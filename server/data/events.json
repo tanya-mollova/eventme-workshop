@@ -9,7 +9,7 @@
     "location": "Sofia",
     "time": 14,
     "price": "",
-    "status": false,
+    "status": true,
     "userId": 1
   },
   "event2": {
@@ -48,7 +48,59 @@
     "location": "Sofia",
     "time": 17,
     "price": 40,
-    "status": false,
+    "status": true,
+    "userId": 4
+  },
+  "event5": {
+    "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis maiores eligendi quos quidem ex numquam hic. Eos quos similique voluptates accusamus quae voluptas magni ad a ipsum, quia enim debitis cumque quibusdam exercitationem architecto sint nostrum dolorum dolor repudiandae nulla deserunt, dolorem itaque!",
+    "_id": "5",
+    "title": "Event 1",
+    "organizator": "Maya",
+    "eventDate": "21.10.25",
+    "category": ["music"],
+    "location": "Sofia",
+    "time": 14,
+    "price": "",
+    "status": true,
+    "userId": 1
+  },
+  "event6": {
+    "description": "Quisquam beatae rerum repudiandae distinctio nesciunt nemo dolorem facilis aspernatur, totam, laudantium sunt amet non, itaque voluptate quae cumque tempore autem similique. Quisquam nemo cupiditate, facere obcaecati iure eveniet illo recusandae! Pariatur magnam commodi, doloremque, beatae unde facilis soluta blanditiis ex debitis quisquam, nostrum voluptates.",
+    "_id": "6",
+    "title": "Event 2",
+    "organizator": "Nicole",
+    "eventDate": "21.10.25",
+    "category": ["webinar"],
+    "location": "Plovdiv",
+    "time": 10,
+    "price": 50,
+    "status": true,
+    "userId": 2
+  },
+  "event7": {
+    "description": "Nesciunt facere, omnis exercitationem neque quisquam optio quidem distinctio laboriosam libero consequuntur aperiam, id possimus accusamus ad eaque quis quas molestiae. Esse praesentium cumque quae nobis atque eligendi commodi nam dolores, aperiam vero quia quaerat, soluta, maiores molestiae voluptatum. Modi doloribus consequatur explicabo enim, voluptate nostrum amet expedita natus tempore exercitationem nesciunt quasi quidem eaque.",
+    "_id": "7",
+    "title": "Event 3",
+    "organizator": "Daniel",
+    "eventDate": "21.10.25",
+    "category": ["online", "music"],
+    "location": "Varna",
+    "time": 17,
+    "price": 30,
+    "status": true,
+    "userId": 3
+  },
+  "event8": {
+    "description": "Nesciunt facere, omnis exercitationem neque quisquam optio quidem distinctio laboriosam libero consequuntur aperiam, id possimus accusamus ad eaque quis quas molestiae. Esse praesentium cumque quae nobis atque eligendi commodi nam dolores, aperiam vero quia quaerat, soluta, maiores molestiae voluptatum. Modi doloribus consequatur explicabo enim, voluptate nostrum amet expedita natus tempore exercitationem nesciunt quasi quidem eaque.",
+    "_id": "8",
+    "title": "Event 4",
+    "organizator": "Emilia",
+    "eventDate": "21.10.25",
+    "category": ["online", "music"],
+    "location": "Sofia",
+    "time": 17,
+    "price": 40,
+    "status": true,
     "userId": 4
   }
 }
