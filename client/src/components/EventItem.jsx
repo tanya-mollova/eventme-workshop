@@ -14,6 +14,7 @@ export default function EventItem({
   _id,
   changeStatus,
   view,
+  deleteEvent,
 }) {
   return (
     <div
@@ -71,6 +72,15 @@ export default function EventItem({
       </Link>
       {/* <p>{status == true ? "Published" : "Pending"}</p>
       <button onClick={() => changeStatus(_id)}>Change</button> */}
+      <button class="delete" onClick={() => deleteEvent(_id)}>
+        <i class="fa-solid fa-trash"></i>
+      </button>
+      <Link key={_id} to={`/event/${_id}`} class="delete">
+        <i class="fa-solid fa-eye"></i>
+      </Link>
+      <button class="delete">
+        <i class="fa-solid fa-pen-to-square"></i>
+      </button>
     </div>
   );
 }

@@ -4,9 +4,10 @@ import "../App";
 // import { PrimeReactProvider, PrimeReactContext } from "primereact/api";
 // import { MultiSelect } from "primereact/multiselect";
 // import "primereact/resources/themes/lara-light-cyan/theme.css";
-import eventService from "../services/eventService";
 import EventItem from "./EventItem";
 import Pagination from "./Pagination";
+import CreateUpdateEvent from "./CreateUpdateEvent";
+import eventService from "../services/eventService";
 
 export default function EventList() {
   const [isGrid, setIsGrid] = useState(true);
@@ -14,8 +15,10 @@ export default function EventList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [eventsPerPage, setEventsPerPage] = useState(4);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [showCreateUpdateModal, setShowCreateUpdateModal] = useState(false);
   const lastPostIndex = currentPage * eventsPerPage;
   const firstPostIndex = lastPostIndex - eventsPerPage;
+
   const [eventitems, setEventItems] = useState([]);
 
   useEffect(() => {
@@ -23,16 +26,6 @@ export default function EventList() {
       setEventItems(result);
     });
   }, []);
-
-  const currentEvents = eventitems.slice(firstPostIndex, lastPostIndex);
-  // const onStatusChanged = (eventId) => {
-  //   setEventItems((oldEvents) =>
-  //     oldEvents.map((item) =>
-  //       item._id === eventId ? { ...item, status: !item.status } : item
-  //     )
-  //   );
-  // };
-
   // const [filteredItems, setFilteredItems] = useState(eventitems);
   // const [filterItems, setFilterItems] = useState(false);
   // const [selectedCategories, setSelectedCategories] = useState();
@@ -43,7 +36,7 @@ export default function EventList() {
   //   { name: "Conference", code: "conference" },
   //   { name: "Paris", code: "PRS" },
   // ];
-
+  const currentEvents = eventitems.slice(firstPostIndex, lastPostIndex);
   const changeViewHandler = (event) => {
     event.preventDefault();
     setIsGrid((isGrid) => !isGrid);
@@ -75,6 +68,12 @@ export default function EventList() {
     setCurrentPage(page);
     setSearchParams(`?page=${page}`);
   };
+  const deleteEventHandler = async (eventId) => {
+    await eventService.deleteEvent(eventId);
+    setEventItems((oldEvents) =>
+      oldEvents.filter((event) => event._id !== eventId)
+    );
+  };
   useEffect(() => {
     if (!isGrid) {
       setView("list-view");
@@ -93,6 +92,10 @@ export default function EventList() {
     // console.log(isEmptyObject(selectedCategories));
   }, [isGrid]);
 
+  const showCreateUpdateModalHandler = () => {
+    setShowCreateUpdateModal((showCreateUpdateModal) => !showCreateUpdateModal);
+  };
+
   return (
     <>
       <section className="section section-events">
@@ -103,7 +106,18 @@ export default function EventList() {
                 <p className="text-primary text-uppercase fw-bold mb-3">
                   events
                 </p>
-                <h1>Events</h1>
+                <h1>My Events</h1>
+                <a
+                  type="button"
+                  class="btn btn-primary"
+                  onClick={showCreateUpdateModalHandler}
+                  data-discover="true"
+                >
+                  Add
+                  <span className="ms-2">
+                    <i className="fa-solid fa-plus"></i>
+                  </span>
+                </a>
               </div>
             </div>
             <div className="row mb-4 ">
@@ -167,6 +181,7 @@ export default function EventList() {
                   key={eventitem._id}
                   {...eventitem}
                   // changeStatus={changeStatus}
+                  deleteEvent={deleteEventHandler}
                 />
               ))}
             </>
@@ -177,6 +192,11 @@ export default function EventList() {
               currentPage={currentPage}
             />
           </div>
+          {showCreateUpdateModal && (
+            <CreateUpdateEvent
+              showModal={showCreateUpdateModalHandler}
+            ></CreateUpdateEvent>
+          )}
           {/* <a
             type="button"
             className="btn btn-primary  mt-4"

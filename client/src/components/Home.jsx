@@ -1,10 +1,18 @@
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
-
+import eventService from "../services/eventService";
 import Banner from "./Banner";
 import EventItem from "./EventItem";
 
-export default function Home({ eventitems }) {
+export default function Home() {
+  const [eventitems, setEventItems] = useState([]);
+
+  useEffect(() => {
+    eventService.getAll().then((result) => {
+      setEventItems(result);
+    });
+  }, []);
+
   return (
     <>
       <Banner></Banner>

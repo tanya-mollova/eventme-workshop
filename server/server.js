@@ -421,12 +421,12 @@
 
 
 
-    const userService = new Service_1();
+    const eventService = new Service_1();
 
-    userService.get('me', getSelf);
-    userService.post('register', onRegister);
-    userService.post('login', onLogin);
-    userService.get('logout', onLogout);
+    eventService.get('me', getSelf);
+    eventService.post('register', onRegister);
+    eventService.post('login', onLogin);
+    eventService.get('logout', onLogout);
 
 
     function getSelf(context, tokens, query, body) {
@@ -451,7 +451,7 @@
         return context.auth.logout();
     }
 
-    var users = userService.parseRequest;
+    var users = eventService.parseRequest;
 
     const { NotFoundError: NotFoundError$1, RequestError: RequestError$1 } = errors;
 
