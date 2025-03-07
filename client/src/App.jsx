@@ -5,9 +5,13 @@ import "./App.css";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import EventsList from "./components/EventsList";
+import SingleEvent from "./components/SingleEvent";
 import Footer from "./components/Footer";
 import About from "./static/About";
 import Contacts from "./static/Contacts";
+import NotFound from "./static/NotFound";
+import PrivacyPolicy from "./static/PrivacyPolicy";
+import TermsAndConditions from "./static/TermsAndConditions";
 
 function App() {
   const [eventitems, setEventItems] = useState([]);
@@ -54,9 +58,12 @@ function App() {
             />
           }
         />
+        <Route path="/event/:eventId" element={<SingleEvent />} />
         <Route path="/about" element={<About />} />
         <Route path="/contacts" element={<Contacts />} />
-        {/* <Route path="*" element={<Home />} /> */}
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </>

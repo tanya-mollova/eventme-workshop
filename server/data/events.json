@@ -1,106 +1,203 @@
 {
-  "event1": {
+  "1": {
     "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis maiores eligendi quos quidem ex numquam hic. Eos quos similique voluptates accusamus quae voluptas magni ad a ipsum, quia enim debitis cumque quibusdam exercitationem architecto sint nostrum dolorum dolor repudiandae nulla deserunt, dolorem itaque!",
     "_id": "1",
     "title": "Event 1",
-    "organizator": "Maya",
-    "eventDate": "21.10.25",
+    "organizator": "Romaguera-Crona",
+    "eventDate": "2025-07-02T06:00:00.000Z",
+    "imageUrl": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "category": ["music"],
-    "location": "Sofia",
+    "address": {
+      "city": "Sofia",
+      "street": "G. Sava Rakovski",
+      "number": "136"
+    },
     "time": 14,
     "price": "",
     "status": true,
-    "userId": 1
+    "userInfo": {
+      "userId": 1,
+      "firstName": "Leanne",
+      "lastName": "Graham",
+      "email": "Sincere@april.biz",
+      "password": "123",
+      "phoneNumber": "088888888"
+    }
   },
-  "event2": {
+  "2": {
     "description": "Quisquam beatae rerum repudiandae distinctio nesciunt nemo dolorem facilis aspernatur, totam, laudantium sunt amet non, itaque voluptate quae cumque tempore autem similique. Quisquam nemo cupiditate, facere obcaecati iure eveniet illo recusandae! Pariatur magnam commodi, doloremque, beatae unde facilis soluta blanditiis ex debitis quisquam, nostrum voluptates.",
     "_id": "2",
     "title": "Event 2",
-    "organizator": "Nicole",
-    "eventDate": "21.10.25",
+    "organizator": "Deckow-Crist",
+    "eventDate": "2025-08-07T01:33:29.567",
+    "imageUrl": "https://images.unsplash.com/photo-1522158637959-30385a09e0da?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "category": ["webinar"],
-    "location": "Plovdiv",
+    "address": {
+      "city": "Plovdiv",
+      "street": "Ivan Vazov",
+      "number": "24"
+    },
     "time": 10,
     "price": 50,
     "status": true,
-    "userId": 2
+    "userInfo": {
+      "userId": 2,
+      "firstName": "Ervin ",
+      "lastName": "Howell",
+      "email": "Shanna@melissa.tv",
+      "password": "123",
+      "phoneNumber": "088888888"
+    }
   },
-  "event3": {
+  "3": {
     "description": "Nesciunt facere, omnis exercitationem neque quisquam optio quidem distinctio laboriosam libero consequuntur aperiam, id possimus accusamus ad eaque quis quas molestiae. Esse praesentium cumque quae nobis atque eligendi commodi nam dolores, aperiam vero quia quaerat, soluta, maiores molestiae voluptatum. Modi doloribus consequatur explicabo enim, voluptate nostrum amet expedita natus tempore exercitationem nesciunt quasi quidem eaque.",
     "_id": "3",
     "title": "Event 3",
-    "organizator": "Daniel",
-    "eventDate": "21.10.25",
+    "organizator": "Romaguera-Jacobson",
+    "eventDate": "2025-10-19T01:33:29.567",
+    "imageUrl": "https://plus.unsplash.com/premium_photo-1664474653221-8412b8dfca3e?q=80&w=869&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "category": ["online", "music"],
-    "location": "Varna",
+    "address": {
+      "city": "Varna",
+      "street": "Vasil Levski",
+      "number": "56"
+    },
     "time": 17,
     "price": 30,
     "status": true,
-    "userId": 3
+    "userInfo": {
+      "userId": 3,
+      "firstName": "Clementine",
+      "lastName": "Bauch",
+      "email": "Nathan@yesenia.net",
+      "password": "123",
+      "phoneNumber": "088888888"
+    }
   },
-  "event4": {
+  "4": {
     "description": "Nesciunt facere, omnis exercitationem neque quisquam optio quidem distinctio laboriosam libero consequuntur aperiam, id possimus accusamus ad eaque quis quas molestiae. Esse praesentium cumque quae nobis atque eligendi commodi nam dolores, aperiam vero quia quaerat, soluta, maiores molestiae voluptatum. Modi doloribus consequatur explicabo enim, voluptate nostrum amet expedita natus tempore exercitationem nesciunt quasi quidem eaque.",
     "_id": "4",
     "title": "Event 4",
-    "organizator": "Emilia",
-    "eventDate": "21.10.25",
+    "organizator": "Robel-Corkery",
+    "eventDate": "2025-10-17T01:33:29.567",
+    "imageUrl": "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "category": ["online", "music"],
-    "location": "Sofia",
+    "address": {
+      "city": "Sofia",
+      "street": "Opalchenska",
+      "number": "13"
+    },
     "time": 17,
     "price": 40,
     "status": true,
-    "userId": 4
+    "userInfo": {
+      "userId": 4,
+      "firstName": "Patricia",
+      "lastName": "Lebsack",
+      "email": "Julianne.OConner@kory.org",
+      "password": "123",
+      "phoneNumber": "493-170-9623 x156"
+    }
   },
-  "event5": {
+  "5": {
     "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis maiores eligendi quos quidem ex numquam hic. Eos quos similique voluptates accusamus quae voluptas magni ad a ipsum, quia enim debitis cumque quibusdam exercitationem architecto sint nostrum dolorum dolor repudiandae nulla deserunt, dolorem itaque!",
     "_id": "5",
     "title": "Event 1",
-    "organizator": "Maya",
-    "eventDate": "21.10.25",
+    "organizator": "Keebler LLC",
+    "eventDate": "2025-11-08T01:33:29.567",
+    "imageUrl": "https://images.unsplash.com/photo-1503428593586-e225b39bddfe?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "category": ["music"],
-    "location": "Sofia",
+    "address": {
+      "city": "Sofia",
+      "street": "Bratq Miladinovi",
+      "number": "2"
+    },
     "time": 14,
     "price": "",
     "status": true,
-    "userId": 1
+    "userInfo": {
+      "userId": 5,
+      "firstName": "Chelsey",
+      "lastName": "Dietrich",
+      "email": "Lucio_Hettinger@annie.ca",
+      "password": "123",
+      "phoneNumber": "(254)954-1289"
+    }
   },
-  "event6": {
+  "6": {
     "description": "Quisquam beatae rerum repudiandae distinctio nesciunt nemo dolorem facilis aspernatur, totam, laudantium sunt amet non, itaque voluptate quae cumque tempore autem similique. Quisquam nemo cupiditate, facere obcaecati iure eveniet illo recusandae! Pariatur magnam commodi, doloremque, beatae unde facilis soluta blanditiis ex debitis quisquam, nostrum voluptates.",
     "_id": "6",
     "title": "Event 2",
-    "organizator": "Nicole",
-    "eventDate": "21.10.25",
-    "category": ["webinar"],
-    "location": "Plovdiv",
+    "organizator": "Considine-Lockman",
+    "eventDate": "2025-06-28T01:33:29.567",
+    "imageUrl": "https://images.unsplash.com/photo-1588702547919-26089e690ecc?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "category": ["online"],
+    "address": {
+      "city": "Stara Zagora",
+      "street": "Hadzhi Dimitar",
+      "number": "6"
+    },
     "time": 10,
     "price": 50,
     "status": true,
-    "userId": 2
+    "userInfo": {
+      "userId": 6,
+      "firstName": "Dennis",
+      "lastName": "Schulist",
+      "email": "Karley_Dach@jasper.info",
+      "password": "123",
+      "phoneNumber": "1-477-935-8478 x6430"
+    }
   },
-  "event7": {
+  "7": {
     "description": "Nesciunt facere, omnis exercitationem neque quisquam optio quidem distinctio laboriosam libero consequuntur aperiam, id possimus accusamus ad eaque quis quas molestiae. Esse praesentium cumque quae nobis atque eligendi commodi nam dolores, aperiam vero quia quaerat, soluta, maiores molestiae voluptatum. Modi doloribus consequatur explicabo enim, voluptate nostrum amet expedita natus tempore exercitationem nesciunt quasi quidem eaque.",
     "_id": "7",
     "title": "Event 3",
-    "organizator": "Daniel",
-    "eventDate": "21.10.25",
-    "category": ["online", "music"],
-    "location": "Varna",
+    "organizator": "Johns Group",
+    "eventDate": "2025-08-14T01:33:29.567",
+    "imageUrl": "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "category": ["webinar"],
+    "address": {
+      "city": "Varna",
+      "street": "Bratq Shkorpil",
+      "number": "3"
+    },
     "time": 17,
     "price": 30,
     "status": true,
-    "userId": 3
+    "userInfo": {
+      "userId": 7,
+      "firstName": "Kurtis",
+      "lastName": "Weissnat",
+      "email": "Telly.Hoeger@billy.biz",
+      "password": "123",
+      "phoneNumber": "210.067.6132"
+    }
   },
-  "event8": {
+  "8": {
     "description": "Nesciunt facere, omnis exercitationem neque quisquam optio quidem distinctio laboriosam libero consequuntur aperiam, id possimus accusamus ad eaque quis quas molestiae. Esse praesentium cumque quae nobis atque eligendi commodi nam dolores, aperiam vero quia quaerat, soluta, maiores molestiae voluptatum. Modi doloribus consequatur explicabo enim, voluptate nostrum amet expedita natus tempore exercitationem nesciunt quasi quidem eaque.",
     "_id": "8",
     "title": "Event 4",
-    "organizator": "Emilia",
-    "eventDate": "21.10.25",
+    "organizator": "Yost and Sons",
+    "eventDate": "2025-09-25T01:33:29.567",
+    "imageUrl": "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+
     "category": ["online", "music"],
-    "location": "Sofia",
+    "address": {
+      "city": "Pleven",
+      "street": "Panega",
+      "number": "10"
+    },
     "time": 17,
     "price": 40,
-    "status": true,
-    "userId": 4
+    "status": false,
+    "userInfo": {
+      "userId": 8,
+      "firstName": "Glenna",
+      "lastName": "Reichert",
+      "email": "Chaim_McDermott@dana.io",
+      "password": "123",
+      "phoneNumber": "775976-6794 x41206"
+    }
   }
 }

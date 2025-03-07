@@ -6,6 +6,7 @@ export default function SocialLinks() {
           title="Explorer Facebook Profile"
           className="text-black social-icons-item"
           href="https://facebook.com/"
+          target="_blank"
         >
           <i className="fab fa-facebook-f"></i>
         </a>
@@ -15,6 +16,7 @@ export default function SocialLinks() {
           title="Explorer Twitter Profile"
           className="text-black  social-icons-item"
           href="https://twitter.com/"
+          target="_blank"
         >
           <i className="fab fa-twitter"></i>
         </a>
@@ -24,6 +26,7 @@ export default function SocialLinks() {
           title="Explorer Instagram Profile"
           className="text-black  social-icons-item"
           href="https://instagram.com/"
+          target="_blank"
         >
           <i className="fab fa-instagram"></i>
         </a>

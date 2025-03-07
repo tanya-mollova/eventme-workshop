@@ -1,16 +1,19 @@
+import { Link } from "react-router";
+import { fromIsoDate } from "../utils/dateTime";
 import styles from "./EventItem.module.css";
 
 export default function EventItem({
   title,
-  date,
+  eventDate,
   category,
-  view,
-  location,
+  address,
   time,
   price,
+  imageUrl,
   status,
   _id,
   changeStatus,
+  view,
 }) {
   return (
     <div
@@ -18,32 +21,34 @@ export default function EventItem({
         styles[`${view}`]
       } col-lg-3 col-md-6 col-sm-6 col-xs-12`}
     >
-      <a className="text-black" href="">
+      <Link className="text-black" key={_id} to={`/event/${_id}`}>
         <div className={styles["block"]}>
-          <img
-            src="../../public/images/header-img.jpg"
-            className={styles["event-image"]}
-            alt="Event image"
-          />
+          <img src={imageUrl} className={styles["event-image"]} alt={title} />
           <div className={styles["event-info"]}>
             <div className={styles["event-meta"]}>
               <h3 className={`${styles["event-title"]}`}>{title}</h3>
               <div>
-                <span className={styles["event-time"]}>{date}</span> -
-                <span className={styles["event-time"]}>{time}</span>h.
+                <i class="fa-solid fa-calendar-days mr-3"></i>
+                <span className={styles["event-time"]}>
+                  {fromIsoDate(eventDate)}
+                </span>{" "}
+                <i class="fa-solid fa-clock"></i>
+                <span className={styles["event-time"]}>{time} h.</span>
               </div>
               <p>
-                <i className="fa-solid fa-location-dot"></i> {location}
+                <i className="fa-solid fa-location-dot"></i>{" "}
+                <strong>{address?.city}</strong>,{address?.street},{" "}
+                {address?.number}
               </p>
               <p className={`${styles["event-price"]} text-primary`}>
                 <i className="fa-solid fa-money-bill-wave"></i>
-                {price == "" ? " free" : ` ${price}  $`}{" "}
+                {price == "" ? " Free" : ` ${price}  $`}{" "}
               </p>
             </div>
 
             <div>
-              {category.map((item) => (
-                <span key={item._id} className={`${styles["colored-box"]}`}>
+              {category.map((item, index) => (
+                <span key={index} className={`${styles["colored-box"]}`}>
                   {item}
                 </span>
               ))}
@@ -63,7 +68,7 @@ export default function EventItem({
             </a> */}
           </div>
         </div>
-      </a>
+      </Link>
       {/* <p>{status == true ? "Published" : "Pending"}</p>
       <button onClick={() => changeStatus(_id)}>Change</button> */}
     </div>

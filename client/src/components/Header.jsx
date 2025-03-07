@@ -1,5 +1,29 @@
 import { Route, Routes, Link, NavLink } from "react-router";
+import { useEffect, useState } from "react";
+
+import Login from "./Login";
+import Register from "./Register";
+
 export default function Header() {
+  const [showLoginForm, setShowLoginForm] = useState(false);
+  const [showRegisterForm, setShowRegisterForm] = useState(false);
+
+  const loginClickHandler = () => {
+    setShowLoginForm((setShowLoginForm) => !setShowLoginForm);
+    setShowRegisterForm(false);
+  };
+  const registerClickHandler = () => {
+    setShowRegisterForm((showRegisterForm) => !showRegisterForm);
+    setShowLoginForm(false);
+  };
+  // useEffect(() => {
+  //   if (showLoginForm) {
+  //     setShowRegisterForm(false);
+  //   }
+  //   if (showRegisterForm) {
+  //     setShowLoginForm(false);
+  //   }
+  // }, [showLoginForm, showRegisterForm]);
   return (
     <header className="navigation bg-tertiary">
       <nav className="navbar navbar-expand-xl navbar-light text-center fixed-top">
@@ -68,7 +92,11 @@ export default function Header() {
               </li>
               <li className="nav-item dropdown">
                 <NavLink
-                  className="nav-link dropdown-toggle"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "nav-link dropdown-toggle active"
+                      : "nav-link dropdown-toggle"
+                  }
                   to=""
                   id="navbarDropdown"
                   role="button"
@@ -79,12 +107,21 @@ export default function Header() {
                 </NavLink>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
-                    <NavLink className="dropdown-item " to="/profile">
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? "dropdown-item  active" : "dropdown-item "
+                      }
+                    >
                       Profile
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink className="dropdown-item " to="/my-events">
+                    <NavLink
+                      className={({ isActive }) =>
+                        isActive ? "dropdown-item  active" : "dropdown-item "
+                      }
+                      to="/my-events"
+                    >
                       My Events
                     </NavLink>
                   </li>
@@ -92,13 +129,29 @@ export default function Header() {
               </li>
             </ul>
             {/* account btn */}{" "}
-            <a href="#!" className="btn btn-outline-primary">
+            <button
+              onClick={loginClickHandler}
+              className="btn btn-outline-primary"
+            >
               Log In
-            </a>
+            </button>
+            {showLoginForm && (
+              <Login
+                showLoginModal={loginClickHandler}
+                showRegisterModal={registerClickHandler}
+                showRegister={showRegisterForm}
+                showLogin={showLoginForm}
+              ></Login>
+            )}
+            {showRegisterForm && (
+              <Register
+                showLoginModal={loginClickHandler}
+                showRegisterModal={registerClickHandler}
+                showRegister={showRegisterForm}
+                showLogin={showLoginForm}
+              ></Register>
+            )}
             {/* account btn */}{" "}
-            <a href="#!" className="btn btn-primary ms-2 ms-lg-3">
-              Sign Up
-            </a>
           </div>
         </div>
       </nav>

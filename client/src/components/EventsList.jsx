@@ -136,15 +136,8 @@ export default function EventList({ eventitems, changeStatus }) {
               {eventitems.map((eventitem) => (
                 <EventItem
                   view={view}
-                  key={eventitem.id}
-                  title={eventitem.title}
-                  date={eventitem.eventDate}
-                  category={eventitem.category}
-                  location={eventitem.location}
-                  time={eventitem.time}
-                  price={eventitem.price}
-                  status={eventitem.status}
-                  _id={eventitem._id}
+                  key={eventitem._id}
+                  {...eventitem}
                   changeStatus={changeStatus}
                 />
               ))}

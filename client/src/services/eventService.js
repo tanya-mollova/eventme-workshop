@@ -7,4 +7,9 @@ export default {
     const events = Object.values(result);
     return events;
   },
+  async getOne(eventId) {
+    const response = await fetch(`${baseUrl}/${eventId}`);
+    const event = await response.json();
+    return event;
+  },
 };

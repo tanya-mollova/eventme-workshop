@@ -24,25 +24,10 @@ export default function Home({ eventitems }) {
           </div>
           <div className="row">
             {eventitems.slice(0, 4).map((eventitem) => (
-              <EventItem
-                key={eventitem.id}
-                title={eventitem.title}
-                date={eventitem.eventDate}
-                category={eventitem.category}
-                location={eventitem.location}
-                time={eventitem.time}
-                price={eventitem.price}
-                status={eventitem.status}
-                _id={eventitem._id}
-              />
+              <EventItem key={eventitem._id} {...eventitem} />
             ))}
           </div>
-          <Link
-            type="button"
-            className="btn btn-primary  mt-4"
-            to="/events"
-            onClick={() => window.scrollTo(0, 0)}
-          >
+          <Link type="button" className="btn btn-primary  mt-4" to="/events">
             See all Events
             <span
               style={{ fontSize: 14 }}

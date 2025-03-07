@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 import SocialLinks from "./SocialLinks";
 
 export default function Footer() {
@@ -13,7 +15,7 @@ export default function Footer() {
                 className="img-fluid"
                 width={250}
                 src="images/eventme-logo-light.png"
-                alt="Wallet"
+                alt="Event.Me Logo"
               />
             </a>
           </div>
@@ -22,20 +24,20 @@ export default function Footer() {
               <h4 className="mb-4">Links</h4>
               <ul className="list-unstyled  font-secondary">
                 <li className="mb-2">
-                  <a href="service-details.html">Home</a>
+                  <Link to="/">Home</Link>
                 </li>
                 <li className="mb-2">
-                  <a href="service-details.html">About</a>
+                  <Link to="/about">About</Link>
                 </li>
 
                 <li className="mb-2">
-                  <a href="service-details.html">Contact</a>
+                  <Link to="/contacts">Contacts</Link>
                 </li>
                 <li className="mb-2">
-                  <a href="privacy-policy.html">Privacy Policy</a>
+                  <Link to="/privacy-policy">Privacy Policy</Link>
                 </li>
                 <li className="mb-2">
-                  <a href="terms.html">Terms &amp; Conditions</a>
+                  <Link to="/terms-and-conditions">Terms &amp; Conditions</Link>
                 </li>
               </ul>
             </div>

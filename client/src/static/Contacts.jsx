@@ -104,58 +104,8 @@ export default function () {
             <div className="col-lg-10">
               <div className="shadow rounded p-5 bg-white">
                 <div className="row align-items-center">
-                  {/* <div className="col-12 mb-4">
-                    <h4>Leave Us A Message</h4>
-                  </div> */}
                   <div className="col-lg-6">
-                    {/* <div className="contact-form">
-                      <form action="#!">
-                        <div className="form-group mb-4 pb-2">
-                          <label
-                            htmlFor="exampleFormControlInput1"
-                            className="form-label"
-                          >
-                            Full Name
-                          </label>
-                          <input
-                            type="text"
-                            className="form-control shadow-none"
-                            id="contact_name"
-                          />
-                        </div>
-                        <div className="form-group mb-4 pb-2">
-                          <label
-                            htmlFor="exampleFormControlInput1"
-                            className="form-label"
-                          >
-                            Email address
-                          </label>
-                          <input
-                            type="email"
-                            className="form-control shadow-none"
-                            id="contact_email"
-                          />
-                        </div>
-                        <div className="form-group mb-4 pb-2">
-                          <label
-                            htmlFor="exampleFormControlTextarea1"
-                            className="form-label"
-                          >
-                            Write Message
-                          </label>
-                          <textarea
-                            className="form-control shadow-none"
-                            id="exampleFormControlTextarea1"
-                            rows={3}
-                            defaultValue={""}
-                          />
-                        </div>
-                        <button className="btn btn-primary w-100" type="submit">
-                          Send Message
-                        </button>
-                      </form>
-                    </div> */}
-                    <img src="/images/about.jpg"></img>
+                    <img src="/images/about.jpg" alt="About image"></img>
                   </div>
                   <div className="col-lg-6 mt-5 mt-lg-0">
                     <div className="contact-info">
@@ -195,6 +145,7 @@ export default function () {
                         </div>
                       </div>
                       <div className="block">
+                        <br />
                         <SocialLinks></SocialLinks>
                       </div>
                     </div>
