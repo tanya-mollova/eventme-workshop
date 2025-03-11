@@ -1,46 +1,38 @@
+import request from "../utils/request";
+
 const baseUrl = "http://localhost:3030/jsonstore/events";
 
 export default {
   async getAll() {
-    const response = await fetch(baseUrl);
-    const result = await response.json();
+    const result = await request.get(baseUrl);
+
     const events = Object.values(result);
+
     return events;
   },
-  async getOne(eventId) {
-    const response = await fetch(`${baseUrl}/${eventId}`);
-    const event = await response.json();
-    return event;
+  getOne(eventId) {
+    return request.get(`${baseUrl}/${eventId}`);
   },
-  async create(eventData) {
+  create(eventData) {
     const postData = transformEventData(eventData);
-
-    const response = await fetch(baseUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(postData),
-    });
-
-    const result = await response.json();
-
-    return result;
+    return request.post(baseUrl, postData);
   },
-
-  async deleteEvent(eventId) {
-    const response = await fetch(`${baseUrl}/${eventId}`, {
-      method: "DELETE",
+  edit(eventId, eventData) {
+    return request.put(`${baseUrl}/${eventId}`, {
+      ...eventData,
+      _id: eventId,
     });
-    const result = await response.json();
-    return result;
+  },
+  delete(eventId) {
+    return request.delete(`${baseUrl}/${eventId}`);
   },
 };
 
 function transformEventData(eventData) {
-  const { city, street, streetNumber, ...transformedData } = eventData;
-
+  const { city, street, streetNumber, category, ...transformedData } =
+    eventData;
   transformedData.address = { city, street, streetNumber };
+  transformedData.category = category;
   transformedData.createdAt = new Date().toISOString();
   transformedData.updatedAt = new Date().toISOString();
 

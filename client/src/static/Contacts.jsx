@@ -1,4 +1,4 @@
-import SocialLinks from "../components/SocialLinks/";
+import SocialLinks from "../components/social-links/SocialLinks/";
 
 export default function () {
   return (

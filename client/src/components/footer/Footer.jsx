@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-import SocialLinks from "./SocialLinks";
+import SocialLinks from "../social-links/SocialLinks";
 
 export default function Footer() {
   return (

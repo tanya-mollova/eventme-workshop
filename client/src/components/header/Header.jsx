@@ -1,10 +1,11 @@
-import { Route, Routes, Link, NavLink } from "react-router";
-import { useEffect, useState } from "react";
+import { Link, NavLink, Navigate, useNavigate } from "react-router";
+import { useState } from "react";
 
-import Login from "./Login";
-import Register from "./Register";
+import Login from "../login/Login";
+import Register from "../register/Register";
 
 export default function Header() {
+  const navigate = useNavigate;
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
 
@@ -16,20 +17,13 @@ export default function Header() {
     setShowRegisterForm((showRegisterForm) => !showRegisterForm);
     setShowLoginForm(false);
   };
-  // useEffect(() => {
-  //   if (showLoginForm) {
-  //     setShowRegisterForm(false);
-  //   }
-  //   if (showRegisterForm) {
-  //     setShowLoginForm(false);
-  //   }
-  // }, [showLoginForm, showRegisterForm]);
+
   return (
     <header className="navigation bg-tertiary">
       <nav className="navbar navbar-expand-xl navbar-light text-center fixed-top">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            <img width={160} src="images/eventme-logo.png" alt="EventMe" />
+            <img width={160} src="/images/eventme-logo.png" alt="EventMe" />
           </Link>
           <button
             className="navbar-toggler"
@@ -108,6 +102,7 @@ export default function Header() {
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
                     <NavLink
+                      to="/my-profile"
                       className={({ isActive }) =>
                         isActive ? "dropdown-item  active" : "dropdown-item "
                       }
@@ -117,10 +112,10 @@ export default function Header() {
                   </li>
                   <li>
                     <NavLink
+                      to="/my-events"
                       className={({ isActive }) =>
                         isActive ? "dropdown-item  active" : "dropdown-item "
                       }
-                      to="/my-events"
                     >
                       My Events
                     </NavLink>
@@ -128,7 +123,6 @@ export default function Header() {
                 </ul>
               </li>
             </ul>
-            {/* account btn */}{" "}
             <button
               onClick={loginClickHandler}
               className="btn btn-outline-primary"

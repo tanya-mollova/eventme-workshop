@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router";
-import "../App";
+import { useSearchParams, Link } from "react-router";
+import "../../App";
 // import { PrimeReactProvider, PrimeReactContext } from "primereact/api";
 // import { MultiSelect } from "primereact/multiselect";
 // import "primereact/resources/themes/lara-light-cyan/theme.css";
-import EventItem from "./EventItem";
-import Pagination from "./Pagination";
-import CreateUpdateEvent from "./CreateUpdateEvent";
-import eventService from "../services/eventService";
+import EventsListItem from "../events-list/events-list-item/EventsListItem";
+import Pagination from "../pagination/Pagination";
+import CreateUpdateEvent from "../event-create/EventCreate";
+import DeleteEvent from "../event-delete/EventDelete";
+import eventService from "../../services/eventService";
 
 export default function EventList() {
   const [isGrid, setIsGrid] = useState(true);
@@ -16,6 +17,8 @@ export default function EventList() {
   const [eventsPerPage, setEventsPerPage] = useState(4);
   const [searchParams, setSearchParams] = useSearchParams();
   const [showCreateUpdateModal, setShowCreateUpdateModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [eventId, setEventId] = useState(null);
   const lastPostIndex = currentPage * eventsPerPage;
   const firstPostIndex = lastPostIndex - eventsPerPage;
 
@@ -23,7 +26,7 @@ export default function EventList() {
 
   useEffect(() => {
     eventService.getAll().then((result) => {
-      setEventItems(result);
+      setEventItems(result.filter((result) => result.status == "Published"));
     });
   }, []);
   // const [filteredItems, setFilteredItems] = useState(eventitems);
@@ -68,11 +71,12 @@ export default function EventList() {
     setCurrentPage(page);
     setSearchParams(`?page=${page}`);
   };
-  const deleteEventHandler = async (eventId) => {
-    await eventService.deleteEvent(eventId);
+  const deleteEventHandler = async () => {
+    await eventService.delete(eventId);
     setEventItems((oldEvents) =>
       oldEvents.filter((event) => event._id !== eventId)
     );
+    setShowDeleteModal(false);
   };
   useEffect(() => {
     if (!isGrid) {
@@ -90,12 +94,50 @@ export default function EventList() {
     //   categoryFilterHandler();
     // }
     // console.log(isEmptyObject(selectedCategories));
-  }, [isGrid]);
+  }, [isGrid, useSearchParams, eventId]);
 
-  const showCreateUpdateModalHandler = () => {
-    setShowCreateUpdateModal((showCreateUpdateModal) => !showCreateUpdateModal);
+  const createEventHandler = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(
+      e.target.parentElement.parentElement.parentElement.parentElement.parentElement
+    );
+    const category = formData.getAll("category");
+    const eventData = Object.fromEntries(formData);
+    const newData = { ...eventData, category: category };
+    await eventService
+      .create(newData)
+      .then((result) => setEventItems((oldEvents) => [result, ...oldEvents]));
+    setShowCreateUpdateModal(() => !showCreateUpdateModal);
   };
 
+  const updateEventHandler = async (id, e) => {
+    e.preventDefault();
+    const formData = new FormData(
+      e.target.parentElement.parentElement.parentElement.parentElement.parentElement
+    );
+    const category = formData.getAll("category");
+    const eventData = Object.fromEntries(formData);
+    const newData = { ...eventData, category: category };
+    await eventService
+      .update(newData, id)
+      .then((result) =>
+        setEventItems((state) =>
+          state.map((event) => (event._id === id ? updatedItem : event))
+        )
+      );
+
+    setShowCreateUpdateModal(() => !showCreateUpdateModal);
+  };
+
+  const showCreateUpdateModalHandler = (id) => {
+    console.log(id);
+    setShowCreateUpdateModal((showCreateUpdateModal) => !showCreateUpdateModal);
+    setEventId(id);
+  };
+  const showDeleteModalHandler = (id) => {
+    setShowDeleteModal((showDeleteModal) => !showDeleteModal);
+    setEventId(id);
+  };
   return (
     <>
       <section className="section section-events">
@@ -107,23 +149,22 @@ export default function EventList() {
                   events
                 </p>
                 <h1>My Events</h1>
-                <a
+                <Link
+                  to="/event/create"
                   type="button"
-                  class="btn btn-primary"
-                  onClick={showCreateUpdateModalHandler}
-                  data-discover="true"
+                  className="btn btn-primary"
                 >
                   Add
                   <span className="ms-2">
                     <i className="fa-solid fa-plus"></i>
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
             <div className="row mb-4 ">
-              <div class="col-md-12 d-inline-flex align-center justify-content-center">
-                <ul class="list-unstyled list-inline mb-0 social-icons">
-                  <li class="list-inline-item me-3">
+              <div className="col-md-12 d-inline-flex align-center justify-content-center">
+                <ul className="list-unstyled list-inline mb-0 social-icons">
+                  <li className="list-inline-item me-3">
                     <a
                       onClick={changeViewHandler}
                       className={`view-button text-black ${
@@ -132,9 +173,9 @@ export default function EventList() {
                       href=""
                     >
                       {isGrid ? (
-                        <i class="fa-solid fa-list-ul "></i>
+                        <i className="fa-solid fa-list-ul "></i>
                       ) : (
-                        <i class="fa-solid fa-grip"></i>
+                        <i className="fa-solid fa-grip"></i>
                       )}
                     </a>
                   </li>
@@ -176,12 +217,14 @@ export default function EventList() {
             </div>
             <>
               {currentEvents.map((eventitem) => (
-                <EventItem
+                <EventsListItem
                   view={view}
                   key={eventitem._id}
                   {...eventitem}
                   // changeStatus={changeStatus}
                   deleteEvent={deleteEventHandler}
+                  showDeleteModal={showDeleteModalHandler}
+                  showCreateUpdateModal={showCreateUpdateModalHandler}
                 />
               ))}
             </>
@@ -195,7 +238,16 @@ export default function EventList() {
           {showCreateUpdateModal && (
             <CreateUpdateEvent
               showModal={showCreateUpdateModalHandler}
+              eventId={eventId}
+              createEvent={createEventHandler}
+              updateEvent={updateEventHandler}
             ></CreateUpdateEvent>
+          )}
+          {showDeleteModal && (
+            <DeleteEvent
+              onDelete={deleteEventHandler}
+              showDeleteModal={showDeleteModalHandler}
+            ></DeleteEvent>
           )}
           {/* <a
             type="button"

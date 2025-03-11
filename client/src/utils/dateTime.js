@@ -9,3 +9,11 @@ export const fromIsoDate = (isoDate) => {
 
   return formattedDate;
 };
+export const toShortDate = (date) => {
+  const formattedDate = new Date(date).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+  });
+
+  return formattedDate;
+};

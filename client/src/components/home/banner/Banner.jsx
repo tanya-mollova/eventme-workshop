@@ -1,12 +1,13 @@
 import { Link } from "react-router";
 
 export default function Banner() {
+  AOS.init();
   return (
     <section className="banner  position-relative overflow-hidden">
       <div className="container">
         <div className="has-shapes">
           <svg
-            class="shape shape-left text-light"
+            className="shape shape-left text-light"
             width="381"
             height="443"
             viewBox="0 0 381 443"
@@ -35,7 +36,7 @@ export default function Banner() {
             ></path>
           </svg>
           <svg
-            class="shape shape-right text-light"
+            className="shape shape-right text-light"
             width="406"
             height="433"
             viewBox="0 0 406 433"
@@ -67,7 +68,11 @@ export default function Banner() {
         <div className="row align-items-center justify-content-center">
           <div className="col-lg-6 mb-5 mb-lg-0">
             <div className="block text-center text-lg-start pe-0 pe-xl-5">
-              <h1 className="text-capitalize mb-4">
+              <h1
+                data-aos="fade-up"
+                data-aos-duration="1000"
+                className="text-capitalize mb-4"
+              >
                 Your event. Find or make it happen.
               </h1>
               <p className="mb-4">
@@ -87,6 +92,8 @@ export default function Banner() {
           <div className="col-lg-6">
             <div className="ps-lg-5 text-center">
               <img
+                data-aos="fade-left"
+                data-aos-duration="1000"
                 alt="Banner image"
                 className="w-100"
                 loading="lazy"

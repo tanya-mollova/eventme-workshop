@@ -4,7 +4,7 @@
     "_id": "1",
     "title": "Event 1",
     "organizator": "Romaguera-Crona",
-    "eventDate": "2025-07-02T06:00:00.000Z",
+    "eventDate": "2025-07-02",
     "imageUrl": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "category": ["music"],
     "address": {
@@ -12,9 +12,9 @@
       "street": "G. Sava Rakovski",
       "number": "136"
     },
-    "time": 14,
+    "time": "14:20",
     "price": "",
-    "status": true,
+    "status": "Published",
     "userInfo": {
       "userId": 1,
       "firstName": "Leanne",
@@ -29,7 +29,7 @@
     "_id": "2",
     "title": "Event 2",
     "organizator": "Deckow-Crist",
-    "eventDate": "2025-08-07T01:33:29.567",
+    "eventDate": "2025-08-07",
     "imageUrl": "https://images.unsplash.com/photo-1522158637959-30385a09e0da?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "category": ["webinar"],
     "address": {
@@ -37,9 +37,9 @@
       "street": "Ivan Vazov",
       "number": "24"
     },
-    "time": 10,
+    "time": "10:00",
     "price": 50,
-    "status": true,
+    "status": "Published",
     "userInfo": {
       "userId": 2,
       "firstName": "Ervin ",
@@ -54,7 +54,7 @@
     "_id": "3",
     "title": "Event 3",
     "organizator": "Romaguera-Jacobson",
-    "eventDate": "2025-10-19T01:33:29.567",
+    "eventDate": "2025-10-19",
     "imageUrl": "https://plus.unsplash.com/premium_photo-1664474653221-8412b8dfca3e?q=80&w=869&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "category": ["online", "music"],
     "address": {
@@ -62,9 +62,9 @@
       "street": "Vasil Levski",
       "number": "56"
     },
-    "time": 17,
+    "time": "17:15",
     "price": 30,
-    "status": true,
+    "status": "Published",
     "userInfo": {
       "userId": 3,
       "firstName": "Clementine",
@@ -79,7 +79,7 @@
     "_id": "4",
     "title": "Event 4",
     "organizator": "Robel-Corkery",
-    "eventDate": "2025-10-17T01:33:29.567",
+    "eventDate": "2025-10-17",
     "imageUrl": "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "category": ["online", "music"],
     "address": {
@@ -87,9 +87,9 @@
       "street": "Opalchenska",
       "number": "13"
     },
-    "time": 17,
+    "time": "17:30",
     "price": 40,
-    "status": true,
+    "status": "Published",
     "userInfo": {
       "userId": 4,
       "firstName": "Patricia",
@@ -104,7 +104,7 @@
     "_id": "5",
     "title": "Event 1",
     "organizator": "Keebler LLC",
-    "eventDate": "2025-11-08T01:33:29.567",
+    "eventDate": "2025-11-08",
     "imageUrl": "https://images.unsplash.com/photo-1503428593586-e225b39bddfe?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "category": ["music"],
     "address": {
@@ -112,9 +112,9 @@
       "street": "Bratq Miladinovi",
       "number": "2"
     },
-    "time": 14,
+    "time": "14:50",
     "price": "",
-    "status": true,
+    "status": "Published",
     "userInfo": {
       "userId": 5,
       "firstName": "Chelsey",
@@ -129,7 +129,7 @@
     "_id": "6",
     "title": "Event 2",
     "organizator": "Considine-Lockman",
-    "eventDate": "2025-06-28T01:33:29.567",
+    "eventDate": "2025-06-28",
     "imageUrl": "https://images.unsplash.com/photo-1588702547919-26089e690ecc?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "category": ["online"],
     "address": {
@@ -137,9 +137,9 @@
       "street": "Hadzhi Dimitar",
       "number": "6"
     },
-    "time": 10,
+    "time": "10:30",
     "price": 50,
-    "status": true,
+    "status": "Published",
     "userInfo": {
       "userId": 6,
       "firstName": "Dennis",
@@ -154,7 +154,7 @@
     "_id": "7",
     "title": "Event 3",
     "organizator": "Johns Group",
-    "eventDate": "2025-08-14T01:33:29.567",
+    "eventDate": "2025-08-14",
     "imageUrl": "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     "category": ["webinar"],
     "address": {
@@ -162,9 +162,9 @@
       "street": "Bratq Shkorpil",
       "number": "3"
     },
-    "time": 17,
+    "time": "17:40",
     "price": 30,
-    "status": true,
+    "status": "Published",
     "userInfo": {
       "userId": 7,
       "firstName": "Kurtis",
@@ -179,7 +179,7 @@
     "_id": "8",
     "title": "Event 4",
     "organizator": "Yost and Sons",
-    "eventDate": "2025-09-25T01:33:29.567",
+    "eventDate": "2025-09-25",
     "imageUrl": "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 
     "category": ["online", "music"],
@@ -188,9 +188,9 @@
       "street": "Panega",
       "number": "10"
     },
-    "time": 17,
+    "time": "17:50",
     "price": 40,
-    "status": false,
+    "status": "Pending",
     "userInfo": {
       "userId": 8,
       "firstName": "Glenna",

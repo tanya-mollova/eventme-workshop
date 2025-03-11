@@ -1,8 +1,8 @@
 import { Link } from "react-router";
 import { useEffect, useState } from "react";
-import eventService from "../services/eventService";
-import Banner from "./Banner";
-import EventItem from "./EventItem";
+import eventService from "../../services/eventService";
+import Banner from "./banner/Banner";
+import EventsListItem from "../events-list/events-list-item/EventsListItem";
 
 export default function Home() {
   const [eventitems, setEventItems] = useState([]);
@@ -24,7 +24,9 @@ export default function Home() {
                 <p className="text-primary text-uppercase fw-bold mb-3">
                   events
                 </p>
-                <h1>Discover upcoming events</h1>
+                <h1 data-aos="fade-up" data-aos-duration="1000">
+                  Discover upcoming events
+                </h1>
                 <span> Want your event listed here? </span>
                 <a href="#">Log in</a>
               </div>
@@ -32,7 +34,7 @@ export default function Home() {
           </div>
           <div className="row">
             {eventitems.slice(0, 4).map((eventitem) => (
-              <EventItem key={eventitem._id} {...eventitem} />
+              <EventsListItem key={eventitem._id} {...eventitem} />
             ))}
           </div>
           <Link type="button" className="btn btn-primary  mt-4" to="/events">

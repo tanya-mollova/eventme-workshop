@@ -1,8 +1,8 @@
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
-import { fromIsoDate } from "../utils/dateTime";
+import { fromIsoDate } from "../../utils/dateTime";
 
-import eventService from "../services/eventService";
+import eventService from "../../services/eventService";
 
 export default function SingleEvent(eventitems) {
   const { eventId } = useParams();
@@ -23,7 +23,7 @@ export default function SingleEvent(eventitems) {
               <div className="content">
                 <h2 id="how-a-payday-loan-online-works">{event.title}</h2>
                 <div>
-                  <img src="/images/about.jpg"></img>
+                  <img src={event.imageUrl} clas={event.title}></img>
                 </div>
                 <h2>{event.organizator}</h2>
                 <p>{event.description}</p>

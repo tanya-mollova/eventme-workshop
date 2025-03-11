@@ -10137,7 +10137,16 @@ blockquote::before {
 .form-control:not(textarea) {
   height: 55px;
 }
-
+select.form-control {
+  height: auto;
+}
+select option:checked {
+  background: #f05537 !important;
+  color: #fff;
+}
+select.form-control {
+  height: auto;
+}
 textarea.form-control {
   height: 140px;
 }
@@ -10425,7 +10434,10 @@ textarea.form-control {
   padding: 10px;
 }
 /*# sourceMappingURL=style.css.map */
-
+#create-modal .modal-dialog {
+  margin-top: 150px;
+  max-width: 80%;
+}
 #root {
   /* max-width: 1280px; */
   width: 100%;

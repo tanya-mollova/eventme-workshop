@@ -1,8 +1,10 @@
 import { Link } from "react-router";
-import { fromIsoDate } from "../utils/dateTime";
-import styles from "./EventItem.module.css";
+import { fromIsoDate } from "../../../utils/dateTime";
+import { toShortDate } from "../../../utils/dateTime";
+import styles from "./assets/EventsListItem.module.css";
 
 export default function EventItem({
+  _id,
   title,
   eventDate,
   category,
@@ -10,11 +12,9 @@ export default function EventItem({
   time,
   price,
   imageUrl,
-  status,
-  _id,
-  changeStatus,
   view,
-  deleteEvent,
+  showDeleteModal,
+  showCreateUpdateModal,
 }) {
   return (
     <div
@@ -22,18 +22,19 @@ export default function EventItem({
         styles[`${view}`]
       } col-lg-3 col-md-6 col-sm-6 col-xs-12`}
     >
-      <Link className="text-black" key={_id} to={`/event/${_id}`}>
+      {/* TODO when logged in make Link to my-events/id/details */}
+      <Link className="text-black" to={`/events/${_id}/details`}>
         <div className={styles["block"]}>
           <img src={imageUrl} className={styles["event-image"]} alt={title} />
           <div className={styles["event-info"]}>
             <div className={styles["event-meta"]}>
               <h3 className={`${styles["event-title"]}`}>{title}</h3>
               <div>
-                <i class="fa-solid fa-calendar-days mr-3"></i>
+                <i className="fa-solid fa-calendar-days mr-3"></i>
                 <span className={styles["event-time"]}>
-                  {fromIsoDate(eventDate)}
+                  {toShortDate(eventDate)}
                 </span>{" "}
-                <i class="fa-solid fa-clock"></i>
+                <i className="fa-solid fa-clock"></i>
                 <span className={styles["event-time"]}>{time} h.</span>
               </div>
               <p>
@@ -43,43 +44,28 @@ export default function EventItem({
               </p>
               <p className={`${styles["event-price"]} text-primary`}>
                 <i className="fa-solid fa-money-bill-wave"></i>
-                {price == "" ? " Free" : ` ${price}  $`}{" "}
+                {price == "" ? "Free" : ` ${price}  $`}{" "}
               </p>
             </div>
 
             <div>
-              {category.map((item, index) => (
-                <span key={index} className={`${styles["colored-box"]}`}>
+              {category?.map((item) => (
+                <span key={item} className={`${styles["colored-box"]}`}>
                   {item}
                 </span>
               ))}
             </div>
-            {/* <a
-              type="button"
-              className="btn btn-primary  mt-4"
-              href="#"
-              data-bs-toggle="modal"
-              data-bs-target="#applyLoan"
-            >
-              Read more{" "}
-              <span
-                style={{ fontSize: 14 }}
-                className="ms-2 fas fa-arrow-right"
-              />
-            </a> */}
           </div>
         </div>
       </Link>
-      {/* <p>{status == true ? "Published" : "Pending"}</p>
-      <button onClick={() => changeStatus(_id)}>Change</button> */}
-      <button class="delete" onClick={() => deleteEvent(_id)}>
-        <i class="fa-solid fa-trash"></i>
+      <button className="delete" onClick={() => showDeleteModal(_id)}>
+        <i className="fa-solid fa-trash"></i>
       </button>
-      <Link key={_id} to={`/event/${_id}`} class="delete">
-        <i class="fa-solid fa-eye"></i>
+      <Link to={`/my-events/${_id}/details`} className="delete">
+        <i className="fa-solid fa-eye"></i>
       </Link>
-      <button class="delete">
-        <i class="fa-solid fa-pen-to-square"></i>
+      <button className="delete" onClick={() => showCreateUpdateModal(_id)}>
+        <i className="fa-solid fa-pen-to-square"></i>
       </button>
     </div>
   );

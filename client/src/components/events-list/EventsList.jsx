@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router";
-import "../App";
+import "../../App";
 // import { PrimeReactProvider, PrimeReactContext } from "primereact/api";
 // import { MultiSelect } from "primereact/multiselect";
 // import "primereact/resources/themes/lara-light-cyan/theme.css";
-import eventService from "../services/eventService";
-import EventItem from "./EventItem";
-import Pagination from "./Pagination";
+import EventsListItem from "../events-list/events-list-item/EventsListItem";
+import Pagination from "../pagination/Pagination";
+import CreateUpdateEvent from "../event-create/EventCreate";
+import DeleteEvent from "../event-delete/EventDelete";
+import eventService from "../../services/eventService";
 
 export default function EventList() {
   const [isGrid, setIsGrid] = useState(true);
@@ -14,25 +16,19 @@ export default function EventList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [eventsPerPage, setEventsPerPage] = useState(4);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [showCreateUpdateModal, setShowCreateUpdateModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [eventId, setEventId] = useState(null);
   const lastPostIndex = currentPage * eventsPerPage;
   const firstPostIndex = lastPostIndex - eventsPerPage;
+
   const [eventitems, setEventItems] = useState([]);
 
   useEffect(() => {
     eventService.getAll().then((result) => {
-      setEventItems(result);
+      setEventItems(result.filter((result) => result.status == "Published"));
     });
   }, []);
-
-  const currentEvents = eventitems.slice(firstPostIndex, lastPostIndex);
-  // const onStatusChanged = (eventId) => {
-  //   setEventItems((oldEvents) =>
-  //     oldEvents.map((item) =>
-  //       item._id === eventId ? { ...item, status: !item.status } : item
-  //     )
-  //   );
-  // };
-
   // const [filteredItems, setFilteredItems] = useState(eventitems);
   // const [filterItems, setFilterItems] = useState(false);
   // const [selectedCategories, setSelectedCategories] = useState();
@@ -43,7 +39,7 @@ export default function EventList() {
   //   { name: "Conference", code: "conference" },
   //   { name: "Paris", code: "PRS" },
   // ];
-
+  const currentEvents = eventitems.slice(firstPostIndex, lastPostIndex);
   const changeViewHandler = (event) => {
     event.preventDefault();
     setIsGrid((isGrid) => !isGrid);
@@ -75,6 +71,13 @@ export default function EventList() {
     setCurrentPage(page);
     setSearchParams(`?page=${page}`);
   };
+  const deleteEventHandler = async () => {
+    await eventService.deleteEvent(eventId);
+    setEventItems((oldEvents) =>
+      oldEvents.filter((event) => event._id !== eventId)
+    );
+    setShowDeleteModal(false);
+  };
   useEffect(() => {
     if (!isGrid) {
       setView("list-view");
@@ -91,8 +94,50 @@ export default function EventList() {
     //   categoryFilterHandler();
     // }
     // console.log(isEmptyObject(selectedCategories));
-  }, [isGrid]);
+  }, [isGrid, useSearchParams, eventId]);
 
+  const createEventHandler = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(
+      e.target.parentElement.parentElement.parentElement.parentElement.parentElement
+    );
+    const category = formData.getAll("category");
+    const eventData = Object.fromEntries(formData);
+    const newData = { ...eventData, category: category };
+    await eventService
+      .create(newData)
+      .then((result) => setEventItems((oldEvents) => [result, ...oldEvents]));
+    setShowCreateUpdateModal(() => !showCreateUpdateModal);
+  };
+
+  const updateEventHandler = async (id, e) => {
+    e.preventDefault();
+    const formData = new FormData(
+      e.target.parentElement.parentElement.parentElement.parentElement.parentElement
+    );
+    const category = formData.getAll("category");
+    const eventData = Object.fromEntries(formData);
+    const newData = { ...eventData, category: category };
+    await eventService
+      .update(newData, id)
+      .then((result) =>
+        setEventItems((state) =>
+          state.map((event) => (event._id === id ? updatedItem : event))
+        )
+      );
+
+    setShowCreateUpdateModal(() => !showCreateUpdateModal);
+  };
+
+  const showCreateUpdateModalHandler = (id) => {
+    console.log(id);
+    setShowCreateUpdateModal((showCreateUpdateModal) => !showCreateUpdateModal);
+    setEventId(id);
+  };
+  const showDeleteModalHandler = (id) => {
+    setShowDeleteModal((showDeleteModal) => !showDeleteModal);
+    setEventId(id);
+  };
   return (
     <>
       <section className="section section-events">
@@ -107,9 +152,9 @@ export default function EventList() {
               </div>
             </div>
             <div className="row mb-4 ">
-              <div class="col-md-12 d-inline-flex align-center justify-content-center">
-                <ul class="list-unstyled list-inline mb-0 social-icons">
-                  <li class="list-inline-item me-3">
+              <div className="col-md-12 d-inline-flex align-center justify-content-center">
+                <ul className="list-unstyled list-inline mb-0 social-icons">
+                  <li className="list-inline-item me-3">
                     <a
                       onClick={changeViewHandler}
                       className={`view-button text-black ${
@@ -118,9 +163,9 @@ export default function EventList() {
                       href=""
                     >
                       {isGrid ? (
-                        <i class="fa-solid fa-list-ul "></i>
+                        <i className="fa-solid fa-list-ul "></i>
                       ) : (
-                        <i class="fa-solid fa-grip"></i>
+                        <i className="fa-solid fa-grip"></i>
                       )}
                     </a>
                   </li>
@@ -162,11 +207,14 @@ export default function EventList() {
             </div>
             <>
               {currentEvents.map((eventitem) => (
-                <EventItem
+                <EventsListItem
                   view={view}
                   key={eventitem._id}
                   {...eventitem}
                   // changeStatus={changeStatus}
+                  deleteEvent={deleteEventHandler}
+                  showDeleteModal={showDeleteModalHandler}
+                  showCreateUpdateModal={showCreateUpdateModalHandler}
                 />
               ))}
             </>
@@ -177,19 +225,6 @@ export default function EventList() {
               currentPage={currentPage}
             />
           </div>
-          {/* <a
-            type="button"
-            className="btn btn-primary  mt-4"
-            href="#"
-            data-bs-toggle="modal"
-            data-bs-target="#applyLoan"
-          >
-            See all Events{" "}
-            <span
-              style={{ fontSize: 14 }}
-              className="ms-2 fas fa-arrow-right"
-            />
-          </a> */}
         </div>
       </section>
     </>
