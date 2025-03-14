@@ -2245,15 +2245,19 @@ textarea.form-control-lg {
   -moz-appearance: none;
   appearance: none;
 }
+select option:hover,
+select option:focus {
+  background-color: #fff !important;
+}
 @media (prefers-reduced-motion: reduce) {
   .form-select {
     transition: none;
   }
 }
 .form-select:focus {
-  border-color: #86b7fe;
+  border-color: #f05537;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  box-shadow: #f05537;
 }
 .form-select[multiple],
 .form-select[size]:not([size="1"]) {
@@ -3985,7 +3989,37 @@ fieldset:disabled .btn {
 .navbar-nav .dropdown-menu {
   position: static;
 }
-
+.css-17jyosd-MuiSwitch-thumb {
+  box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+  background-color: #f05537;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+}
+.css-17jyosd-MuiSwitch-thumb {
+  background-color: #f05537 !important;
+}
+.MuiChip-filled {
+  background: rgb(240, 186, 175) !important;
+}
+.css-161ms7l-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked
+  + .MuiSwitch-track {
+  background: #f05537 !important;
+  opacity: 0.7 !important;
+}
+.MuiSwitch-track {
+  background-color: #bebdbd !important;
+}
+.css-161ms7l-MuiButtonBase-root-MuiSwitch-switchBase.Mui-checked {
+  color: #f05537 !important;
+}
+.css-quhxjy-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused
+  .MuiOutlinedInput-notchedOutline,
+.Mui-focused .css-1ll44ll-MuiOutlinedInput-notchedOutline {
+  border-color: #f05537 !important;
+  border-width: 1px !important;
+}
 .navbar-text {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
@@ -10139,13 +10173,11 @@ blockquote::before {
 }
 select.form-control {
   height: auto;
+  padding-top: 10px;
 }
 select option:checked {
   background: #f05537 !important;
   color: #fff;
-}
-select.form-control {
-  height: auto;
 }
 textarea.form-control {
   height: 140px;
@@ -10165,8 +10197,15 @@ textarea.form-control {
   top: -13px;
   left: 12px;
   padding: 0 9px;
+  z-index: 99;
 }
-
+.MuiStack-root {
+  padding-top: 0 !important;
+}
+.css-1rju2q6-MuiButtonBase-root-MuiMenuItem-root.Mui-selected {
+  background-color: #f05537 !important;
+  color: #fff;
+}
 .contact-info {
   padding-left: 50px;
 }
@@ -10437,6 +10476,9 @@ textarea.form-control {
 #create-modal .modal-dialog {
   margin-top: 150px;
   max-width: 80%;
+}
+#create .col-lg-4 {
+  padding: 5px;
 }
 #root {
   /* max-width: 1280px; */

@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-import { useSearchParams, Link } from "react-router";
+import { useSearchParams, Link, useNavigate } from "react-router";
 import "../../App";
-// import { PrimeReactProvider, PrimeReactContext } from "primereact/api";
-// import { MultiSelect } from "primereact/multiselect";
-// import "primereact/resources/themes/lara-light-cyan/theme.css";
+
 import EventsListItem from "../events-list/events-list-item/EventsListItem";
 import Pagination from "../pagination/Pagination";
-import CreateUpdateEvent from "../event-create/EventCreate";
 import DeleteEvent from "../event-delete/EventDelete";
 import eventService from "../../services/eventService";
 
@@ -16,60 +13,41 @@ export default function EventList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [eventsPerPage, setEventsPerPage] = useState(4);
   const [searchParams, setSearchParams] = useSearchParams();
-  const [showCreateUpdateModal, setShowCreateUpdateModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [eventId, setEventId] = useState(null);
+  const [searchCategory, setSearchCategory] = useState("All");
+  const [searchCity, setSearchCity] = useState("All");
   const lastPostIndex = currentPage * eventsPerPage;
   const firstPostIndex = lastPostIndex - eventsPerPage;
-
   const [eventitems, setEventItems] = useState([]);
+  const [displayProducts, setDisplayProducts] = useState([]);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     eventService.getAll().then((result) => {
-      setEventItems(result.filter((result) => result.status == "Published"));
+      setEventItems(result);
+      setDisplayProducts(result);
     });
   }, []);
-  // const [filteredItems, setFilteredItems] = useState(eventitems);
-  // const [filterItems, setFilterItems] = useState(false);
-  // const [selectedCategories, setSelectedCategories] = useState();
-  // const categories = [
-  //   { name: "Webinar", code: "webinar" },
-  //   { name: "Online", code: "online" },
-  //   { name: "Music", code: "music" },
-  //   { name: "Conference", code: "conference" },
-  //   { name: "Paris", code: "PRS" },
-  // ];
-  const currentEvents = eventitems.slice(firstPostIndex, lastPostIndex);
+
+  useEffect(() => {
+    if (!isGrid) {
+      setView("list-view");
+    } else {
+      setView("grid-view");
+    }
+  }, [isGrid]);
+
+  const currentEvents = displayProducts.slice(firstPostIndex, lastPostIndex);
   const changeViewHandler = (event) => {
     event.preventDefault();
     setIsGrid((isGrid) => !isGrid);
   };
-  // const categoryFilterHandler = () => {
-  //   let itemCategories = [];
-  //   let categoriesItems = [];
-  //   if (selectedCategories.length > 0) {
-  //     selectedCategories.forEach((element) => {
-  //       categoriesItems.push(element.code);
-  //     });
-  //   } else {
-  //     categoriesItems = [];
-  //   }
-  //   eventitems.forEach((element) => {
-  //     if (element.category.some((r) => categoriesItems.includes(r))) {
-  //       itemCategories.push(element);
-  //     }
-  //   });
-  //   setFilteredItems(itemCategories);
-  // };
-  // const clearFiltersHandler = (e) => {
-  //   e.preventDefault;
-  //   setFilterItems(false);
-  //   setFilteredItems(eventitems);
-  //   setSelectedCategories();
-  // };
+
   const currentPageClickHandler = (page) => {
     setCurrentPage(page);
-    setSearchParams(`?page=${page}`);
+    // setSearchParams(`?page=${page}`);
   };
   const deleteEventHandler = async () => {
     await eventService.delete(eventId);
@@ -78,66 +56,76 @@ export default function EventList() {
     );
     setShowDeleteModal(false);
   };
-  useEffect(() => {
-    if (!isGrid) {
-      setView("list-view");
-    } else {
-      setView("grid-view");
-    }
-    // function isArrayEmptyOrUndefined(arr) {
-    //   return !Array.isArray(arr) || arr.length === 0;
-    // }
-    // if (isArrayEmptyOrUndefined(selectedCategories)) {
-    //   setFilterItems(false);
-    // } else {
-    //   setFilterItems(true);
-    //   categoryFilterHandler();
-    // }
-    // console.log(isEmptyObject(selectedCategories));
-  }, [isGrid, useSearchParams, eventId]);
 
-  const createEventHandler = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(
-      e.target.parentElement.parentElement.parentElement.parentElement.parentElement
-    );
-    const category = formData.getAll("category");
-    const eventData = Object.fromEntries(formData);
-    const newData = { ...eventData, category: category };
-    await eventService
-      .create(newData)
-      .then((result) => setEventItems((oldEvents) => [result, ...oldEvents]));
-    setShowCreateUpdateModal(() => !showCreateUpdateModal);
-  };
-
-  const updateEventHandler = async (id, e) => {
-    e.preventDefault();
-    const formData = new FormData(
-      e.target.parentElement.parentElement.parentElement.parentElement.parentElement
-    );
-    const category = formData.getAll("category");
-    const eventData = Object.fromEntries(formData);
-    const newData = { ...eventData, category: category };
-    await eventService
-      .update(newData, id)
-      .then((result) =>
-        setEventItems((state) =>
-          state.map((event) => (event._id === id ? updatedItem : event))
-        )
-      );
-
-    setShowCreateUpdateModal(() => !showCreateUpdateModal);
-  };
-
-  const showCreateUpdateModalHandler = (id) => {
-    console.log(id);
-    setShowCreateUpdateModal((showCreateUpdateModal) => !showCreateUpdateModal);
-    setEventId(id);
-  };
   const showDeleteModalHandler = (id) => {
     setShowDeleteModal((showDeleteModal) => !showDeleteModal);
     setEventId(id);
   };
+
+  const filterHandler = (e) => {
+    const filterItemValue = e.target.value;
+    const filterBy = e.target.id;
+    if (filterBy == "category") {
+      setSearchCategory(filterItemValue);
+      navigate(`?category=${filterItemValue}&city=${searchCity}`);
+      if (searchCity == null || searchCity == "All") {
+        setDisplayProducts(
+          [...eventitems].filter((item) =>
+            item.category.includes(filterItemValue)
+          )
+        );
+      } else if (filterItemValue === "All") {
+        setDisplayProducts(...eventitems);
+      } else {
+        setDisplayProducts(
+          [...eventitems].filter(
+            (item) =>
+              item.category.includes(filterItemValue) &&
+              item.address.city.includes(searchCity)
+          )
+        );
+      }
+      if (filterItemValue === "All") {
+        setDisplayProducts(
+          [...eventitems].filter((item) =>
+            item.address.city.includes(searchCity)
+          )
+        );
+      }
+      if (filterItemValue === "All" && searchCity == "All") {
+        setDisplayProducts([...eventitems]);
+      }
+    } else if (filterBy == "city") {
+      setSearchCity(filterItemValue);
+      navigate(`?category=${searchCategory}&city=${filterItemValue}`);
+      if (searchCategory == null || searchCategory == "All") {
+        setDisplayProducts(
+          [...eventitems].filter((item) =>
+            item.address.city.includes(filterItemValue)
+          )
+        );
+      } else {
+        setDisplayProducts(
+          [...eventitems].filter(
+            (item) =>
+              item.address.city.includes(filterItemValue) &&
+              item.category.includes(searchCategory)
+          )
+        );
+      }
+      if (filterItemValue === "All") {
+        setDisplayProducts(
+          [...eventitems].filter((item) =>
+            item.category.includes(searchCategory)
+          )
+        );
+      }
+      if (filterItemValue === "All" && searchCategory == "All") {
+        setDisplayProducts([...eventitems]);
+      }
+    }
+  };
+
   return (
     <>
       <section className="section section-events">
@@ -163,56 +151,68 @@ export default function EventList() {
             </div>
             <div className="row mb-4 ">
               <div className="col-md-12 d-inline-flex align-center justify-content-center">
-                <ul className="list-unstyled list-inline mb-0 social-icons">
-                  <li className="list-inline-item me-3">
-                    <a
-                      onClick={changeViewHandler}
-                      className={`view-button text-black ${
-                        isGrid ? "grid" : ""
-                      }`}
-                      href=""
-                    >
-                      {isGrid ? (
-                        <i className="fa-solid fa-list-ul "></i>
-                      ) : (
-                        <i className="fa-solid fa-grip"></i>
-                      )}
-                    </a>
-                  </li>
-                </ul>
-                <div>
-                  {/* <select
-                    onClick={() => categoryFilterHandler(e)}
-                    id="multiple-checkboxes"
-                    multiple="multiple"
+                <div className="d-inline-flex align-center justify-content-start">
+                  <form
+                    action={filterHandler}
+                    className="d-inline-flex align-items-center justify-content-center"
                   >
-                    <option selected disabled>
-                      Category
-                    </option>
-                    <option value="online">Online</option>
-                    <option value="music">Music</option>
-                    <option value="seminar">Seminar</option>
-                    <option value="festiva">Festival</option>
-                    <option value="charity">Charity</option>
-                    <option value="sport">Sport</option>
-                  </select> */}
-                  {/* <PrimeReactProvider value={{ unstyled: false }}>
-                    <MultiSelect
-                      value={selectedCategories}
-                      onChange={(e) => {
-                        setSelectedCategories(e.value);
-                      }}
-                      options={categories}
-                      optionLabel="name"
-                      placeholder="Select Categories"
-                      maxSelectedLabels={5}
-                      className="w-full md:w-20rem me-3"
-                    />
-                  </PrimeReactProvider> */}
-                  {/* <a className="text-primary" onClick={clearFiltersHandler}>
-                    Clear
-                  </a> */}
+                    {" "}
+                    <span> Category: </span>
+                    <div className="form-group p-3">
+                      <select
+                        className="form-control form-select shadow-none"
+                        id="category"
+                        name="category"
+                        onChange={filterHandler}
+                      >
+                        <option defaultValue="All" selected>
+                          All
+                        </option>
+                        <option defaultValue="Online">Online</option>
+                        <option defaultValue="Music">Music</option>
+                        <option defaultValue=" Business">Business</option>
+                        <option defaultValue=" Culture">Culture</option>
+                        <option defaultValue=" Sport">Sport</option>
+                        <option defaultValue="Lifestyle">Lifestyle</option>
+                      </select>
+                    </div>
+                    <span> City: </span>
+                    <div className="form-group p-3">
+                      <select
+                        className="form-control form-select  shadow-none"
+                        id="city"
+                        name="city"
+                        onChange={filterHandler}
+                      >
+                        <option defaultValue="All" selected>
+                          All
+                        </option>
+                        <option defaultValue="Sofia">Sofia</option>
+                        <option defaultValue=" Varna">Varna</option>
+                      </select>
+                    </div>
+                  </form>
                 </div>
+                <div className="d-inline-flex align-center justify-content-end">
+                  <ul className="list-unstyled list-inline mb-0 social-icons p-3">
+                    <li className="list-inline-item me-3 mt-2">
+                      <a
+                        onClick={changeViewHandler}
+                        className={`view-button text-black ${
+                          isGrid ? "grid" : ""
+                        }`}
+                        href=""
+                      >
+                        {isGrid ? (
+                          <i className="fa-solid fa-list-ul "></i>
+                        ) : (
+                          <i className="fa-solid fa-grip"></i>
+                        )}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div></div>
               </div>
             </div>
             <>
@@ -224,44 +224,22 @@ export default function EventList() {
                   // changeStatus={changeStatus}
                   deleteEvent={deleteEventHandler}
                   showDeleteModal={showDeleteModalHandler}
-                  showCreateUpdateModal={showCreateUpdateModalHandler}
                 />
               ))}
             </>
             <Pagination
-              totalEvents={eventitems.length}
+              totalEvents={displayProducts.length}
               eventsPerPage={eventsPerPage}
               showCurrentPage={currentPageClickHandler}
               currentPage={currentPage}
             />
           </div>
-          {showCreateUpdateModal && (
-            <CreateUpdateEvent
-              showModal={showCreateUpdateModalHandler}
-              eventId={eventId}
-              createEvent={createEventHandler}
-              updateEvent={updateEventHandler}
-            ></CreateUpdateEvent>
-          )}
           {showDeleteModal && (
             <DeleteEvent
               onDelete={deleteEventHandler}
               showDeleteModal={showDeleteModalHandler}
             ></DeleteEvent>
           )}
-          {/* <a
-            type="button"
-            className="btn btn-primary  mt-4"
-            href="#"
-            data-bs-toggle="modal"
-            data-bs-target="#applyLoan"
-          >
-            See all Events{" "}
-            <span
-              style={{ fontSize: 14 }}
-              className="ms-2 fas fa-arrow-right"
-            />
-          </a> */}
         </div>
       </section>
     </>

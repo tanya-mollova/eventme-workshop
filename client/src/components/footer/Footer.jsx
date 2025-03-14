@@ -14,7 +14,7 @@ export default function Footer() {
                 decoding="async"
                 className="img-fluid"
                 width={250}
-                src="images/eventme-logo-light.png"
+                src="/images/eventme-logo-light.png"
                 alt="Event.Me Logo"
               />
             </a>

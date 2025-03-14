@@ -129,11 +129,11 @@ export default function EventList() {
     setShowCreateUpdateModal(() => !showCreateUpdateModal);
   };
 
-  const showCreateUpdateModalHandler = (id) => {
-    console.log(id);
-    setShowCreateUpdateModal((showCreateUpdateModal) => !showCreateUpdateModal);
-    setEventId(id);
-  };
+  // const showCreateUpdateModalHandler = (id) => {
+  //   console.log(id);
+  //   setShowCreateUpdateModal((showCreateUpdateModal) => !showCreateUpdateModal);
+  //   setEventId(id);
+  // };
   const showDeleteModalHandler = (id) => {
     setShowDeleteModal((showDeleteModal) => !showDeleteModal);
     setEventId(id);
@@ -214,7 +214,6 @@ export default function EventList() {
                   // changeStatus={changeStatus}
                   deleteEvent={deleteEventHandler}
                   showDeleteModal={showDeleteModalHandler}
-                  showCreateUpdateModal={showCreateUpdateModalHandler}
                 />
               ))}
             </>

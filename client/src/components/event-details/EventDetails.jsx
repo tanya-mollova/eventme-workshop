@@ -1,6 +1,6 @@
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
-import { fromIsoDate } from "../../utils/dateTime";
+import { toShortDate } from "../../utils/dateTime";
 
 import eventService from "../../services/eventService";
 
@@ -9,11 +9,8 @@ export default function SingleEvent(eventitems) {
   const [event, setEvent] = useState({});
 
   useEffect(() => {
-    eventService.getOne(eventId).then((result) => {
-      setEvent(result);
-      console.log(result);
-    });
-  }, []);
+    eventService.getOne(eventId).then(setEvent);
+  }, [eventId]);
   return (
     <>
       <section className="section-sm">
@@ -25,21 +22,18 @@ export default function SingleEvent(eventitems) {
                 <div>
                   <img src={event.imageUrl} clas={event.title}></img>
                 </div>
-                <h2>{event.organizator}</h2>
-                <p>{event.description}</p>
-
+                <h2 id="what-you-know-about-loans">{event.title}</h2>
                 <h3 id="payday-loan-application-processing">
-                  {fromIsoDate(event.eventDate)} <br></br>
+                  <span className="text-primary display-4">
+                    {toShortDate(event.date)}{" "}
+                  </span>
+                  <br></br>
                   {event.time}h.
                 </h3>
-
-                <h2 id="what-you-know-about-loans">
-                  What You Know About Loans
-                </h2>
+                <p>{event.description}</p>
                 <hr />
-                <a href="">Contact</a>
-                <p></p>
-                <p></p>
+                For more information about this event, contact the{" "}
+                <a href="mailto:">Organizer</a>
               </div>
             </div>
           </div>

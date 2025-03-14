@@ -1,5 +1,6 @@
 .event-item {
   padding: 10px 20px;
+  position: relative;
 }
 .event-item .block {
   border: 1px solid #f4f4f4;
@@ -84,7 +85,7 @@
 }
 .list-view .block {
   display: flex;
-  align-items: center;
+  align-items: baseline;
 }
 
 .list-view.event-item {
@@ -94,17 +95,36 @@
   width: 100%;
   padding: 10px 30px;
 }
-
+.list-view .event-info {
+  width: 100%;
+  padding: 10px 30px;
+  font-size: 16px;
+}
+.list-view .event-info * {
+  font-size: 16px;
+}
+.list-view .event-info .colored-box {
+  font-size: 12px;
+}
 .list-view .event-meta {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  font-size: 16px;
 }
-.list-view .event-title {
-  max-width: 50%;
-  width: 50%;
+.list-view .event-location {
+  display: none;
+}
+.list-view .event-info a {
+  max-width: 65%;
+  width: 65%;
+}
+.list-view .event-info .event-title {
+  max-width: 100%;
+  width: 100%;
   text-align: left;
+  font-size: 20px !important;
 }
 .list-view .event-image {
   width: 300px;
@@ -120,32 +140,50 @@
 .text-black:hover .event-title {
   color: #f05537;
 }
-
-/* @media (min-width: 991px) {
-  .event-item:nth-child(2),
-  .event-item:nth-child(4) {
-    border-left: 1px solid #f4f4f4;
-  }
-  .event-item:nth-child(4),
-  .event-item:nth-child(5),
-  .event-item:nth-child(6) {
-    border-bottom: 1px solid #f4f4f4;
-  }
+.action-buttons {
+  width: 250px;
+  margin: 0 auto;
 }
-@media (max-width: 991px) {
-  .event-item:nth-child(2),
-  .event-item:nth-child(3),
-  .event-item:nth-child(5) {
-    border-left: 1px solid #f4f4f4;
-  }
-  .event-item:nth-child(6),
-  .event-item:nth-child(5) {
-    border-bottom: 1px solid #f4f4f4;
-  }
+.action-buttons a {
+  background: transparent;
+  padding: 10px;
+  display: inline-block;
+  transition: all 0.2s ease-in;
 }
-@media (max-width: 767px) {
-  .event-item {
-    border: 1px solid #f4f4f4;
-    border-bottom: 0;
-  }
-} */
+.action-buttons a:hover {
+  border-color: transparent;
+  outline: none;
+  transform: scale(1.2);
+}
+.action-buttons i {
+  color: #f0927f;
+  transition: all 0.2s ease-in;
+}
+.action-buttons a:hover i {
+  color: #f05537;
+}
+.event-status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.published {
+  margin-left: 10px;
+  background-color: #abff00;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px,
+    #89ff00 0 2px 12px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.pending {
+  margin-left: 10px;
+  background-color: rgb(236, 21, 21);
+  box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #441313 0 -1px 9px,
+    rgba(198, 17, 17, 0.5) 0 2px 12px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}

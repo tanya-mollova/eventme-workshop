@@ -6,15 +6,15 @@ import styles from "./assets/EventsListItem.module.css";
 export default function EventItem({
   _id,
   title,
-  eventDate,
+  date,
   category,
   address,
   time,
   price,
   imageUrl,
   view,
+  status,
   showDeleteModal,
-  showCreateUpdateModal,
 }) {
   return (
     <div
@@ -23,24 +23,29 @@ export default function EventItem({
       } col-lg-3 col-md-6 col-sm-6 col-xs-12`}
     >
       {/* TODO when logged in make Link to my-events/id/details */}
-      <Link className="text-black" to={`/events/${_id}/details`}>
+      <div className="text-black">
         <div className={styles["block"]}>
-          <img src={imageUrl} className={styles["event-image"]} alt={title} />
+          <Link className="text-black" to={`/events/${_id}/details`}>
+            {" "}
+            <img src={imageUrl} className={styles["event-image"]} alt={title} />
+          </Link>
           <div className={styles["event-info"]}>
             <div className={styles["event-meta"]}>
-              <h3 className={`${styles["event-title"]}`}>{title}</h3>
-              <div>
+              <Link className="text-black" to={`/events/${_id}/details`}>
+                <h3 className={`${styles["event-title"]}`}>{title}</h3>
+              </Link>
+              <div className={styles["event-date-time"]}>
                 <i className="fa-solid fa-calendar-days mr-3"></i>
                 <span className={styles["event-time"]}>
-                  {toShortDate(eventDate)}
+                  {toShortDate(date)}
                 </span>{" "}
                 <i className="fa-solid fa-clock"></i>
                 <span className={styles["event-time"]}>{time} h.</span>
               </div>
-              <p>
+              <p className={styles["event-location"]}>
                 <i className="fa-solid fa-location-dot"></i>{" "}
                 <strong>{address?.city}</strong>,{address?.street},{" "}
-                {address?.number}
+                {address?.streetNumber}
               </p>
               <p className={`${styles["event-price"]} text-primary`}>
                 <i className="fa-solid fa-money-bill-wave"></i>
@@ -56,17 +61,21 @@ export default function EventItem({
               ))}
             </div>
           </div>
+          <div className={styles["action-buttons"]}>
+            <Link onClick={() => showDeleteModal(_id)}>
+              <i className="fa-solid fa-trash"></i>
+            </Link>
+            <Link to={`/my-events/${_id}/details`}>
+              <i className="fa-solid fa-eye"></i>
+            </Link>
+            <Link to={`/my-events/${_id}/edit`}>
+              <i className="fa-solid fa-pen-to-square"></i>
+            </Link>
+            {status == true && <span className={styles["published"]}></span>}
+            {status == false && <span className={styles["pending"]}></span>}
+          </div>
         </div>
-      </Link>
-      <button className="delete" onClick={() => showDeleteModal(_id)}>
-        <i className="fa-solid fa-trash"></i>
-      </button>
-      <Link to={`/my-events/${_id}/details`} className="delete">
-        <i className="fa-solid fa-eye"></i>
-      </Link>
-      <button className="delete" onClick={() => showCreateUpdateModal(_id)}>
-        <i className="fa-solid fa-pen-to-square"></i>
-      </button>
+      </div>
     </div>
   );
 }

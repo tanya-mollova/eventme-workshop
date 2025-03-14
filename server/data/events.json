@@ -1,203 +1,146 @@
 {
-  "1": {
-    "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis maiores eligendi quos quidem ex numquam hic. Eos quos similique voluptates accusamus quae voluptas magni ad a ipsum, quia enim debitis cumque quibusdam exercitationem architecto sint nostrum dolorum dolor repudiandae nulla deserunt, dolorem itaque!",
-    "_id": "1",
-    "title": "Event 1",
-    "organizator": "Romaguera-Crona",
-    "eventDate": "2025-07-02",
-    "imageUrl": "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "category": ["music"],
-    "address": {
-      "city": "Sofia",
-      "street": "G. Sava Rakovski",
-      "number": "136"
-    },
-    "time": "14:20",
-    "price": "",
-    "status": "Published",
-    "userInfo": {
-      "userId": 1,
-      "firstName": "Leanne",
-      "lastName": "Graham",
-      "email": "Sincere@april.biz",
-      "password": "123",
-      "phoneNumber": "088888888"
-    }
-  },
-  "2": {
-    "description": "Quisquam beatae rerum repudiandae distinctio nesciunt nemo dolorem facilis aspernatur, totam, laudantium sunt amet non, itaque voluptate quae cumque tempore autem similique. Quisquam nemo cupiditate, facere obcaecati iure eveniet illo recusandae! Pariatur magnam commodi, doloremque, beatae unde facilis soluta blanditiis ex debitis quisquam, nostrum voluptates.",
-    "_id": "2",
-    "title": "Event 2",
-    "organizator": "Deckow-Crist",
-    "eventDate": "2025-08-07",
-    "imageUrl": "https://images.unsplash.com/photo-1522158637959-30385a09e0da?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "category": ["webinar"],
+  "5fb2bc08-35fb-416d-aa78-8ef81854d968": {
+    "title": "Cookbook Collage Workshop",
+    "imageUrl": "https://events.amny.com/wp-content/uploads/2025/02/File-1298_medium-e1739917123993.png",
+    "description": "Do you own a cookbook you love but never use? Or cherished family recipes that could be creatively commemorated? What about that stack of old food magazines or restaurant menus you can’t seem to let go of? Join MOFAD for a community crafting workshop and transform those cookbooks and recipes into vibrant works of art. With guidance from multi-disciplinary artist and chef, Andrea Lekberg, we’ll chat about our favorite recipes and lean into our creativity at this hands-on collage workshop. We encourage you to bring physical cookbooks, recipes, food magazines, restaurant menus, or anything else you like! Don’t want to cut into a favorite piece? Bring a photocopy! MOFAD will also provide plenty of supplies for you to create for you to create your own cookbook collage to take home. Ticket includes access to Flavor: The World to Your Brain from 6 to 7 PM, baked goods from The Artist Baker, and beverages.",
+    "time": "16:30",
+    "date": "2025-07-22",
+    "price": "30",
+    "status": true,
     "address": {
       "city": "Plovdiv",
-      "street": "Ivan Vazov",
-      "number": "24"
+      "street": "Vasil Levski",
+      "streetNumber": "52"
     },
-    "time": "10:00",
-    "price": 50,
-    "status": "Published",
-    "userInfo": {
-      "userId": 2,
-      "firstName": "Ervin ",
-      "lastName": "Howell",
-      "email": "Shanna@melissa.tv",
-      "password": "123",
-      "phoneNumber": "088888888"
-    }
+    "category": ["Culture", "Lifestyle"],
+    "createdAt": "2025-03-12T09:11:24.936Z",
+    "updatedAt": "2025-03-12T09:11:24.936Z",
+    "_id": "5fb2bc08-35fb-416d-aa78-8ef81854d968"
   },
-  "3": {
-    "description": "Nesciunt facere, omnis exercitationem neque quisquam optio quidem distinctio laboriosam libero consequuntur aperiam, id possimus accusamus ad eaque quis quas molestiae. Esse praesentium cumque quae nobis atque eligendi commodi nam dolores, aperiam vero quia quaerat, soluta, maiores molestiae voluptatum. Modi doloribus consequatur explicabo enim, voluptate nostrum amet expedita natus tempore exercitationem nesciunt quasi quidem eaque.",
-    "_id": "3",
-    "title": "Event 3",
-    "organizator": "Romaguera-Jacobson",
-    "eventDate": "2025-10-19",
-    "imageUrl": "https://plus.unsplash.com/premium_photo-1664474653221-8412b8dfca3e?q=80&w=869&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "category": ["online", "music"],
+  "a23600f0-7e9e-4453-b5f0-e513cb472734": {
+    "title": "Aviv Purim Afterparty",
+    "imageUrl": "https://bj.org/wp-content/uploads/2025/02/Aviv-Purim-Happy-Hour.png",
+    "description": "Join other 20s & 30s for drinks, hamantaschen, and great company after the Megillah reading. Come in costume, grab a cocktail, and let’s toast to a night of joy, laughter, and a little bit of chaos—just as Purim should be! ?? Register",
+    "time": "17:10",
+    "date": "2025-06-26",
+    "price": "40",
+    "status": true,
     "address": {
       "city": "Varna",
-      "street": "Vasil Levski",
-      "number": "56"
+      "street": "Ivan Vazov",
+      "streetNumber": "56"
     },
-    "time": "17:15",
-    "price": 30,
-    "status": "Published",
-    "userInfo": {
-      "userId": 3,
-      "firstName": "Clementine",
-      "lastName": "Bauch",
-      "email": "Nathan@yesenia.net",
-      "password": "123",
-      "phoneNumber": "088888888"
-    }
+    "category": ["Music", "Lifestyle"],
+    "createdAt": "2025-03-12T09:09:33.641Z",
+    "updatedAt": "2025-03-12T09:09:33.641Z",
+    "_id": "a23600f0-7e9e-4453-b5f0-e513cb472734"
   },
-  "4": {
-    "description": "Nesciunt facere, omnis exercitationem neque quisquam optio quidem distinctio laboriosam libero consequuntur aperiam, id possimus accusamus ad eaque quis quas molestiae. Esse praesentium cumque quae nobis atque eligendi commodi nam dolores, aperiam vero quia quaerat, soluta, maiores molestiae voluptatum. Modi doloribus consequatur explicabo enim, voluptate nostrum amet expedita natus tempore exercitationem nesciunt quasi quidem eaque.",
-    "_id": "4",
-    "title": "Event 4",
-    "organizator": "Robel-Corkery",
-    "eventDate": "2025-10-17",
-    "imageUrl": "https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "category": ["online", "music"],
+  "3fc7370d-c075-4271-8aea-6541f735558b": {
+    "title": "AI Image Generators",
+    "imageUrl": "https://149472331.v2.pressablecdn.com/wp-content/uploads/2024/01/ai-image-generators-Adobe-Stock.jpeg",
+    "description": "Do you envision something in your mind’s eye but struggle to bring it to life? There’s an AI tool for that! This lecture will explain how artificial intelligence can turn your words into stunning realistic and imaginative images in seconds. We’ll demonstrate an AI image generator and the wide range of visual and artistic styles it can produce. You’ll also learn tips for getting the most out of this new and exciting technology so you can get started! NYC Program Registration - Q1 2025",
+    "time": "14:40",
+    "date": "2025-10-07",
+    "price": "10",
+    "status": true,
     "address": {
       "city": "Sofia",
       "street": "Opalchenska",
-      "number": "13"
+      "streetNumber": "13"
     },
-    "time": "17:30",
-    "price": 40,
-    "status": "Published",
-    "userInfo": {
-      "userId": 4,
-      "firstName": "Patricia",
-      "lastName": "Lebsack",
-      "email": "Julianne.OConner@kory.org",
-      "password": "123",
-      "phoneNumber": "493-170-9623 x156"
-    }
+    "category": ["Online", "Business"],
+    "createdAt": "2025-03-12T09:05:06.893Z",
+    "updatedAt": "2025-03-12T09:05:06.893Z",
+    "_id": "3fc7370d-c075-4271-8aea-6541f735558b"
   },
-  "5": {
-    "description": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perferendis maiores eligendi quos quidem ex numquam hic. Eos quos similique voluptates accusamus quae voluptas magni ad a ipsum, quia enim debitis cumque quibusdam exercitationem architecto sint nostrum dolorum dolor repudiandae nulla deserunt, dolorem itaque!",
-    "_id": "5",
-    "title": "Event 1",
-    "organizator": "Keebler LLC",
-    "eventDate": "2025-11-08",
-    "imageUrl": "https://images.unsplash.com/photo-1503428593586-e225b39bddfe?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "category": ["music"],
-    "address": {
-      "city": "Sofia",
-      "street": "Bratq Miladinovi",
-      "number": "2"
-    },
-    "time": "14:50",
-    "price": "",
-    "status": "Published",
-    "userInfo": {
-      "userId": 5,
-      "firstName": "Chelsey",
-      "lastName": "Dietrich",
-      "email": "Lucio_Hettinger@annie.ca",
-      "password": "123",
-      "phoneNumber": "(254)954-1289"
-    }
-  },
-  "6": {
-    "description": "Quisquam beatae rerum repudiandae distinctio nesciunt nemo dolorem facilis aspernatur, totam, laudantium sunt amet non, itaque voluptate quae cumque tempore autem similique. Quisquam nemo cupiditate, facere obcaecati iure eveniet illo recusandae! Pariatur magnam commodi, doloremque, beatae unde facilis soluta blanditiis ex debitis quisquam, nostrum voluptates.",
-    "_id": "6",
-    "title": "Event 2",
-    "organizator": "Considine-Lockman",
-    "eventDate": "2025-06-28",
-    "imageUrl": "https://images.unsplash.com/photo-1588702547919-26089e690ecc?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "category": ["online"],
-    "address": {
-      "city": "Stara Zagora",
-      "street": "Hadzhi Dimitar",
-      "number": "6"
-    },
-    "time": "10:30",
-    "price": 50,
-    "status": "Published",
-    "userInfo": {
-      "userId": 6,
-      "firstName": "Dennis",
-      "lastName": "Schulist",
-      "email": "Karley_Dach@jasper.info",
-      "password": "123",
-      "phoneNumber": "1-477-935-8478 x6430"
-    }
-  },
-  "7": {
-    "description": "Nesciunt facere, omnis exercitationem neque quisquam optio quidem distinctio laboriosam libero consequuntur aperiam, id possimus accusamus ad eaque quis quas molestiae. Esse praesentium cumque quae nobis atque eligendi commodi nam dolores, aperiam vero quia quaerat, soluta, maiores molestiae voluptatum. Modi doloribus consequatur explicabo enim, voluptate nostrum amet expedita natus tempore exercitationem nesciunt quasi quidem eaque.",
-    "_id": "7",
-    "title": "Event 3",
-    "organizator": "Johns Group",
-    "eventDate": "2025-08-14",
-    "imageUrl": "https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    "category": ["webinar"],
+  "0cf6a3db-0b18-4c10-83e7-879ca83c958f": {
+    "title": "Drop-in Crafternoon",
+    "imageUrl": "https://events.amny.com/wp-content/uploads/2022/11/ny-parenting-liberty-logo-family-brandcolors-placeholder-1.jpg?w=1200&p=q",
+    "description": "This event will take place in person at Mulberry Street Branch. Drop in from 3:30 - 5 PM to make a fun craft in the Community Room on LL2; all supplies will be provided. For ages 4+. No registration is required. ",
+    "time": "15:21",
+    "date": "2025-07-18",
+    "price": "30",
+    "status": true,
     "address": {
       "city": "Varna",
-      "street": "Bratq Shkorpil",
-      "number": "3"
+      "street": "G. Sava Rakovski",
+      "streetNumber": "100"
     },
-    "time": "17:40",
-    "price": 30,
-    "status": "Published",
-    "userInfo": {
-      "userId": 7,
-      "firstName": "Kurtis",
-      "lastName": "Weissnat",
-      "email": "Telly.Hoeger@billy.biz",
-      "password": "123",
-      "phoneNumber": "210.067.6132"
-    }
+    "category": ["Culture", "Lifestyle"],
+    "createdAt": "2025-03-12T09:02:48.905Z",
+    "updatedAt": "2025-03-12T09:02:48.905Z",
+    "_id": "0cf6a3db-0b18-4c10-83e7-879ca83c958f"
   },
-  "8": {
-    "description": "Nesciunt facere, omnis exercitationem neque quisquam optio quidem distinctio laboriosam libero consequuntur aperiam, id possimus accusamus ad eaque quis quas molestiae. Esse praesentium cumque quae nobis atque eligendi commodi nam dolores, aperiam vero quia quaerat, soluta, maiores molestiae voluptatum. Modi doloribus consequatur explicabo enim, voluptate nostrum amet expedita natus tempore exercitationem nesciunt quasi quidem eaque.",
-    "_id": "8",
-    "title": "Event 4",
-    "organizator": "Yost and Sons",
-    "eventDate": "2025-09-25",
-    "imageUrl": "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-
-    "category": ["online", "music"],
+  "87d643ec-9bd3-4b5a-8fe4-83d403eeed46": {
+    "title": "Meditation with Ms. Jean",
+    "imageUrl": "https://149472331.v2.pressablecdn.com/wp-content/uploads/2020/03/meditation.jpg",
+    "description": "Join us for this participant-led meditation session. Ms. Jean will lead us in a simple form of meditation focusing on the inner light and sound within you. The goal of this session is to bring clarity and peace to the mind and body. Registration NYC Program Registration - Q1 2025",
+    "time": "13:00",
+    "date": "2025-06-27",
+    "price": "50",
+    "status": true,
     "address": {
-      "city": "Pleven",
-      "street": "Panega",
-      "number": "10"
+      "city": "Plovdiv",
+      "street": "Кракра 2",
+      "streetNumber": "26"
     },
-    "time": "17:50",
-    "price": 40,
-    "status": "Pending",
-    "userInfo": {
-      "userId": 8,
-      "firstName": "Glenna",
-      "lastName": "Reichert",
-      "email": "Chaim_McDermott@dana.io",
-      "password": "123",
-      "phoneNumber": "775976-6794 x41206"
-    }
+    "category": ["Music"],
+    "createdAt": "2025-03-12T08:57:33.164Z",
+    "updatedAt": "2025-03-12T08:57:33.164Z",
+    "_id": "87d643ec-9bd3-4b5a-8fe4-83d403eeed46"
+  },
+  "c5ea4a50-c6c8-4fcd-ae49-539cfbe19884": {
+    "title": "Big East Basketball Tournament - All Session Pass",
+    "imageUrl": "https://img.vggcdn.net/img/cat/10461/2/1.jpg",
+    "description": "Ticket listings for Big East Basketball Tournament ",
+    "time": "00:50",
+    "date": "2025-07-15",
+    "price": "",
+    "status": true,
+    "address": {
+      "city": "Varna",
+      "street": "Ivan Vazov",
+      "streetNumber": "26"
+    },
+    "category": ["Sport"],
+    "createdAt": "2025-03-12T08:54:59.287Z",
+    "updatedAt": "2025-03-12T08:54:59.287Z",
+    "_id": "c5ea4a50-c6c8-4fcd-ae49-539cfbe19884"
+  },
+  "05aaef7b-b1dd-40bd-9798-ef0b231ab454": {
+    "title": "Staying Safe Online",
+    "imageUrl": "https://149472331.v2.pressablecdn.com/wp-content/uploads/2022/10/online-privacy-cybersecurity.jpeg",
+    "description": "This hands-on workshop reviews important tips for keeping your personal information safe while enjoying the benefits of the internet. Learn how to recognize suspicious emails, tips for safe browsing and best practices for shopping online. NYC Program Registration - Q1 2025",
+    "time": "18:00",
+    "date": "2025-07-20",
+    "price": "20",
+    "status": false,
+    "address": {
+      "city": "Varna",
+      "street": "",
+      "streetNumber": ""
+    },
+    "category": ["Online", "Business"],
+    "createdAt": "2025-03-12T08:48:50.139Z",
+    "updatedAt": "2025-03-12T08:48:50.139Z",
+    "_id": "05aaef7b-b1dd-40bd-9798-ef0b231ab454"
+  },
+  "21bb332a-cc09-40b9-9320-af492eab6353": {
+    "title": "Wild & Scenic Film Festival",
+    "imageUrl": "https://images.mapsofworld.com/around-the-world/film-festivals1.jpg",
+    "description": "Wild & Scenic Film Festival brings together incredible selections of films that inform, inspire, and ignite solutions and possibilities to restore the earth and human communities while creating a positive future for the next generation. Join the Alliance for the Chesapeake Bay at Studio Two-Three on March 6th, 2025, for award-winning & inspirational films benefitting clean water for all! ",
+    "time": "17:30",
+    "date": "2025-06-13",
+    "price": "100",
+    "status": true,
+    "address": {
+      "city": "Sofia",
+      "street": "Vasil Levski",
+      "streetNumber": "24"
+    },
+    "category": ["Music", "Business", "Culture"],
+    "createdAt": "2025-03-12T08:43:07.646Z",
+    "updatedAt": "2025-03-12T08:43:07.646Z",
+    "_id": "21bb332a-cc09-40b9-9320-af492eab6353"
   }
 }

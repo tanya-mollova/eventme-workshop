@@ -91,7 +91,7 @@ export default function Header() {
                       ? "nav-link dropdown-toggle active"
                       : "nav-link dropdown-toggle"
                   }
-                  to=""
+                  to="!"
                   id="navbarDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
