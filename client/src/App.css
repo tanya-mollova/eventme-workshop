@@ -10638,8 +10638,28 @@ footer h4 {
 input:-internal-autofill-selected {
   background-color: #fff !important;
 }
+#filter-form {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
 @media (max-width: 900px) {
   .view-button {
     display: none !important;
+  }
+}
+@media (max-width: 600px) {
+  #filter-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #filter-form .form-group {
+    width: 100% !important;
+  }
+  .section-events .d-inline-flex {
+    display: block !important;
   }
 }

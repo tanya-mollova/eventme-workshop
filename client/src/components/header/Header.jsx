@@ -126,10 +126,7 @@ export default function Header() {
                 </ul>
               </li>
             </ul>
-            <button
-              onClick={loginClickHandler}
-              className="btn btn-outline-primary"
-            >
+            <button onClick={loginClickHandler} className="btn btn-primary">
               Log In
             </button>
             {showLoginForm && (

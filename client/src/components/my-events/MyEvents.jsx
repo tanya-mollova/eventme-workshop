@@ -169,6 +169,7 @@ export default function EventList() {
                   events
                 </p>
                 <h1>My Events</h1>
+                <br />
                 <Link
                   to="/event/create"
                   type="button"
@@ -183,11 +184,8 @@ export default function EventList() {
             </div>
             <div className="row mb-4 ">
               <div className="col-md-12 d-inline-flex align-center justify-content-center">
-                <div className="d-inline-flex align-center justify-content-start">
-                  <form
-                    action={filterHandler}
-                    className="d-inline-flex align-items-center justify-content-center"
-                  >
+                <div>
+                  <form id="filter-form" action={filterHandler}>
                     {" "}
                     <span> Category: </span>
                     <div className="form-group p-3">
@@ -236,7 +234,7 @@ export default function EventList() {
                 </div>
                 <div className="d-inline-flex align-center justify-content-end">
                   <ul className="list-unstyled list-inline mb-0 social-icons p-3">
-                    <li className="list-inline-item me-3 mt-2">
+                    <li className="list-inline-item">
                       <a
                         onClick={changeViewHandler}
                         className={`view-button text-black ${

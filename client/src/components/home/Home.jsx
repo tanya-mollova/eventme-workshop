@@ -1,30 +1,22 @@
 import { Link } from "react-router";
 import { useEffect, useState, useTransition } from "react";
+import useFetch from "../../hooks/useFetch";
 import eventService from "../../services/eventService";
 import { fromIsoDate } from "../../utils/dateTime";
 import Banner from "./banner/Banner";
 import EventsListItem from "../events-list/events-list-item/EventsListItem";
 
 export default function Home() {
-  const [eventitems, setEventItems] = useState([]);
-  const [pending, startTransition] = useTransition();
+  const url = "http://localhost:3030/jsonstore/events";
   const [noData, setNoData] = useState(false);
-
-  useEffect(() => {
-    startTransition(() => {
-      eventService.getAll().then((result) => {
-        const today = fromIsoDate(new Date());
-        const filteredItems = result.filter(
-          (item) => item.status == true && fromIsoDate(item.date) > today
-        );
-        const sortedItems = () =>
-          filteredItems.sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-          );
-        setEventItems(sortedItems);
-      });
-    });
-  }, []);
+  const [pending, eventitems] = useFetch(url, []);
+  const today = fromIsoDate(new Date());
+  const filteredItems = eventitems.filter(
+    (item) => item.status == true && fromIsoDate(item.date) > today
+  );
+  const sortedItems = filteredItems.sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
 
   useEffect(() => {
     setTimeout(() => {
@@ -33,7 +25,7 @@ export default function Home() {
         setNoData(true);
       } else {
       }
-    }, 500);
+    }, 1000);
   }, [eventitems]);
   return (
     <>
@@ -60,7 +52,7 @@ export default function Home() {
             </div>
           )}
           <div className="row">
-            {eventitems.slice(0, 4).map((eventitem) => (
+            {sortedItems.slice(0, 4).map((eventitem) => (
               <EventsListItem key={eventitem._id} {...eventitem} />
             ))}
           </div>
