@@ -151,7 +151,7 @@ export default function Header() {
                 Delivers World-Class Solutions for Every Need.
               </p>
               <div className="content">
-                <ul>
+                <ul className="text-left">
                   <li>One platform for all your event needs</li>
                   <li>Easy-to-use interface</li>
                   <li>Data Protection</li>

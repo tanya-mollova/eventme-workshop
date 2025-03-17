@@ -18,8 +18,8 @@
   font-weight: 300;
 }
 .event-time {
-  font-size: 23px;
-  line-height: 50px;
+  font-size: 16px;
+  line-height: 30px;
   padding-left: 5px;
   padding-right: 5px;
   font-weight: 500;
@@ -28,7 +28,7 @@
 
 .event-price {
   font-size: 23px;
-  line-height: 50px;
+  line-height: 20px;
   font-weight: 500;
 }
 
@@ -85,7 +85,7 @@
 }
 .list-view .block {
   display: flex;
-  align-items: baseline;
+  align-items: center;
 }
 
 .list-view.event-item {
@@ -102,6 +102,9 @@
 }
 .list-view .event-info * {
   font-size: 16px;
+}
+.list-view .event-price {
+  font-size: 22px;
 }
 .list-view .event-info .colored-box {
   font-size: 12px;
@@ -124,7 +127,7 @@
   max-width: 100%;
   width: 100%;
   text-align: left;
-  font-size: 20px !important;
+  font-size: 22px !important;
 }
 .list-view .event-image {
   width: 300px;

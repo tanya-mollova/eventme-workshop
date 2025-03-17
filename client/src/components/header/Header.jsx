@@ -100,7 +100,7 @@ export default function Header() {
                   My Profile
                 </NavLink>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
+                  {/* <li>
                     <NavLink
                       to="/my-profile"
                       className={({ isActive }) =>
@@ -109,7 +109,7 @@ export default function Header() {
                     >
                       Profile
                     </NavLink>
-                  </li>
+                  </li> */}
                   <li>
                     <NavLink
                       to="/my-events"
@@ -119,6 +119,9 @@ export default function Header() {
                     >
                       My Events
                     </NavLink>
+                  </li>
+                  <li>
+                    <a className="dropdown-item ">Logout</a>
                   </li>
                 </ul>
               </li>

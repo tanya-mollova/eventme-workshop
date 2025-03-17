@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useSearchParams, Link, useNavigate } from "react-router";
 import "../../App";
 
@@ -11,7 +11,7 @@ export default function EventList() {
   const [isGrid, setIsGrid] = useState(true);
   const [view, setView] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [eventsPerPage, setEventsPerPage] = useState(4);
+  const [eventsPerPage, setEventsPerPage] = useState(8);
   const [searchParams, setSearchParams] = useSearchParams();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [eventId, setEventId] = useState(null);
@@ -23,14 +23,20 @@ export default function EventList() {
   const [displayProducts, setDisplayProducts] = useState([]);
 
   const navigate = useNavigate();
+  const [pending, startTransition] = useTransition();
 
   useEffect(() => {
-    eventService.getAll().then((result) => {
-      setEventItems(result);
-      setDisplayProducts(result);
+    startTransition(() => {
+      eventService.getAll().then((result) => {
+        setEventItems(result);
+        setDisplayProducts(result);
+      });
     });
   }, []);
-
+  //   const sortedItems = () =>
+  //   filteredItems.sort((a, b) => new Date(a.date) - new Date(b.date));
+  // setEventItems(sortedItems);
+  // });
   useEffect(() => {
     if (!isGrid) {
       setView("list-view");
@@ -51,8 +57,8 @@ export default function EventList() {
   };
   const deleteEventHandler = async () => {
     await eventService.delete(eventId);
-    setEventItems((oldEvents) =>
-      oldEvents.filter((event) => event._id !== eventId)
+    setDisplayProducts((oldstate) =>
+      oldstate.filter((event) => event._id !== eventId)
     );
     setShowDeleteModal(false);
   };
@@ -165,9 +171,7 @@ export default function EventList() {
                         name="category"
                         onChange={filterHandler}
                       >
-                        <option defaultValue="All" selected>
-                          All
-                        </option>
+                        <option defaultValue="All">All</option>
                         <option defaultValue="Online">Online</option>
                         <option defaultValue="Music">Music</option>
                         <option defaultValue=" Business">Business</option>
@@ -184,9 +188,7 @@ export default function EventList() {
                         name="city"
                         onChange={filterHandler}
                       >
-                        <option defaultValue="All" selected>
-                          All
-                        </option>
+                        <option defaultValue="All">All</option>
                         <option defaultValue="Sofia">Sofia</option>
                         <option defaultValue=" Varna">Varna</option>
                       </select>
@@ -214,6 +216,12 @@ export default function EventList() {
                 </div>
                 <div></div>
               </div>
+              <br />
+              {pending && (
+                <div id="loader">
+                  <img src="/images/loader.svg" />
+                </div>
+              )}
             </div>
             <>
               {currentEvents.map((eventitem) => (

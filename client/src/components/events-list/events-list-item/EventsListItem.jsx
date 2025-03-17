@@ -1,6 +1,5 @@
 import { Link } from "react-router";
-import { fromIsoDate } from "../../../utils/dateTime";
-import { toShortDate } from "../../../utils/dateTime";
+import { toShortDate, fromIsoTime } from "../../../utils/dateTime";
 import styles from "./assets/EventsListItem.module.css";
 
 export default function EventItem({
@@ -40,7 +39,9 @@ export default function EventItem({
                   {toShortDate(date)}
                 </span>{" "}
                 <i className="fa-solid fa-clock"></i>
-                <span className={styles["event-time"]}>{time} h.</span>
+                <span className={styles["event-time"]}>
+                  {fromIsoTime(time)} h.
+                </span>
               </div>
               <p className={styles["event-location"]}>
                 <i className="fa-solid fa-location-dot"></i>{" "}
@@ -49,7 +50,7 @@ export default function EventItem({
               </p>
               <p className={`${styles["event-price"]} text-primary`}>
                 <i className="fa-solid fa-money-bill-wave"></i>
-                {price == "" ? "Free" : ` ${price}  $`}{" "}
+                {price == "" ? " Free" : ` ${price}  $`}{" "}
               </p>
             </div>
 
@@ -61,15 +62,16 @@ export default function EventItem({
               ))}
             </div>
           </div>
+          {/* TO DO hide when */}
           <div className={styles["action-buttons"]}>
-            <Link onClick={() => showDeleteModal(_id)}>
-              <i className="fa-solid fa-trash"></i>
-            </Link>
             <Link to={`/my-events/${_id}/details`}>
               <i className="fa-solid fa-eye"></i>
             </Link>
             <Link to={`/my-events/${_id}/edit`}>
               <i className="fa-solid fa-pen-to-square"></i>
+            </Link>
+            <Link onClick={() => showDeleteModal(_id)}>
+              <i className="fa-solid fa-trash"></i>
             </Link>
             {status == true && <span className={styles["published"]}></span>}
             {status == false && <span className={styles["pending"]}></span>}

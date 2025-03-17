@@ -1,12 +1,10 @@
 import { useNavigate } from "react-router";
-import * as React from "react";
 import { useState, useEffect, useTransition } from "react";
+import { fromIsoDate } from "../../utils/dateTime";
 import eventService from "../../services/eventService";
-import { useTheme } from "@mui/material/styles";
+
 import Box from "@mui/material/Box";
 import OutlinedInput from "@mui/material/OutlinedInput";
-import InputLabel from "@mui/material/InputLabel";
-import TextField from "@mui/material/TextField";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
@@ -15,12 +13,14 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import { fromIsoDate, fromIsoTime } from "./../../utils/dateTime";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import Stack from "@mui/material/Stack";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import Switch from "@mui/material/Switch";
-// import { DataGrid } from "@mui/x-data-grid";
+
+dayjs.extend(utc);
+
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
@@ -40,35 +40,23 @@ const categories = [
   "Culture",
   "Sport",
 ];
-function getStyles(name, personName, theme) {
-  return {
-    fontWeight: personName.includes(name)
-      ? theme.typography.fontWeightMedium
-      : theme.typography.fontWeightRegular,
-  };
-}
 
 export default function EventCreate() {
-  const theme = useTheme();
-  const [categoriesList, setCategoriesList] = useState([]);
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState(null);
   const [pending, startTransition] = useTransition();
-  // const [status, setStatus] = useState(true);
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
     imageUrl: "",
     description: "",
-    time: "",
+    time: dayjs(),
     date: "",
     price: "",
     status: true,
     city: "",
     street: "",
     streetNumber: "",
-    category: categoriesList,
+    category: [],
   });
 
   const handleChange = (e) => {
@@ -85,33 +73,50 @@ export default function EventCreate() {
     });
   };
   const handleTime = (e) => {
-    const time = e.format();
     setFormData({
       ...formData,
-      time: fromIsoTime(time),
+      time: e.format(),
     });
   };
-  const handleStatus = (event) => {
-    if (event.target.checked) {
+  const handleStatus = (e) => {
+    if (e.target.checked) {
       setFormData({
         ...formData,
-        status: "event.target.checked",
+        status: "e.target.checked",
+      });
+    } else {
+      setFormData({
+        ...formData,
+        status: e.target.checked,
       });
     }
-    setFormData({
-      ...formData,
-      status: event.target.checked,
-    });
   };
 
-  const handleSelect = (event) => {
+  const handleSelect = (e) => {
     const {
       target: { value },
-    } = event;
-    setCategoriesList(
-      // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value
-    );
+    } = e;
+    setFormData({
+      ...formData,
+      category: typeof value === "string" ? value.split(",") : value,
+    });
+  };
+  const validateForm = (data) => {
+    const errors = {};
+    if (!data.title.trim()) {
+      errors.title = "Title is required";
+    }
+    if (!data.imageUrl.trim()) {
+      errors.imageUrl = "Image url is required";
+    } else if (
+      !data.imageUrl.match(
+        /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+      )
+    ) {
+      errors.imageUrl = "Image url must be real url";
+    }
+
+    return errors;
   };
 
   const submitAction = async (e) => {
@@ -126,20 +131,18 @@ export default function EventCreate() {
         });
       });
     } else {
-      alert("Form submission failed due to validation errors.");
     }
-  };
-  const validateForm = (data) => {
-    const errors = {};
-    if (!data.title.trim()) {
-      errors.title = "Title is required";
-    }
-    return errors;
   };
 
   useEffect(() => {
-    formData.category = categoriesList;
-  }, [handleSelect]);
+    console.log(errors);
+    if (Object.keys(errors).length == 0) {
+      setErrors({});
+    } else {
+      const newErrors = validateForm(formData);
+      setErrors(newErrors);
+    }
+  }, [formData]);
 
   // if (!data.email.trim()) {
   //   errors.email = "Email is required";
@@ -169,7 +172,7 @@ export default function EventCreate() {
               <div className="col-lg-12 mb-12 pb-2">
                 <div className="form-group">
                   <label htmlFor="title" className="form-label">
-                    Title
+                    Title *
                   </label>
                   <input
                     type="text"
@@ -187,7 +190,7 @@ export default function EventCreate() {
               <div className="col-lg-12 mb-12 pb-2">
                 <div className="form-group">
                   <label htmlFor="imageUrl" className="form-label">
-                    Image
+                    Image *
                   </label>
                   <input
                     type="url"
@@ -197,6 +200,9 @@ export default function EventCreate() {
                     value={formData.imageUrl}
                     onChange={handleChange}
                   />
+                  {errors.imageUrl && (
+                    <span className="error-message">{errors.imageUrl}</span>
+                  )}
                 </div>
               </div>
               <div className="col-lg-12 mb-12 pb-2">
@@ -213,19 +219,23 @@ export default function EventCreate() {
                   ></textarea>
                 </div>
               </div>
-              <div class="row"></div>
+              <div className="row"></div>
             </div>
             <div className="col-lg-6 mb-12 pb-2">
               {" "}
-              <div class="row">
+              <div className="row">
                 <div className="col-lg-4 mb-12 pb-2">
                   <div className="form-group">
                     <label htmlFor="time" className="form-label">
-                      Time
+                      Time *
                     </label>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <Stack spacing={2}>
-                        <TimePicker value={time} onChange={handleTime} />
+                        <TimePicker
+                          value={dayjs.utc(`${formData.time}`)}
+                          onChange={handleTime}
+                          views={["hours", "minutes"]}
+                        />
                       </Stack>
                     </LocalizationProvider>
                   </div>
@@ -233,13 +243,15 @@ export default function EventCreate() {
                 <div className="col-lg-4 mb-12 pb-2">
                   <div className="form-group">
                     <label htmlFor="date" className="form-label">
-                      Date
+                      Date *
                     </label>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <DemoContainer components={["DatePicker"]}>
                         <DatePicker
                           value={formData.data}
                           onChange={handleDate}
+                          disablePast={true}
+                          views={["year", "month", "day"]}
                         />
                       </DemoContainer>
                     </LocalizationProvider>
@@ -265,7 +277,7 @@ export default function EventCreate() {
                 <div className="col-lg-4 mb-12 pb-2">
                   <div className="form-group">
                     <label htmlFor="city" className="form-label">
-                      City
+                      City *
                     </label>
                     <input
                       type="text"
@@ -313,13 +325,13 @@ export default function EventCreate() {
                   <div className="form-group">
                     <FormControl sx={{ m: 1, width: 200 }}>
                       <label htmlFor="category" className="form-label">
-                        Category
+                        Category *
                       </label>
                       <Select
                         labelId="demo-multiple-chip-label"
                         id="demo-multiple-chip"
                         multiple
-                        value={categoriesList}
+                        value={formData.category}
                         onChange={handleSelect}
                         input={
                           <OutlinedInput
@@ -342,11 +354,11 @@ export default function EventCreate() {
                           <MenuItem
                             key={category}
                             value={category}
-                            style={getStyles(
-                              categoriesList,
-                              formData.category,
-                              theme
-                            )}
+                            // style={getStyles(
+                            //   categoriesList,
+                            //   formData.category,
+                            //   theme
+                            // )}
                           >
                             {category}
                           </MenuItem>
@@ -362,7 +374,8 @@ export default function EventCreate() {
                     </label> */}
                     <span> Publish</span>
                     <Switch
-                      checked={formData.status}
+                      checked={!!formData.status}
+                      value={formData.status}
                       onChange={handleStatus}
                       inputProps={{ "aria-label": "controlled" }}
                       name="status"
@@ -378,9 +391,10 @@ export default function EventCreate() {
             <div className="col-lg-4"></div>
             <div className="col-lg-4 mb-12 pb-2">
               <input
+                // disabled={errors}
                 disabled={pending}
                 type="submit"
-                defaultValue="Add event"
+                value="Add event"
                 className="btn btn-primary w-100"
               />
             </div>

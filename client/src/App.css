@@ -370,7 +370,9 @@ select {
 [role="button"] {
   cursor: pointer;
 }
-
+.btn-primary:disabled {
+  cursor: not-allowed;
+}
 select {
   word-wrap: normal;
 }
@@ -9873,6 +9875,10 @@ blockquote::before {
 .homepage_tab {
   z-index: 5;
 }
+#home div[class^="_action-buttons"],
+#public-events div[class^="_action-buttons"] {
+  display: none;
+}
 @media (max-width: 767px) {
   .homepage_tab {
     overflow: hidden;
@@ -10611,6 +10617,11 @@ footer h4 {
 }
 .p-multiselect-items {
   padding-left: 0;
+}
+#loader {
+  width: 100px;
+  display: block;
+  margin: 0 auto;
 }
 @media (max-width: 900px) {
   .view-button {

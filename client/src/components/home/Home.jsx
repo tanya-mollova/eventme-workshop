@@ -1,22 +1,33 @@
 import { Link } from "react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useTransition } from "react";
 import eventService from "../../services/eventService";
+import { fromIsoDate } from "../../utils/dateTime";
 import Banner from "./banner/Banner";
 import EventsListItem from "../events-list/events-list-item/EventsListItem";
 
 export default function Home() {
   const [eventitems, setEventItems] = useState([]);
+  const [pending, startTransition] = useTransition();
 
   useEffect(() => {
-    eventService.getAll().then((result) => {
-      setEventItems(result);
+    startTransition(() => {
+      eventService.getAll().then((result) => {
+        const today = fromIsoDate(new Date());
+        const filteredItems = result.filter(
+          (item) => item.status == true && fromIsoDate(item.date) > today
+        );
+        const sortedItems = () =>
+          filteredItems.sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          );
+        setEventItems(sortedItems);
+      });
     });
   }, []);
-
   return (
     <>
       <Banner></Banner>
-      <section className="section section-events">
+      <section className="section section-events" id="home">
         <div className="container">
           <div className="row">
             <div className="col-lg-12 col-md-12 mb-4">
@@ -27,11 +38,16 @@ export default function Home() {
                 <h1 data-aos="fade-up" data-aos-duration="1000">
                   Discover upcoming events
                 </h1>
-                <span> Want your event listed here? </span>
-                <a href="#">Log in</a>
+                <span> Explore and attend our upcoming events!</span>
               </div>
             </div>
           </div>
+          <br />
+          {pending && (
+            <div id="loader">
+              <img src="/images/loader.svg" />
+            </div>
+          )}
           <div className="row">
             {eventitems.slice(0, 4).map((eventitem) => (
               <EventsListItem key={eventitem._id} {...eventitem} />
