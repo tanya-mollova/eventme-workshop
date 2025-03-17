@@ -1,4 +1,4 @@
-export default function Header() {
+export default function About() {
   return (
     <>
       <section className="page-header bg-tertiary pt-4">

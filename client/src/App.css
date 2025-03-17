@@ -370,7 +370,7 @@ select {
 [role="button"] {
   cursor: pointer;
 }
-.btn-primary:disabled {
+.btn:disabled {
   cursor: not-allowed;
 }
 select {
@@ -10195,7 +10195,8 @@ textarea.form-control {
 
 .form-group {
   position: relative;
-  margin-top: 8px;
+
+  padding-bottom: 8px;
 }
 .form-group label {
   position: absolute;
@@ -10622,6 +10623,20 @@ footer h4 {
   width: 100px;
   display: block;
   margin: 0 auto;
+}
+.error-message {
+  color: red;
+  font-size: 14px;
+}
+.css-10o2lyd-MuiStack-root > .MuiTextField-root,
+.css-10o2lyd-MuiStack-root > .MuiPickersTextField-root {
+  min-width: 150px !important;
+}
+.MuiFormControl-root.css-18eob8d-MuiFormControl-root {
+  margin-left: 0 !important;
+}
+input:-internal-autofill-selected {
+  background-color: #fff !important;
 }
 @media (max-width: 900px) {
   .view-button {

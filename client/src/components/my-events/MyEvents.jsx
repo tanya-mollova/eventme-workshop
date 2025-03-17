@@ -21,29 +21,35 @@ export default function EventList() {
   const firstPostIndex = lastPostIndex - eventsPerPage;
   const [eventitems, setEventItems] = useState([]);
   const [displayProducts, setDisplayProducts] = useState([]);
-
+  const [noData, setNoData] = useState(false);
   const navigate = useNavigate();
   const [pending, startTransition] = useTransition();
 
   useEffect(() => {
     startTransition(() => {
       eventService.getAll().then((result) => {
-        setEventItems(result);
+        setEventItems(
+          result.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        );
         setDisplayProducts(result);
       });
     });
   }, []);
-  //   const sortedItems = () =>
-  //   filteredItems.sort((a, b) => new Date(a.date) - new Date(b.date));
-  // setEventItems(sortedItems);
-  // });
+
   useEffect(() => {
     if (!isGrid) {
       setView("list-view");
     } else {
       setView("grid-view");
     }
-  }, [isGrid]);
+    setTimeout(() => {
+      setNoData(false);
+      if (!pending && !displayProducts.length) {
+        setNoData(true);
+      } else {
+      }
+    }, 500);
+  }, [isGrid, displayProducts]);
 
   const currentEvents = displayProducts.slice(firstPostIndex, lastPostIndex);
   const changeViewHandler = (event) => {
@@ -129,6 +135,26 @@ export default function EventList() {
       if (filterItemValue === "All" && searchCategory == "All") {
         setDisplayProducts([...eventitems]);
       }
+    } else if (filterBy == "date") {
+      if (filterItemValue.includes("asc")) {
+        const sortedItems = () =>
+          [...displayProducts].sort(
+            (a, b) => new Date(a.date) - new Date(b.date)
+          );
+        setDisplayProducts(sortedItems);
+      } else if (filterItemValue.includes("desc")) {
+        const sortedItems = () =>
+          [...displayProducts].sort(
+            (a, b) => new Date(b.date) - new Date(a.date)
+          );
+        setDisplayProducts(sortedItems);
+      } else {
+        const sortedItems = () =>
+          [...displayProducts].sort(
+            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+          );
+        setDisplayProducts(sortedItems);
+      }
     }
   };
 
@@ -193,6 +219,19 @@ export default function EventList() {
                         <option defaultValue=" Varna">Varna</option>
                       </select>
                     </div>
+                    <span> Date: </span>
+                    <div className="form-group p-3">
+                      <select
+                        className="form-control form-select  shadow-none"
+                        id="date"
+                        name="date"
+                        onChange={filterHandler}
+                      >
+                        <option defaultValue="All">Newest</option>
+                        <option defaultValue="asc">Date asc &uarr; </option>
+                        <option defaultValue="desc">Date desc &darr;</option>
+                      </select>
+                    </div>
                   </form>
                 </div>
                 <div className="d-inline-flex align-center justify-content-end">
@@ -235,6 +274,13 @@ export default function EventList() {
                 />
               ))}
             </>
+            {noData && (
+              <div>
+                <h3 className="text-primary">
+                  <i class="fa-solid fa-circle-info"></i> No data found!
+                </h3>
+              </div>
+            )}
             <Pagination
               totalEvents={displayProducts.length}
               eventsPerPage={eventsPerPage}

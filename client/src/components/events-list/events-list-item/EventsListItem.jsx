@@ -45,7 +45,10 @@ export default function EventItem({
               </div>
               <p className={styles["event-location"]}>
                 <i className="fa-solid fa-location-dot"></i>{" "}
-                <strong>{address?.city}</strong>,{address?.street},{" "}
+                <strong>{address?.city}</strong>
+                {address?.street && ", "}
+                {address?.street}
+                {address?.streetNumber && ", "}
                 {address?.streetNumber}
               </p>
               <p className={`${styles["event-price"]} text-primary`}>

@@ -1,6 +1,6 @@
 import SocialLinks from "../components/social-links/SocialLinks/";
 
-export default function () {
+export default function Contacts() {
   return (
     <>
       <section className="section">

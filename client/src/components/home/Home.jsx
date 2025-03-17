@@ -8,6 +8,7 @@ import EventsListItem from "../events-list/events-list-item/EventsListItem";
 export default function Home() {
   const [eventitems, setEventItems] = useState([]);
   const [pending, startTransition] = useTransition();
+  const [noData, setNoData] = useState(false);
 
   useEffect(() => {
     startTransition(() => {
@@ -24,6 +25,16 @@ export default function Home() {
       });
     });
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setNoData(false);
+      if (!pending && !eventitems.length) {
+        setNoData(true);
+      } else {
+      }
+    }, 500);
+  }, [eventitems]);
   return (
     <>
       <Banner></Banner>
@@ -53,6 +64,13 @@ export default function Home() {
               <EventsListItem key={eventitem._id} {...eventitem} />
             ))}
           </div>
+          {noData && (
+            <div>
+              <h3 className="text-primary">
+                <i className="fa-solid fa-circle-info"></i> No data found!
+              </h3>
+            </div>
+          )}
           <Link type="button" className="btn btn-primary  mt-4" to="/events">
             See all Events
             <span

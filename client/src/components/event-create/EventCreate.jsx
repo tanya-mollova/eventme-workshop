@@ -115,7 +115,18 @@ export default function EventCreate() {
     ) {
       errors.imageUrl = "Image url must be real url";
     }
-
+    if (!data.time == {}) {
+      errors.time = "Time is required";
+    }
+    if (!data.date.trim()) {
+      errors.date = "Date is required";
+    }
+    if (!data.city.trim()) {
+      errors.city = "City is required";
+    }
+    if (!data.category.length) {
+      errors.category = "Category is required";
+    }
     return errors;
   };
 
@@ -182,10 +193,10 @@ export default function EventCreate() {
                     value={formData.title}
                     onChange={handleChange}
                   />
-                  {errors.title && (
-                    <span className="error-message">{errors.title}</span>
-                  )}
                 </div>
+                {errors.title && (
+                  <span className="error-message">{errors.title}</span>
+                )}
               </div>
               <div className="col-lg-12 mb-12 pb-2">
                 <div className="form-group">
@@ -238,6 +249,9 @@ export default function EventCreate() {
                         />
                       </Stack>
                     </LocalizationProvider>
+                    {errors.time && (
+                      <span className="error-message">{errors.time}</span>
+                    )}
                   </div>
                 </div>
                 <div className="col-lg-4 mb-12 pb-2">
@@ -255,6 +269,9 @@ export default function EventCreate() {
                         />
                       </DemoContainer>
                     </LocalizationProvider>
+                    {errors.date && (
+                      <span className="error-message">{errors.date}</span>
+                    )}
                   </div>
                 </div>
                 <div className="col-lg-4 mb-12 pb-2">
@@ -288,6 +305,9 @@ export default function EventCreate() {
                       onChange={handleChange}
                     />
                   </div>
+                  {errors.city && (
+                    <span className="error-message">{errors.city}</span>
+                  )}
                 </div>
                 <div className="col-lg-4 mb-12 pb-2">
                   <div className="form-group">
@@ -364,6 +384,9 @@ export default function EventCreate() {
                           </MenuItem>
                         ))}
                       </Select>
+                      {errors.category && (
+                        <span className="error-message">{errors.category}</span>
+                      )}
                     </FormControl>
                   </div>
                 </div>
@@ -386,8 +409,7 @@ export default function EventCreate() {
               </div>
             </div>
           </div>
-          <br /> <br />
-          <div className="row mt-4">
+          <div className="row">
             <div className="col-lg-4"></div>
             <div className="col-lg-4 mb-12 pb-2">
               <input

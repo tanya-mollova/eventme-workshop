@@ -142,7 +142,6 @@ export default function EventCreate() {
         });
       });
     } else {
-      alert("Form submission failed due to validation errors.");
     }
   };
   const validateForm = (data) => {
@@ -150,9 +149,38 @@ export default function EventCreate() {
     if (!data.title.trim()) {
       errors.title = "Title is required";
     }
+    if (!data.imageUrl.trim()) {
+      errors.imageUrl = "Image url is required";
+    } else if (
+      !data.imageUrl.match(
+        /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+      )
+    ) {
+      errors.imageUrl = "Image url must be real url";
+    }
+    if (!data.time == {}) {
+      errors.time = "Time is required";
+    }
+    if (!data.date.trim()) {
+      errors.date = "Date is required";
+    }
+    if (!data.city.trim()) {
+      errors.city = "City is required";
+    }
+    if (!data.category.length) {
+      errors.category = "Category is required";
+    }
     return errors;
   };
-
+  useEffect(() => {
+    console.log(errors);
+    if (Object.keys(errors).length == 0) {
+      setErrors({});
+    } else {
+      const newErrors = validateForm(eventData);
+      setErrors(newErrors);
+    }
+  }, [eventData]);
   // useEffect(() => {
   //   eventData.category = categoriesList;
   // }, [handleSelect]);
@@ -214,6 +242,9 @@ export default function EventCreate() {
                     onChange={handleChange}
                   />
                 </div>
+                {errors.imageUrl && (
+                  <span className="error-message">{errors.imageUrl}</span>
+                )}
               </div>
               <div className="col-lg-12 mb-12 pb-2">
                 <div className="form-group">
@@ -249,6 +280,9 @@ export default function EventCreate() {
                         />
                       </Stack>
                     </LocalizationProvider>
+                    {errors.time && (
+                      <span className="error-message">{errors.time}</span>
+                    )}
                   </div>
                 </div>
                 <div className="col-lg-4 mb-12 pb-2">
@@ -266,6 +300,9 @@ export default function EventCreate() {
                         />
                       </DemoContainer>
                     </LocalizationProvider>
+                    {errors.date && (
+                      <span className="error-message">{errors.date}</span>
+                    )}
                   </div>
                 </div>
                 <div className="col-lg-4 mb-12 pb-2">
@@ -299,6 +336,9 @@ export default function EventCreate() {
                       onChange={handleChange}
                     />
                   </div>
+                  {errors.city && (
+                    <span className="error-message">{errors.city}</span>
+                  )}
                 </div>
                 <div className="col-lg-4 mb-12 pb-2">
                   <div className="form-group">
@@ -376,6 +416,9 @@ export default function EventCreate() {
                         ))}
                       </Select>
                     </FormControl>
+                    {errors.category && (
+                      <span className="error-message">{errors.category}</span>
+                    )}
                   </div>
                 </div>
                 <div className="col-lg-4 mb-12 pb-2">
@@ -402,8 +445,7 @@ export default function EventCreate() {
               </div>
             </div>
           </div>
-          <br /> <br />
-          <div className="row mt-4">
+          <div className="row">
             <div className="col-lg-4"></div>
             <div className="col-lg-4 mb-12 pb-2">
               <input
