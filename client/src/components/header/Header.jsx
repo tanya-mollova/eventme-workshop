@@ -58,7 +58,7 @@ export default function Header() {
                   }
                   to="/events"
                 >
-                  Events
+                  All Events
                 </NavLink>
               </li>
               <li className="nav-item ">

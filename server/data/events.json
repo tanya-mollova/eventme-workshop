@@ -13,6 +13,7 @@
       "streetNumber": "52"
     },
     "category": ["Culture", "Lifestyle"],
+    "likes": 40,
     "createdAt": "2025-03-12T09:11:24.936Z",
     "updatedAt": "2025-03-12T09:11:24.936Z",
     "_id": "5fb2bc08-35fb-416d-aa78-8ef81854d968"
@@ -30,6 +31,7 @@
       "street": "Ivan Vazov",
       "streetNumber": "56"
     },
+    "likes": 100,
     "category": ["Music", "Lifestyle"],
     "createdAt": "2025-03-12T09:09:33.641Z",
     "updatedAt": "2025-03-12T09:09:33.641Z",
@@ -48,6 +50,7 @@
       "street": "Opalchenska",
       "streetNumber": "13"
     },
+    "likes": 56,
     "category": ["Online", "Business"],
     "createdAt": "2025-03-12T09:05:06.893Z",
     "updatedAt": "2025-03-12T09:05:06.893Z",
@@ -66,6 +69,7 @@
       "street": "G. Sava Rakovski",
       "streetNumber": "100"
     },
+    "likes": 125,
     "category": ["Culture", "Lifestyle"],
     "createdAt": "2025-03-12T09:02:48.905Z",
     "updatedAt": "2025-03-12T09:02:48.905Z",
@@ -84,6 +88,7 @@
       "street": "Кракра 2",
       "streetNumber": "26"
     },
+    "likes": 89,
     "category": ["Music"],
     "createdAt": "2025-03-12T08:57:33.164Z",
     "updatedAt": "2025-03-12T08:57:33.164Z",
@@ -102,6 +107,7 @@
       "street": "Ivan Vazov",
       "streetNumber": "26"
     },
+    "likes": 187,
     "category": ["Sport"],
     "createdAt": "2025-03-12T08:54:59.287Z",
     "updatedAt": "2025-03-12T08:54:59.287Z",
@@ -120,6 +126,7 @@
       "street": "",
       "streetNumber": ""
     },
+    "likes": 203,
     "category": ["Online", "Business"],
     "createdAt": "2025-03-12T08:48:50.139Z",
     "updatedAt": "2025-03-12T08:48:50.139Z",
@@ -138,6 +145,7 @@
       "street": "Vasil Levski",
       "streetNumber": "24"
     },
+    "likes": 143,
     "category": ["Music", "Business", "Culture"],
     "createdAt": "2025-03-12T08:43:07.646Z",
     "updatedAt": "2025-03-12T08:43:07.646Z",

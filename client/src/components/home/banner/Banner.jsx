@@ -1,7 +1,6 @@
 import { Link } from "react-router";
 
 export default function Banner() {
-  AOS.init();
   return (
     <section className="banner  position-relative overflow-hidden">
       <div className="container">
@@ -92,13 +91,11 @@ export default function Banner() {
           <div className="col-lg-6">
             <div className="ps-lg-5 text-center">
               <img
-                data-aos="fade-left"
-                data-aos-duration="1000"
                 alt="Banner image"
-                className="w-100"
+                className="w-200"
                 loading="lazy"
                 decoding="async"
-                src="../../public/images/header-img.jpg"
+                src="../../public/images/banner-img.png"
               />
             </div>
           </div>

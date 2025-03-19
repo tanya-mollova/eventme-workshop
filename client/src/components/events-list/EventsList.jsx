@@ -1,4 +1,4 @@
-import { useEffect, useState, useTransition } from "react";
+import { useEffect, useState, useTransition, useContext } from "react";
 import { useNavigate } from "react-router";
 import "../../App";
 
@@ -6,6 +6,7 @@ import { fromIsoDate } from "../../utils/dateTime";
 import eventService from "../../services/eventService";
 import EventsListItem from "../events-list/events-list-item/EventsListItem";
 import Pagination from "../pagination/Pagination";
+import { LikeContext } from "./../../contexts/LikeContext";
 
 export default function EventList() {
   const [isGrid, setIsGrid] = useState(true);
@@ -24,7 +25,8 @@ export default function EventList() {
 
   const navigate = useNavigate();
   const [pending, startTransition] = useTransition();
-
+  const { likeStatusHandler } = useContext(LikeContext);
+  const [likeStatus, setLikeStatus] = useState({ child1: "", child2: "" });
   useEffect(() => {
     startTransition(() => {
       eventService.getAll().then((result) => {
@@ -67,7 +69,17 @@ export default function EventList() {
     setCurrentPage(page);
     // setSearchParams(`?page=${page}`);
   };
-
+  const likeClickHandler = async (e) => {
+    // const itemData = eventitems.filter((item) => item._id === id);
+    // const likes = itemData.likes;
+    console.log(e.target.value);
+    // const eventData = () => {
+    //   [...itemData], likes;
+    // };
+    console.log([eventData]);
+    // await eventService.edit(id, eventData);
+    // setDisplayProducts((oldstate) => [...oldstate], itemData);
+  };
   const filterHandler = (e) => {
     const filterItemValue = e.target.value;
     const filterBy = e.target.id;
@@ -249,6 +261,7 @@ export default function EventList() {
                   view={view}
                   key={eventitem._id}
                   {...eventitem}
+                  onLike={likeClickHandler}
                 />
               ))}
             </>

@@ -1,32 +1,13 @@
 import { Link } from "react-router";
-import { useEffect, useState, useTransition } from "react";
-import useFetch from "../../hooks/useFetch";
-import eventService from "../../services/eventService";
+import { useEffect, useState } from "react";
+import { useLatestEvents } from "../../api/eventApi";
 import { fromIsoDate } from "../../utils/dateTime";
 import Banner from "./banner/Banner";
+import { useEvents } from "../../api/eventApi";
 import EventsListItem from "../events-list/events-list-item/EventsListItem";
 
 export default function Home() {
-  const url = "http://localhost:3030/jsonstore/events";
-  const [noData, setNoData] = useState(false);
-  const [pending, eventitems] = useFetch(url, []);
-  const today = fromIsoDate(new Date());
-  const filteredItems = eventitems.filter(
-    (item) => item.status == true && fromIsoDate(item.date) > today
-  );
-  const sortedItems = filteredItems.sort(
-    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-  );
-
-  useEffect(() => {
-    setTimeout(() => {
-      setNoData(false);
-      if (!pending && !eventitems.length) {
-        setNoData(true);
-      } else {
-      }
-    }, 1000);
-  }, [eventitems]);
+  const { latestEvents, pending } = useLatestEvents();
   return (
     <>
       <Banner></Banner>
@@ -45,18 +26,17 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <br />
           {pending && (
             <div id="loader">
               <img src="/images/loader.svg" />
             </div>
           )}
           <div className="row">
-            {sortedItems.slice(0, 4).map((eventitem) => (
+            {latestEvents.map((eventitem) => (
               <EventsListItem key={eventitem._id} {...eventitem} />
             ))}
           </div>
-          {noData && (
+          {!latestEvents.length && (
             <div>
               <h3 className="text-primary">
                 <i className="fa-solid fa-circle-info"></i> No data found!

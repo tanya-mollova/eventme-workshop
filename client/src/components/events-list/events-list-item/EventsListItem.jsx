@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import eventService from "../../../services/eventService";
 import { Link } from "react-router";
 import { toShortDate, fromIsoTime } from "../../../utils/dateTime";
 import styles from "./assets/EventsListItem.module.css";
@@ -5,6 +7,7 @@ import styles from "./assets/EventsListItem.module.css";
 export default function EventItem({
   _id,
   title,
+  description,
   date,
   category,
   address,
@@ -13,8 +16,48 @@ export default function EventItem({
   imageUrl,
   view,
   status,
+  likes,
   showDeleteModal,
 }) {
+  // const [likeStatus, setLikeStatus] = useState(true);
+  // const [likesValue, setLikesValue] = useState(0);
+
+  // useEffect(() => {
+  //   setLikesValue(likes);
+  // }, []);
+  // useEffect(() => {
+  //   setLikesValue(likes);
+  // }, [likesValue]);
+  const onLike = async () => {
+    // const itemData = eventitems.filter((item) => item._id === id);
+    // const likes = itemData.likes;
+    setLikeStatus((oldstate) => (oldstate = !oldstate));
+    const eventData = {
+      title: title,
+      imageUrl: imageUrl,
+      description: description,
+      time: time,
+      date: date,
+      price: price,
+      status: status,
+      city: address.city,
+      street: address.street,
+      streetNumber: address.streetNumber,
+      likes: likesValue,
+      category: category,
+    };
+    if (likeStatus == true) {
+      const postData = { ...eventData, likes: likesValue + 1 };
+      const result = await eventService.edit(_id, postData);
+      setLikesValue(result.likes);
+      setLikeStatus(false);
+    } else {
+      const postData = { ...eventData, likes: likesValue - 1 };
+      const result = await eventService.edit(_id, postData);
+      setLikesValue(result.likes);
+      setLikeStatus(false);
+    }
+  };
   return (
     <div
       className={`${styles["event-item"]} ${
@@ -65,6 +108,22 @@ export default function EventItem({
               ))}
             </div>
           </div>
+          {/* <div className={styles["likes"]}>
+            <span className="primary-text likes">
+              {likeStatus && (
+                <button type="submit" value={likesValue} onClick={onLike}>
+                  <i class="fa-solid fa-thumbs-up"></i>
+                </button>
+              )}
+              {!likeStatus && (
+                <button type="submit" value={likesValue} onClick={onLike}>
+                  <i class="fa-solid fa-thumbs-down"></i>
+                </button>
+              )}
+            </span>
+            {likesValue} Likes
+          </div> */}
+          {/* <br /> */}
           {/* TO DO hide when */}
           <div className={styles["action-buttons"]}>
             <Link to={`/my-events/${_id}/details`}>

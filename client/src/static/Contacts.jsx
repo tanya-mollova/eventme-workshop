@@ -3,7 +3,7 @@ import SocialLinks from "../components/social-links/SocialLinks/";
 export default function Contacts() {
   return (
     <>
-      <section className="section">
+      <section className="section" id="contacts">
         <div className="container pt-4">
           <div className="row justify-content-center align-items-center">
             <div className="col-lg-6">
