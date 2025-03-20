@@ -1,9 +1,7 @@
 import { Link } from "react-router";
-import { useEffect, useState } from "react";
 import { useLatestEvents } from "../../api/eventApi";
-import { fromIsoDate } from "../../utils/dateTime";
+
 import Banner from "./banner/Banner";
-import { useEvents } from "../../api/eventApi";
 import EventsListItem from "../events-list/events-list-item/EventsListItem";
 
 export default function Home() {

@@ -1,9 +1,35 @@
-export default function Register({
-  showLoginModal,
-  showRegisterModal,
-  showLogin,
-  showRegister,
-}) {
+import { useActionState, useContext } from "react";
+import { useNavigate } from "react-router";
+import { UserContext } from "../../contexts/UserContext";
+import { useRegister } from "./../../api/authApi";
+
+export default function Register({ showLoginModal, showRegisterModal }) {
+  const { userLoginHandler } = useContext(UserContext);
+  const { register } = useRegister();
+  const navigate = useNavigate();
+
+  const registerHandler = async (_, formData) => {
+    console.log(Object.fromEntries(formData));
+    const { username, email, password, passwordConfirm } =
+      Object.fromEntries(formData);
+
+    if (password !== passwordConfirm) {
+      console.log("Password missmatch");
+
+      return;
+    }
+    const authData = await register(username, email, password);
+    userLoginHandler(authData);
+    showRegisterModal(false);
+    navigate("/events");
+  };
+
+  const [_, registerAction, isPending] = useActionState(registerHandler, {
+    username: "",
+    email: "",
+    password: "",
+  });
+
   return (
     <div className="modal applyLoanModal fade" id="login">
       <div className="modal-dialog modal-dialog-centered">
@@ -21,29 +47,59 @@ export default function Register({
             ></button>
           </div>
           <div className="modal-body">
-            <form action="#!" method="post">
+            <form action={registerAction} id="register">
               <div className="row">
                 <div className="col-lg-12 mb-12 pb-2">
                   <div className="form-group">
-                    <label htmlFor="loan_email_address" className="form-label">
-                      Email
+                    <label htmlFor="username" className="form-label">
+                      Username
                     </label>
                     <input
-                      type="email"
+                      name="username"
+                      type="text"
                       className="form-control shadow-none"
-                      id="loan_email_address"
+                      id="username"
+                      placeholder="username"
                     />
                   </div>
                 </div>
                 <div className="col-lg-12 mb-12 pb-2">
                   <div className="form-group">
-                    <label htmlFor="loan_password" className="form-label">
+                    <label htmlFor="email" className="form-label">
+                      Email
+                    </label>
+                    <input
+                      name="email"
+                      type="email"
+                      className="form-control shadow-none"
+                      id="email"
+                      placeholder="someone@example.com"
+                    />
+                  </div>
+                </div>
+                <div className="col-lg-12 mb-12 pb-2">
+                  <div className="form-group">
+                    <label htmlFor="password" className="form-label">
                       Password
                     </label>
                     <input
+                      name="password"
                       type="password"
                       className="form-control shadow-none"
-                      id="loan_password"
+                      id="password"
+                    />
+                  </div>
+                </div>
+                <div className="col-lg-12 mb-12 pb-2">
+                  <div className="form-group">
+                    <label htmlFor="passwordConfirm" className="form-label">
+                      Password Confirm
+                    </label>
+                    <input
+                      name="passwordConfirm"
+                      type="password"
+                      className="form-control shadow-none"
+                      id="passwordConfirm"
                     />
                   </div>
                 </div>

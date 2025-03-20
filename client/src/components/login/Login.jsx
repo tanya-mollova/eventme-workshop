@@ -1,9 +1,26 @@
-export default function Login({
-  showLoginModal,
-  showRegisterModal,
-  showLogin,
-  showRegister,
-}) {
+import { useActionState, useContext } from "react";
+import { useNavigate } from "react-router";
+import { UserContext } from "../../contexts/UserContext";
+import { useLogin } from "./../../api/authApi";
+
+export default function Login({ showLoginModal, showRegisterModal }) {
+  const { userLoginHandler } = useContext(UserContext);
+  const { login } = useLogin();
+  const navigate = useNavigate();
+
+  const loginHandler = async (_, formData) => {
+    const values = Object.fromEntries(formData);
+    const authData = await login(values.email, values.password);
+    userLoginHandler(authData);
+    navigate("/events");
+    showLoginModal(false);
+  };
+
+  const [_, loginAction, isPending] = useActionState(loginHandler, {
+    email: "",
+    password: "",
+  });
+
   return (
     <div className="modal applyLoanModal fade" id="login">
       <div className="modal-dialog modal-dialog-centered">
@@ -21,29 +38,32 @@ export default function Login({
             ></button>
           </div>
           <div className="modal-body">
-            <form action="#!" method="post">
+            <form action={loginAction} id="login">
               <div className="row">
                 <div className="col-lg-12 mb-12 pb-2">
                   <div className="form-group">
-                    <label htmlFor="loan_email_address" className="form-label">
+                    <label htmlFor="email" className="form-label">
                       Email
                     </label>
                     <input
+                      name="email"
                       type="email"
                       className="form-control shadow-none"
-                      id="loan_email_address"
+                      id="email"
+                      placeholder="someone@example.com"
                     />
                   </div>
                 </div>
                 <div className="col-lg-12 mb-12 pb-2">
                   <div className="form-group">
-                    <label htmlFor="loan_password" className="form-label">
+                    <label htmlFor="password" className="form-label">
                       Password
                     </label>
                     <input
+                      name="password"
                       type="password"
                       className="form-control shadow-none"
-                      id="loan_password"
+                      id="password"
                     />
                   </div>
                 </div>

@@ -1,5 +1,9 @@
+import { useState, useContext } from "react";
 import { Link, NavLink, Navigate, useNavigate } from "react-router";
-import { useState } from "react";
+
+import useAuth from "../../hooks/useAuth";
+
+import { UserContext } from "../../contexts/UserContext";
 
 import Login from "../login/Login";
 import Register from "../register/Register";
@@ -8,6 +12,7 @@ export default function Header() {
   const navigate = useNavigate;
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
+  const { username, isAuthenticated } = useAuth();
 
   const loginClickHandler = () => {
     setShowLoginForm((setShowLoginForm) => !setShowLoginForm);
@@ -84,23 +89,27 @@ export default function Header() {
                   Contacts
                 </NavLink>
               </li>
-              <li className="nav-item dropdown">
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive
-                      ? "nav-link dropdown-toggle active"
-                      : "nav-link dropdown-toggle"
-                  }
-                  to="!"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  My Profile
-                </NavLink>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  {/* <li>
+              {isAuthenticated && (
+                <li className="nav-item dropdown">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? "nav-link dropdown-toggle active"
+                        : "nav-link dropdown-toggle"
+                    }
+                    to="!"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <i class="fa-solid fa-circle-user"></i> {username}
+                  </NavLink>
+                  <ul
+                    className="dropdown-menu"
+                    aria-labelledby="navbarDropdown"
+                  >
+                    {/* <li>
                     <NavLink
                       to="/my-profile"
                       className={({ isActive }) =>
@@ -110,25 +119,28 @@ export default function Header() {
                       Profile
                     </NavLink>
                   </li> */}
-                  <li>
-                    <NavLink
-                      to="/my-events"
-                      className={({ isActive }) =>
-                        isActive ? "dropdown-item  active" : "dropdown-item "
-                      }
-                    >
-                      My Events
-                    </NavLink>
-                  </li>
-                  <li>
-                    <a className="dropdown-item ">Logout</a>
-                  </li>
-                </ul>
-              </li>
+                    <li>
+                      <NavLink
+                        to="/my-events"
+                        className={({ isActive }) =>
+                          isActive ? "dropdown-item  active" : "dropdown-item "
+                        }
+                      >
+                        My Events
+                      </NavLink>
+                    </li>
+                    <li>
+                      <a className="dropdown-item ">Logout</a>
+                    </li>
+                  </ul>
+                </li>
+              )}
             </ul>
-            <button onClick={loginClickHandler} className="btn btn-primary">
-              Log In
-            </button>
+            {!isAuthenticated && (
+              <button onClick={loginClickHandler} className="btn btn-primary">
+                Log In
+              </button>
+            )}
             {showLoginForm && (
               <Login
                 showLoginModal={loginClickHandler}
