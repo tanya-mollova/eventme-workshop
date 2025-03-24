@@ -2,14 +2,12 @@ import { useState, useContext } from "react";
 import { Link, NavLink, Navigate, useNavigate } from "react-router";
 
 import useAuth from "../../hooks/useAuth";
-
-import { UserContext } from "../../contexts/UserContext";
+import { useLogout } from "../../api/authApi";
 
 import Login from "../login/Login";
 import Register from "../register/Register";
 
 export default function Header() {
-  const navigate = useNavigate;
   const [showLoginForm, setShowLoginForm] = useState(false);
   const [showRegisterForm, setShowRegisterForm] = useState(false);
   const { username, isAuthenticated } = useAuth();
@@ -22,7 +20,6 @@ export default function Header() {
     setShowRegisterForm((showRegisterForm) => !showRegisterForm);
     setShowLoginForm(false);
   };
-
   return (
     <header className="navigation bg-tertiary">
       <nav className="navbar navbar-expand-xl navbar-light text-center fixed-top">
@@ -67,7 +64,6 @@ export default function Header() {
                 </NavLink>
               </li>
               <li className="nav-item ">
-                {" "}
                 <NavLink
                   className={({ isActive }) =>
                     isActive ? "nav-link active" : "nav-link"
@@ -79,7 +75,6 @@ export default function Header() {
               </li>
 
               <li className="nav-item ">
-                {" "}
                 <NavLink
                   className={({ isActive }) =>
                     isActive ? "nav-link active" : "nav-link"
@@ -109,16 +104,6 @@ export default function Header() {
                     className="dropdown-menu"
                     aria-labelledby="navbarDropdown"
                   >
-                    {/* <li>
-                    <NavLink
-                      to="/my-profile"
-                      className={({ isActive }) =>
-                        isActive ? "dropdown-item  active" : "dropdown-item "
-                      }
-                    >
-                      Profile
-                    </NavLink>
-                  </li> */}
                     <li>
                       <NavLink
                         to="/my-events"
@@ -130,7 +115,9 @@ export default function Header() {
                       </NavLink>
                     </li>
                     <li>
-                      <a className="dropdown-item ">Logout</a>
+                      <Link to="/logout" className="dropdown-item">
+                        Logout
+                      </Link>
                     </li>
                   </ul>
                 </li>

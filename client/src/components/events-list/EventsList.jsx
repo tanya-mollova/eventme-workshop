@@ -1,12 +1,12 @@
 import { useEffect, useState, useTransition, useContext } from "react";
 import { useNavigate } from "react-router";
-import "../../App";
-
+import { useEvents } from "../../api/eventApi";
 import { fromIsoDate } from "../../utils/dateTime";
-import eventService from "../../services/eventService";
+// import eventService from "../../services/eventService";
 import EventsListItem from "../events-list/events-list-item/EventsListItem";
 import Pagination from "../pagination/Pagination";
 import { LikeContext } from "./../../contexts/LikeContext";
+import "../../App";
 
 export default function EventList() {
   const [isGrid, setIsGrid] = useState(true);
@@ -21,27 +21,31 @@ export default function EventList() {
   const firstPostIndex = lastPostIndex - eventsPerPage;
   const [eventitems, setEventItems] = useState([]);
   const [noData, setNoData] = useState(false);
-  const [displayProducts, setDisplayProducts] = useState([]);
 
+  const { events, pending } = useEvents();
   const navigate = useNavigate();
-  const [pending, startTransition] = useTransition();
-  const { likeStatusHandler } = useContext(LikeContext);
-  const [likeStatus, setLikeStatus] = useState({ child1: "", child2: "" });
+  const [displayProducts, setDisplayProducts] = useState([]);
+  // const [pending, startTransition] = useTransition();
+  // const { likeStatusHandler } = useContext(LikeContext);
+  // const [likeStatus, setLikeStatus] = useState({ child1: "", child2: "" });
+
   useEffect(() => {
-    startTransition(() => {
-      eventService.getAll().then((result) => {
-        const today = fromIsoDate(new Date());
-        const filteredItems = result.filter(
-          (item) => item.status == true && fromIsoDate(item.date) > today
-        );
-        const sortedItems = () =>
-          filteredItems.sort(
-            (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-          );
-        setEventItems(sortedItems);
-        setDisplayProducts(sortedItems);
-      });
-    });
+    // startTransition(() => {
+    //   eventService.getAll().then((result) => {
+    //     const today = fromIsoDate(new Date());
+    //     const filteredItems = result.filter(
+    //       (item) => item.status == true && fromIsoDate(item.date) > today
+    //     );
+    //     const sortedItems = () =>
+    //       filteredItems.sort(
+    //         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+    //       );
+    //     setEventItems(sortedItems);
+    //     setDisplayProducts(sortedItems);
+    //   });
+    // });
+
+    setDisplayProducts(events);
   }, []);
 
   useEffect(() => {
@@ -50,36 +54,36 @@ export default function EventList() {
     } else {
       setView("grid-view");
     }
-    setTimeout(() => {
-      setNoData(false);
-      if (!pending && !displayProducts.length) {
-        setNoData(true);
-      } else {
-      }
-    }, 500);
+    // setTimeout(() => {
+    //   setNoData(false);
+    //   if (!pending && !displayProducts.length) {
+    //     setNoData(true);
+    //   } else {
+    //   }
+    // }, 500);
   }, [isGrid, displayProducts]);
 
-  const currentEvents = displayProducts.slice(firstPostIndex, lastPostIndex);
+  // const currentEvents = displayProducts.slice(firstPostIndex, lastPostIndex);
   const changeViewHandler = (event) => {
     event.preventDefault();
     setIsGrid((isGrid) => !isGrid);
   };
 
-  const currentPageClickHandler = (page) => {
-    setCurrentPage(page);
-    // setSearchParams(`?page=${page}`);
-  };
-  const likeClickHandler = async (e) => {
-    // const itemData = eventitems.filter((item) => item._id === id);
-    // const likes = itemData.likes;
-    console.log(e.target.value);
-    // const eventData = () => {
-    //   [...itemData], likes;
-    // };
-    console.log([eventData]);
-    // await eventService.edit(id, eventData);
-    // setDisplayProducts((oldstate) => [...oldstate], itemData);
-  };
+  // const currentPageClickHandler = (page) => {
+  //   setCurrentPage(page);
+  //   // setSearchParams(`?page=${page}`);
+  // };
+  // const likeClickHandler = async (e) => {
+  //   // const itemData = eventitems.filter((item) => item._id === id);
+  //   // const likes = itemData.likes;
+  //   console.log(e.target.value);
+  //   // const eventData = () => {
+  //   //   [...itemData], likes;
+  //   // };
+  //   console.log([eventData]);
+  //   // await eventService.edit(id, eventData);
+  //   // setDisplayProducts((oldstate) => [...oldstate], itemData);
+  // };
   const filterHandler = (e) => {
     const filterItemValue = e.target.value;
     const filterBy = e.target.id;
@@ -249,19 +253,19 @@ export default function EventList() {
                 <div></div>
               </div>
               <br />
-              {pending && (
+              {/* {pending && (
                 <div id="loader">
                   <img src="/images/loader.svg" />
                 </div>
-              )}
+              )} */}
             </div>
             <>
-              {currentEvents.map((eventitem) => (
+              {displayProducts.map((eventitem) => (
                 <EventsListItem
                   view={view}
                   key={eventitem._id}
                   {...eventitem}
-                  onLike={likeClickHandler}
+                  // onLike={likeClickHandler}
                 />
               ))}
             </>
@@ -272,12 +276,12 @@ export default function EventList() {
                 </h3>
               </div>
             )}
-            <Pagination
+            {/* <Pagination
               totalEvents={displayProducts.length}
               eventsPerPage={eventsPerPage}
               showCurrentPage={currentPageClickHandler}
               currentPage={currentPage}
-            />
+            /> */}
           </div>
         </div>
       </section>

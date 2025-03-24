@@ -78,7 +78,7 @@
   margin-right: 5px;
 }
 .list-view {
-  width: 100%;
+  width: 100% !important;
 }
 .list-view p {
   margin-bottom: 0;

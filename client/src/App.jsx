@@ -1,7 +1,6 @@
-import { useState } from "react";
 import { Routes, Route } from "react-router";
 
-import { UserContext } from "./contexts/UserContext";
+import UserProvider from "./providers/UserProvider";
 
 import Header from "./components/header/Header";
 import Home from "./components/home/Home";
@@ -16,32 +15,29 @@ import NotFound from "./static/NotFound";
 import PrivacyPolicy from "./static/PrivacyPolicy";
 import TermsAndConditions from "./static/TermsAndConditions";
 import Footer from "./components/footer/Footer";
+import AuthGuard from "./components/guards/AuthGard";
+import Logout from "./components/logout/Logout";
 import "./App.css";
 
 function App() {
-  const [authData, setAuthData] = useState();
-
-  const userLoginHandler = (data) => {
-    setAuthData(data);
-  };
-
-  const userLogoutHandler = () => {
-    setAuthData({});
-  };
-
   return (
-    <UserContext.Provider
-      value={{ ...authData, userLoginHandler, userLogoutHandler }}
-    >
+    <UserProvider>
       <Header />
+
       <Routes>
         <Route index element={<Home />} />
         <Route path="/events" element={<EventsList />} />
         <Route path="/events/:eventId/details" element={<EventDetails />} />
-        <Route path="/my-events/:eventId/edit" element={<EventEdit />} />
-        <Route path="/event/create" element={<EventCreate />} />
-        <Route path="/my-events" element={<MyEvents />} />
-        <Route path="/my-events/:eventId/details" element={<EventDetails />} />
+        <Route element={<AuthGuard />}>
+          <Route path="/my-events/:eventId/edit" element={<EventEdit />} />
+          <Route path="/event/create" element={<EventCreate />} />
+          <Route path="/my-events" element={<MyEvents />} />
+          <Route
+            path="/my-events/:eventId/details"
+            element={<EventDetails />}
+          />
+        </Route>
+        <Route path="/logout" element={<Logout />} />
         <Route path="/about" element={<About />} />
         <Route path="/contacts" element={<Contacts />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
@@ -49,7 +45,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
-    </UserContext.Provider>
+    </UserProvider>
   );
 }
 

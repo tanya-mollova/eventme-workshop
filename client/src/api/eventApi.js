@@ -6,16 +6,22 @@ const baseUrl = "http://localhost:3030/data/events";
 
 export const useEvents = () => {
   const [events, setEvents] = useState([]);
-
+  const [pending, startTransition] = useTransition();
   useEffect(() => {
-    request.get(baseUrl).then(setEvents);
+    const searchParams = new URLSearchParams({
+      sortBy: "_createdOn desc",
+      // select: "_id,imageUrl,title,description,address,price",
+    });
+    startTransition(() => {
+      request.get(`${baseUrl}?${searchParams.toString()}`).then(setEvents);
+    });
   }, []);
 
   return { events };
 };
 
 export const useEvent = (gameId) => {
-  const [events, setEvent] = useState({});
+  const [event, setEvent] = useState({});
 
   useEffect(() => {
     request.get(`${baseUrl}/${eventId}`).then(setEvent);

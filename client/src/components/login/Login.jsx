@@ -12,7 +12,7 @@ export default function Login({ showLoginModal, showRegisterModal }) {
     const values = Object.fromEntries(formData);
     const authData = await login(values.email, values.password);
     userLoginHandler(authData);
-    navigate("/events");
+    navigate("/my-events");
     showLoginModal(false);
   };
 

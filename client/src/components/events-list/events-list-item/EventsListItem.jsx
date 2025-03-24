@@ -1,13 +1,11 @@
-import { useEffect, useState } from "react";
-import eventService from "../../../services/eventService";
 import { Link } from "react-router";
+import useAuth from "./../../../hooks/useAuth";
 import { toShortDate, fromIsoTime } from "../../../utils/dateTime";
 import styles from "./assets/EventsListItem.module.css";
 
-export default function EventItem({
+export default function EventsListItem({
   _id,
   title,
-  description,
   date,
   category,
   address,
@@ -16,48 +14,10 @@ export default function EventItem({
   imageUrl,
   view,
   status,
-  likes,
   showDeleteModal,
 }) {
-  // const [likeStatus, setLikeStatus] = useState(true);
-  // const [likesValue, setLikesValue] = useState(0);
+  const { isAuthenticated } = useAuth();
 
-  // useEffect(() => {
-  //   setLikesValue(likes);
-  // }, []);
-  // useEffect(() => {
-  //   setLikesValue(likes);
-  // }, [likesValue]);
-  const onLike = async () => {
-    // const itemData = eventitems.filter((item) => item._id === id);
-    // const likes = itemData.likes;
-    setLikeStatus((oldstate) => (oldstate = !oldstate));
-    const eventData = {
-      title: title,
-      imageUrl: imageUrl,
-      description: description,
-      time: time,
-      date: date,
-      price: price,
-      status: status,
-      city: address.city,
-      street: address.street,
-      streetNumber: address.streetNumber,
-      likes: likesValue,
-      category: category,
-    };
-    if (likeStatus == true) {
-      const postData = { ...eventData, likes: likesValue + 1 };
-      const result = await eventService.edit(_id, postData);
-      setLikesValue(result.likes);
-      setLikeStatus(false);
-    } else {
-      const postData = { ...eventData, likes: likesValue - 1 };
-      const result = await eventService.edit(_id, postData);
-      setLikesValue(result.likes);
-      setLikeStatus(false);
-    }
-  };
   return (
     <div
       className={`${styles["event-item"]} ${
@@ -125,19 +85,21 @@ export default function EventItem({
           </div> */}
           {/* <br /> */}
           {/* TO DO hide when */}
-          <div className={styles["action-buttons"]}>
-            <Link to={`/my-events/${_id}/details`}>
-              <i className="fa-solid fa-eye"></i>
-            </Link>
-            <Link to={`/my-events/${_id}/edit`}>
-              <i className="fa-solid fa-pen-to-square"></i>
-            </Link>
-            <Link onClick={() => showDeleteModal(_id)}>
-              <i className="fa-solid fa-trash"></i>
-            </Link>
-            {status == true && <span className={styles["published"]}></span>}
-            {status == false && <span className={styles["pending"]}></span>}
-          </div>
+          {isAuthenticated && (
+            <div className={styles["action-buttons"]}>
+              <Link to={`/my-events/${_id}/details`}>
+                <i className="fa-solid fa-eye"></i>
+              </Link>
+              <Link to={`/my-events/${_id}/edit`}>
+                <i className="fa-solid fa-pen-to-square"></i>
+              </Link>
+              <Link onClick={() => showDeleteModal(_id)}>
+                <i className="fa-solid fa-trash"></i>
+              </Link>
+              {status == true && <span className={styles["published"]}></span>}
+              {status == false && <span className={styles["pending"]}></span>}
+            </div>
+          )}
         </div>
       </div>
     </div>
