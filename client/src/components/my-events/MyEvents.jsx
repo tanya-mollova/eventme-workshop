@@ -1,13 +1,12 @@
 import { useEffect, useState, useTransition } from "react";
 import { useSearchParams, Link, useNavigate } from "react-router";
-import "../../App";
 
 import { useMyEvents, useDeleteEvent } from "../../api/eventApi";
 
 import EventsListItem from "../events-list/events-list-item/EventsListItem";
 import Pagination from "../pagination/Pagination";
 import DeleteEvent from "../event-delete/EventDelete";
-import eventService from "../../services/eventService";
+import "../../App";
 
 export default function EventList() {
   const [isGrid, setIsGrid] = useState(true);
@@ -37,7 +36,7 @@ export default function EventList() {
     } else {
       setView("grid-view");
     }
-  }, [isGrid, displayProducts]);
+  }, [isGrid]);
 
   const currentEvents = displayProducts.slice(firstPostIndex, lastPostIndex);
   const changeViewHandler = (event) => {
@@ -47,7 +46,6 @@ export default function EventList() {
 
   const currentPageClickHandler = (page) => {
     setCurrentPage(page);
-    // setSearchParams(`?page=${page}`);
   };
   const showDeleteModalHandler = (id) => {
     setShowDeleteModal((showDeleteModal) => !showDeleteModal);
@@ -70,15 +68,15 @@ export default function EventList() {
       navigate(`?category=${filterItemValue}&city=${searchCity}`);
       if (searchCity == null || searchCity == "All") {
         setDisplayProducts(
-          [...eventitems].filter((item) =>
+          [...myEvents].filter((item) =>
             item.category.includes(filterItemValue)
           )
         );
       } else if (filterItemValue === "All") {
-        setDisplayProducts(...eventitems);
+        setDisplayProducts(...myEvents);
       } else {
         setDisplayProducts(
-          [...eventitems].filter(
+          [...myEvents].filter(
             (item) =>
               item.category.includes(filterItemValue) &&
               item.address.city.includes(searchCity)
@@ -87,26 +85,24 @@ export default function EventList() {
       }
       if (filterItemValue === "All") {
         setDisplayProducts(
-          [...eventitems].filter((item) =>
-            item.address.city.includes(searchCity)
-          )
+          [...myEvents].filter((item) => item.address.city.includes(searchCity))
         );
       }
       if (filterItemValue === "All" && searchCity == "All") {
-        setDisplayProducts([...eventitems]);
+        setDisplayProducts([...myEvents]);
       }
     } else if (filterBy == "city") {
       setSearchCity(filterItemValue);
       navigate(`?category=${searchCategory}&city=${filterItemValue}`);
       if (searchCategory == null || searchCategory == "All") {
         setDisplayProducts(
-          [...eventitems].filter((item) =>
+          [...myEvents].filter((item) =>
             item.address.city.includes(filterItemValue)
           )
         );
       } else {
         setDisplayProducts(
-          [...eventitems].filter(
+          [...myEvents].filter(
             (item) =>
               item.address.city.includes(filterItemValue) &&
               item.category.includes(searchCategory)
@@ -115,13 +111,11 @@ export default function EventList() {
       }
       if (filterItemValue === "All") {
         setDisplayProducts(
-          [...eventitems].filter((item) =>
-            item.category.includes(searchCategory)
-          )
+          [...myEvents].filter((item) => item.category.includes(searchCategory))
         );
       }
       if (filterItemValue === "All" && searchCategory == "All") {
-        setDisplayProducts([...eventitems]);
+        setDisplayProducts([...myEvents]);
       }
     } else if (filterBy == "date") {
       if (filterItemValue.includes("asc")) {
@@ -201,8 +195,18 @@ export default function EventList() {
                         onChange={filterHandler}
                       >
                         <option defaultValue="All">All</option>
-                        <option defaultValue="Sofia">Sofia</option>
+                        <option defaultValue="Burgas">Burgas</option>
                         <option defaultValue=" Varna">Varna</option>
+                        <option defaultValue="Veliko Tarnovo">
+                          Veliko Tarnovo
+                        </option>
+                        <option defaultValue="Pleven">Pleven</option>
+                        <option defaultValue="Plovdiv">Plovdiv</option>
+                        <option defaultValue="Sofia">Sofia</option>
+                        <option defaultValue="Ruse">Ruse</option>
+                        <option defaultValue="Stara Zagora">
+                          Stara Zagora
+                        </option>
                       </select>
                     </div>
                     <span> Date: </span>

@@ -1,7 +1,8 @@
-import { useNavigate } from "react-router";
 import { useState, useEffect, useTransition } from "react";
+import { useNavigate } from "react-router";
+
 import { fromIsoDate } from "../../utils/dateTime";
-import eventService from "../../services/eventService";
+import { useCreateEvent } from "../../api/eventApi";
 
 import Box from "@mui/material/Box";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -18,7 +19,7 @@ import utc from "dayjs/plugin/utc";
 import Stack from "@mui/material/Stack";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import Switch from "@mui/material/Switch";
-import { useCreateEvent } from "../../api/eventApi";
+
 dayjs.extend(utc);
 
 const ITEM_HEIGHT = 48;
@@ -45,6 +46,7 @@ export default function EventCreate() {
   const [pending, startTransition] = useTransition();
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     title: "",
     imageUrl: "",
@@ -153,24 +155,8 @@ export default function EventCreate() {
     }
   }, [formData]);
 
-  // if (!data.email.trim()) {
-  //   errors.email = "Email is required";
-  // } else if (!/\S+@\S+\.\S+/.test(data.email)) {
-  //   errors.email = "Email is invalid";
-  // }
-
-  // if (!data.password) {
-  //   errors.password = "Password is required";
-  // } else if (data.password.length < 8) {
-  //   errors.password = "Password must be at least 8 characters long";
-  // }
-
-  // if (data.confirmPassword !== data.password) {
-  //   errors.confirmPassword = "Passwords do not match";
-  // }
-
   return (
-    <section className="section">
+    <section className="section" id="section-create">
       <div className="section-title">
         <h2 className="h1 mb-4 mt-4">Create Event</h2>
       </div>
@@ -369,15 +355,7 @@ export default function EventCreate() {
                         MenuProps={MenuProps}
                       >
                         {categories.map((category) => (
-                          <MenuItem
-                            key={category}
-                            value={category}
-                            // style={getStyles(
-                            //   categoriesList,
-                            //   formData.category,
-                            //   theme
-                            // )}
-                          >
+                          <MenuItem key={category} value={category}>
                             {category}
                           </MenuItem>
                         ))}
@@ -390,9 +368,6 @@ export default function EventCreate() {
                 </div>
                 <div className="col-lg-4 mb-12 pb-2">
                   <div className="form-group">
-                    {/* <label htmlFor="status" className="form-label">
-                      Status
-                    </label> */}
                     <span> Publish</span>
                     <Switch
                       checked={!!formData.status}
@@ -411,7 +386,6 @@ export default function EventCreate() {
             <div className="col-lg-4"></div>
             <div className="col-lg-4 mb-12 pb-2">
               <input
-                // disabled={errors}
                 disabled={pending}
                 type="submit"
                 value="Add event"

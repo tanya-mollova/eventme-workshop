@@ -158,6 +158,8 @@ h6,
 p {
   margin-top: 0;
   margin-bottom: 1rem;
+  font-size: 20px !important;
+  color: #233242;
 }
 .extreme-font {
   font-size: 200px;
@@ -4824,7 +4826,7 @@ fieldset:disabled .btn {
   margin-bottom: 0;
   line-height: 1.5;
   width: 100%;
-  font-size:30px;
+  font-size: 30px;
 }
 
 .modal-body {
@@ -10265,7 +10267,40 @@ textarea.form-control {
   border-radius: 0px;
   padding: 19px;
 }
-
+.homepage-events .img-box {
+  overflow: hidden;
+  border-radius: 20px;
+}
+.homepage-events img {
+  transition: all ease-in-out 0.3s;
+}
+.homepage-events :hover img {
+  transform: scale(1.05);
+  transform-origin: 50% 50%;
+}
+.homepage-events img {
+  height: 400px;
+  max-height: 400px;
+  width: 100%;
+  object-fit: cover;
+}
+.homepage-events {
+  position: relative;
+}
+.homepage-datetime {
+  position: absolute;
+  bottom: 75px;
+  right: 24px;
+  background: white;
+  padding: 7px;
+  border-radius: 5px;
+}
+.pb-100 {
+  padding-bottom: 100px;
+}
+.pt-50 {
+  padding-top: 50px;
+}
 .footer-widget ul li a {
   color: #000;
 }
@@ -10273,7 +10308,10 @@ textarea.form-control {
   color: #f05537;
   text-decoration: underline !important;
 }
-
+footer p {
+  font-size: 16px !important;
+  color: #fff;
+}
 .social-icons a {
   display: inline-block;
   height: 45px;
@@ -10555,6 +10593,7 @@ nav.shrink .navbar-toggle {
 }
 .section-events {
   background-color: #f7f5f2;
+  padding-bottom:50px;
 }
 .social-icons-item {
   transition: all ease-in 0.2s;
@@ -10564,6 +10603,17 @@ nav.shrink .navbar-toggle {
 }
 .social-icons-item:hover i {
   color: #fff;
+}
+#section-edit,
+#section-create,
+#section-details {
+  background: #f7f5f2;
+}
+#section-details .container {
+  padding: 100px 50px;
+}
+#home ._action-buttons_1ik26_281 {
+  display: none;
 }
 footer {
   padding-top: 100px;

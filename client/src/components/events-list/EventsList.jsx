@@ -2,7 +2,6 @@ import { useEffect, useState, useTransition, useContext } from "react";
 import { useNavigate } from "react-router";
 import { useEvents, useDeleteEvent } from "../../api/eventApi";
 import { fromIsoDate } from "../../utils/dateTime";
-// import eventService from "../../services/eventService";
 import DeleteEvent from "../event-delete/EventDelete";
 import EventsListItem from "../events-list/events-list-item/EventsListItem";
 import Pagination from "../pagination/Pagination";
@@ -20,31 +19,17 @@ export default function EventList() {
   const [searchCity, setSearchCity] = useState("All");
   const lastPostIndex = currentPage * eventsPerPage;
   const firstPostIndex = lastPostIndex - eventsPerPage;
-  // const [eventitems, setEventItems] = useState([]);
+  // const [events, setevents] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { events, pending } = useEvents();
   const navigate = useNavigate();
   const [displayProducts, setDisplayProducts] = useState([]);
-
+  const [IsPending, startTransition] = useTransition();
   // const { likeStatusHandler } = useContext(LikeContext);
   // const [likeStatus, setLikeStatus] = useState({ child1: "", child2: "" });
   const { deleteEvent } = useDeleteEvent();
 
   useEffect(() => {
-    // startTransition(() => {
-    //   eventService.getAll().then((result) => {
-    //     const today = fromIsoDate(new Date());
-    //     const filteredItems = result.filter(
-    //       (item) => item.status == true && fromIsoDate(item.date) > today
-    //     );
-    //     const sortedItems = () =>
-    //       filteredItems.sort(
-    //         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-    //       );
-    //     setEventItems(sortedItems);
-    //     setDisplayProducts(sortedItems);
-    //   });
-    // });
     setDisplayProducts(events);
   }, [events]);
 
@@ -60,42 +45,24 @@ export default function EventList() {
     );
     setShowDeleteModal(false);
   };
-  // useEffect(() => {
-  //   if (!isGrid) {
-  //     setView("list-view");
-  //   } else {
-  //     setView("grid-view");
-  //   }
-  //   setTimeout(() => {
-  //     setNoData(false);
-  //     if (!pending && !displayProducts.length) {
-  //       setNoData(true);
-  //     } else {
-  //     }
-  //   }, 500);
-  // }, [isGrid, displayProducts]);
+  useEffect(() => {
+    if (!isGrid) {
+      setView("list-view");
+    } else {
+      setView("grid-view");
+    }
+  }, [isGrid]);
 
-  // const currentEvents = displayProducts.slice(firstPostIndex, lastPostIndex);
+  const currentEvents = displayProducts.slice(firstPostIndex, lastPostIndex);
   const changeViewHandler = (event) => {
     event.preventDefault();
     setIsGrid((isGrid) => !isGrid);
   };
 
-  // const currentPageClickHandler = (page) => {
-  //   setCurrentPage(page);
-  //   // setSearchParams(`?page=${page}`);
-  // };
-  // const likeClickHandler = async (e) => {
-  //   // const itemData = eventitems.filter((item) => item._id === id);
-  //   // const likes = itemData.likes;
-  //   console.log(e.target.value);
-  //   // const eventData = () => {
-  //   //   [...itemData], likes;
-  //   // };
-  //   console.log([eventData]);
-  //   // await eventService.edit(id, eventData);
-  //   // setDisplayProducts((oldstate) => [...oldstate], itemData);
-  // };
+  const currentPageClickHandler = (page) => {
+    setCurrentPage(page);
+  };
+
   const filterHandler = (e) => {
     const filterItemValue = e.target.value;
     const filterBy = e.target.id;
@@ -104,15 +71,13 @@ export default function EventList() {
       navigate(`?category=${filterItemValue}&city=${searchCity}`);
       if (searchCity == null || searchCity == "All") {
         setDisplayProducts(
-          [...eventitems].filter((item) =>
-            item.category.includes(filterItemValue)
-          )
+          [...events].filter((item) => item.category.includes(filterItemValue))
         );
       } else if (filterItemValue === "All") {
-        setDisplayProducts(...eventitems);
+        setDisplayProducts(...events);
       } else {
         setDisplayProducts(
-          [...eventitems].filter(
+          [...events].filter(
             (item) =>
               item.category.includes(filterItemValue) &&
               item.address.city.includes(searchCity)
@@ -121,26 +86,24 @@ export default function EventList() {
       }
       if (filterItemValue === "All") {
         setDisplayProducts(
-          [...eventitems].filter((item) =>
-            item.address.city.includes(searchCity)
-          )
+          [...events].filter((item) => item.address.city.includes(searchCity))
         );
       }
       if (filterItemValue === "All" && searchCity == "All") {
-        setDisplayProducts([...eventitems]);
+        setDisplayProducts([...events]);
       }
     } else if (filterBy == "city") {
       setSearchCity(filterItemValue);
       navigate(`?category=${searchCategory}&city=${filterItemValue}`);
       if (searchCategory == null || searchCategory == "All") {
         setDisplayProducts(
-          [...eventitems].filter((item) =>
+          [...events].filter((item) =>
             item.address.city.includes(filterItemValue)
           )
         );
       } else {
         setDisplayProducts(
-          [...eventitems].filter(
+          [...events].filter(
             (item) =>
               item.address.city.includes(filterItemValue) &&
               item.category.includes(searchCategory)
@@ -149,13 +112,11 @@ export default function EventList() {
       }
       if (filterItemValue === "All") {
         setDisplayProducts(
-          [...eventitems].filter((item) =>
-            item.category.includes(searchCategory)
-          )
+          [...events].filter((item) => item.category.includes(searchCategory))
         );
       }
       if (filterItemValue === "All" && searchCategory == "All") {
-        setDisplayProducts([...eventitems]);
+        setDisplayProducts([...events]);
       }
     } else if (filterBy == "date") {
       if (filterItemValue.includes("asc")) {
@@ -224,8 +185,18 @@ export default function EventList() {
                         onChange={filterHandler}
                       >
                         <option defaultValue="All">All</option>
-                        <option defaultValue="Sofia">Sofia</option>
+                        <option defaultValue="Burgas">Burgas</option>
                         <option defaultValue=" Varna">Varna</option>
+                        <option defaultValue="Veliko Tarnovo">
+                          Veliko Tarnovo
+                        </option>
+                        <option defaultValue="Pleven">Pleven</option>
+                        <option defaultValue="Plovdiv">Plovdiv</option>
+                        <option defaultValue="Sofia">Sofia</option>
+                        <option defaultValue="Ruse">Ruse</option>
+                        <option defaultValue="Stara Zagora">
+                          Stara Zagora
+                        </option>
                       </select>
                     </div>
                     <span> Date: </span>
@@ -273,7 +244,7 @@ export default function EventList() {
               )}
             </div>
             <>
-              {displayProducts.map((eventitem) => (
+              {currentEvents.map((eventitem) => (
                 <EventsListItem
                   view={view}
                   key={eventitem._id}
@@ -283,25 +254,26 @@ export default function EventList() {
                 />
               ))}
             </>
-            {!displayProducts.length && (
+            {!currentEvents.length && (
               <div>
                 <h3 className="text-primary">
                   <i class="fa-solid fa-circle-info"></i> No data found!
                 </h3>
               </div>
             )}
+
             {showDeleteModal && (
               <DeleteEvent
                 onDelete={deleteEventHandler}
                 showDeleteModal={showDeleteModalHandler}
               ></DeleteEvent>
             )}
-            {/* <Pagination
+            <Pagination
               totalEvents={displayProducts.length}
               eventsPerPage={eventsPerPage}
               showCurrentPage={currentPageClickHandler}
               currentPage={currentPage}
-            /> */}
+            />
           </div>
         </div>
       </section>

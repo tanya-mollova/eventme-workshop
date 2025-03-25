@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useParams, Link, useNavigate } from "react-router";
-import { toShortDate, fromIsoTime, fromIsoTimeTwo } from "../../utils/dateTime";
+import { toShortDate, fromIsoTimeTwo } from "../../utils/dateTime";
 import { useEvent, useDeleteEvent } from "../../api/eventApi";
 import DeleteEvent from "../event-delete/EventDelete";
 import useAuth from "../../hooks/useAuth";
@@ -24,8 +24,8 @@ export default function SingleEvent() {
   };
   return (
     <>
-      <section className="section-sm">
-        <div className="container">
+      <section className="section-sm" id="section-details">
+        <div className="container bg-white shadow">
           <div className="row g-5">
             <div className="col-lg-12">
               <div className="content">
@@ -33,20 +33,24 @@ export default function SingleEvent() {
                 <div>
                   <img src={eventData.imageUrl} clas={eventData.title}></img>
                 </div>
-                <h2 id="what-you-know-about-loans">{eventData.title}</h2>
                 <h3 id="payday-loan-application-processing">
                   <span className="text-primary display-4">
                     {toShortDate(eventData.date)}{" "}
                   </span>
                   <br></br>
+                  <i class="fa-solid fa-clock"></i>{" "}
                   {fromIsoTimeTwo(eventData.time)} h.
                 </h3>
-                <h5>Category:</h5>
+                <span>
+                  <b>Category: </b>
+                </span>
                 {eventData.category}
                 {/* <h5>Category:</h5>
                 {eventData.category.map((item) => (
                   <span key={item}>{item},</span>
                 ))} */}
+                <br />
+                <br />
                 <p>{eventData.description}</p>
                 <hr />
                 For more information about this event, contact to{" "}

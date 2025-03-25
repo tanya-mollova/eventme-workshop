@@ -13,7 +13,7 @@
   box-shadow: rgba(12, 56, 145, 0.05) 4px 4px 4px 0px;
 }
 .event-info {
-  padding: 30px 20px;
+  padding: 30px 20px 60px 20px;
   text-align: left;
   font-weight: 300;
 }
@@ -77,6 +77,9 @@
   width: auto;
   margin-right: 5px;
 }
+.event-location {
+  font-size: 16px !important;
+}
 .list-view {
   width: 100% !important;
 }
@@ -137,8 +140,16 @@
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 10px;
 }
+.grid-view .action-buttons {
+  position: relative;
+}
 .grid-view {
   display: block;
+}
+.grid-view .action-buttons {
+  position: absolute;
+  bottom: 5px;
+  width: 100%;
 }
 .text-black:hover .event-title {
   color: #f05537;

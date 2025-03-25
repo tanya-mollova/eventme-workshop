@@ -1,5 +1,5 @@
-import { useNavigate, useParams } from "react-router";
 import { useState, useEffect, useTransition } from "react";
+import { useNavigate, useParams } from "react-router";
 
 import request from "../../utils/request";
 import { useEditEvent } from "../../api/eventApi";
@@ -52,6 +52,7 @@ export default function EventCreate() {
   const navigate = useNavigate();
   const { eventId } = useParams();
   const { edit } = useEditEvent();
+
   const [eventData, setEventData] = useState({
     title: "",
     imageUrl: "",
@@ -170,7 +171,7 @@ export default function EventCreate() {
       startTransition(async () => {
         await edit(eventId, eventData);
         startTransition(() => {
-          navigate("/my-events");
+          navigate(-1);
         });
       });
     }
@@ -186,7 +187,7 @@ export default function EventCreate() {
   }, [eventData]);
 
   return (
-    <section className="section">
+    <section className="section" id="section-edit">
       <div className="section-title">
         <h2 className="h1 mb-4 mt-4">Edit Event</h2>
       </div>
@@ -256,8 +257,6 @@ export default function EventCreate() {
                         <TimePicker
                           value={dayjs.utc(`${eventData.time}`)}
                           onChange={handleTime}
-                          // timezone="Europe/Bulgaria"
-                          // referenceDate={dayjs("2022-04-17T15:30")}
                         />
                       </Stack>
                     </LocalizationProvider>
@@ -374,15 +373,7 @@ export default function EventCreate() {
                         MenuProps={MenuProps}
                       >
                         {categories.map((category) => (
-                          <MenuItem
-                            key={category}
-                            value={category}
-                            // style={getStyles(
-                            //   categoriesList,
-                            //   eventData.category,
-                            //   theme
-                            // )}
-                          >
+                          <MenuItem key={category} value={category}>
                             {category}
                           </MenuItem>
                         ))}
@@ -392,9 +383,6 @@ export default function EventCreate() {
                 </div>
                 <div className="col-lg-4 mb-12 pb-2">
                   <div className="form-group">
-                    {/* <label htmlFor="status" className="form-label">
-                      Status
-                    </label> */}
                     <span> Publish</span>
                     <Switch
                       checked={!!eventData.status}

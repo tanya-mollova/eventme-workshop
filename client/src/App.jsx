@@ -15,7 +15,8 @@ import NotFound from "./static/NotFound";
 import PrivacyPolicy from "./static/PrivacyPolicy";
 import TermsAndConditions from "./static/TermsAndConditions";
 import Footer from "./components/footer/Footer";
-import AuthGuard from "./components/guards/AuthGard";
+import AuthGuard from "./components/guards/AuthGuard";
+import AuthorGuard from "./components/guards/AutorGuard";
 import Logout from "./components/logout/Logout";
 import "./App.css";
 
@@ -29,7 +30,9 @@ function App() {
         <Route path="/events" element={<EventsList />} />
         <Route path="/events/:eventId/details" element={<EventDetails />} />
         <Route element={<AuthGuard />}>
-          <Route path="/my-events/:eventId/edit" element={<EventEdit />} />
+          <Route element={<AuthorGuard />}>
+            <Route path="/my-events/:eventId/edit" element={<EventEdit />} />
+          </Route>
           <Route path="/event/create" element={<EventCreate />} />
           <Route path="/my-events" element={<MyEvents />} />
           <Route
