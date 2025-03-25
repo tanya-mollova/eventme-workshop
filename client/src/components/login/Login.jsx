@@ -1,4 +1,4 @@
-import { useActionState, useContext } from "react";
+import { useActionState, useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { UserContext } from "../../contexts/UserContext";
 import { useLogin } from "./../../api/authApi";
@@ -7,10 +7,15 @@ export default function Login({ showLoginModal, showRegisterModal }) {
   const { userLoginHandler } = useContext(UserContext);
   const { login } = useLogin();
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const loginHandler = async (_, formData) => {
     const values = Object.fromEntries(formData);
     const authData = await login(values.email, values.password);
+    if (authData.code == "403") {
+      setError(authData.message);
+      return;
+    }
     userLoginHandler(authData);
     navigate("/my-events");
     showLoginModal(false);
@@ -67,6 +72,7 @@ export default function Login({ showLoginModal, showRegisterModal }) {
                     />
                   </div>
                 </div>
+                {error && <span className="error-message">{error}</span>}
                 <div className="col-lg-12 mt-4">
                   <button type="submit" className="btn btn-primary w-100">
                     Login

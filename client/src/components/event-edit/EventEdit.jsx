@@ -1,7 +1,8 @@
 import { useNavigate, useParams } from "react-router";
 import { useState, useEffect, useTransition } from "react";
 
-import eventService from "../../services/eventService";
+import request from "../../utils/request";
+import { useEditEvent } from "../../api/eventApi";
 import { fromIsoDate } from "../../utils/dateTime";
 
 import Box from "@mui/material/Box";
@@ -23,7 +24,6 @@ import Switch from "@mui/material/Switch";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
-// dayjs.tz.setDefault("Europe/Paris");
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
@@ -46,9 +46,12 @@ const categories = [
 ];
 
 export default function EventCreate() {
+  const baseUrl = "http://localhost:3030/data/events";
   const [pending, startTransition] = useTransition();
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const { eventId } = useParams();
+  const { edit } = useEditEvent();
   const [eventData, setEventData] = useState({
     title: "",
     imageUrl: "",
@@ -63,10 +66,8 @@ export default function EventCreate() {
     category: [],
   });
 
-  const { eventId } = useParams();
-
   useEffect(() => {
-    eventService.getOne(eventId).then((result) => {
+    request.get(`${baseUrl}/${eventId}`).then((result) => {
       const city = result.address.city;
       const street = result.address.street;
       const streetNumber = result.address.streetNumber;
@@ -80,19 +81,20 @@ export default function EventCreate() {
     });
   }, []);
 
-  console.log(eventData.time);
   const handleDate = (e) => {
     setEventData({
       ...eventData,
       date: fromIsoDate(e),
     });
   };
+
   const handleTime = (e) => {
     setEventData({
       ...eventData,
       time: e.format(),
     });
   };
+
   const handleStatus = (event) => {
     if (event.target.checked) {
       setEventData({
@@ -100,6 +102,7 @@ export default function EventCreate() {
         status: "event.target.checked",
       });
     }
+
     setEventData({
       ...eventData,
       status: event.target.checked,
@@ -111,11 +114,11 @@ export default function EventCreate() {
       target: { value },
     } = event;
     setEventData({
-      // On autofill we get a stringified value.
       ...eventData,
       category: typeof value === "string" ? value.split(",") : value,
     });
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === "city" || name === "street" || name === "streetNumber") {
@@ -130,20 +133,7 @@ export default function EventCreate() {
       });
     }
   };
-  const submitAction = async (e) => {
-    const newErrors = validateForm(eventData);
-    setErrors(newErrors);
-    if (Object.keys(newErrors).length === 0) {
-      startTransition(async () => {
-        await eventService.edit(eventId, eventData);
-        startTransition(() => {
-          // <DataGrid {...data} loading />;
-          navigate("/my-events");
-        });
-      });
-    } else {
-    }
-  };
+
   const validateForm = (data) => {
     const errors = {};
     if (!data.title.trim()) {
@@ -172,8 +162,21 @@ export default function EventCreate() {
     }
     return errors;
   };
+
+  const submitAction = async (e) => {
+    const newErrors = validateForm(eventData);
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length === 0) {
+      startTransition(async () => {
+        await edit(eventId, eventData);
+        startTransition(() => {
+          navigate("/my-events");
+        });
+      });
+    }
+  };
+
   useEffect(() => {
-    console.log(errors);
     if (Object.keys(errors).length == 0) {
       setErrors({});
     } else {
@@ -181,25 +184,6 @@ export default function EventCreate() {
       setErrors(newErrors);
     }
   }, [eventData]);
-  // useEffect(() => {
-  //   eventData.category = categoriesList;
-  // }, [handleSelect]);
-
-  // if (!data.email.trim()) {
-  //   errors.email = "Email is required";
-  // } else if (!/\S+@\S+\.\S+/.test(data.email)) {
-  //   errors.email = "Email is invalid";
-  // }
-
-  // if (!data.password) {
-  //   errors.password = "Password is required";
-  // } else if (data.password.length < 8) {
-  //   errors.password = "Password must be at least 8 characters long";
-  // }
-
-  // if (data.confirmPassword !== data.password) {
-  //   errors.confirmPassword = "Passwords do not match";
-  // }
 
   return (
     <section className="section">
@@ -242,9 +226,6 @@ export default function EventCreate() {
                     onChange={handleChange}
                   />
                 </div>
-                {errors.imageUrl && (
-                  <span className="error-message">{errors.imageUrl}</span>
-                )}
               </div>
               <div className="col-lg-12 mb-12 pb-2">
                 <div className="form-group">
@@ -280,9 +261,6 @@ export default function EventCreate() {
                         />
                       </Stack>
                     </LocalizationProvider>
-                    {errors.time && (
-                      <span className="error-message">{errors.time}</span>
-                    )}
                   </div>
                 </div>
                 <div className="col-lg-4 mb-12 pb-2">
@@ -300,9 +278,6 @@ export default function EventCreate() {
                         />
                       </DemoContainer>
                     </LocalizationProvider>
-                    {errors.date && (
-                      <span className="error-message">{errors.date}</span>
-                    )}
                   </div>
                 </div>
                 <div className="col-lg-4 mb-12 pb-2">
@@ -336,9 +311,6 @@ export default function EventCreate() {
                       onChange={handleChange}
                     />
                   </div>
-                  {errors.city && (
-                    <span className="error-message">{errors.city}</span>
-                  )}
                 </div>
                 <div className="col-lg-4 mb-12 pb-2">
                   <div className="form-group">
@@ -416,9 +388,6 @@ export default function EventCreate() {
                         ))}
                       </Select>
                     </FormControl>
-                    {errors.category && (
-                      <span className="error-message">{errors.category}</span>
-                    )}
                   </div>
                 </div>
                 <div className="col-lg-4 mb-12 pb-2">
@@ -445,7 +414,8 @@ export default function EventCreate() {
               </div>
             </div>
           </div>
-          <div className="row">
+          <br /> <br />
+          <div className="row mt-4">
             <div className="col-lg-4"></div>
             <div className="col-lg-4 mb-12 pb-2">
               <input

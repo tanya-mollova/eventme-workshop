@@ -390,6 +390,9 @@ button,
 [type="submit"] {
   -webkit-appearance: button;
 }
+[type="submit"] {
+  max-width: 200px;
+}
 button:not(:disabled),
 [type="button"]:not(:disabled),
 [type="reset"]:not(:disabled),
@@ -4810,6 +4813,7 @@ fieldset:disabled .btn {
   border-bottom: 1px solid #acb9c4;
   border-top-left-radius: calc(0.3rem - 1px);
   border-top-right-radius: calc(0.3rem - 1px);
+  text-align: center;
 }
 .modal-header .btn-close {
   padding: 0.5rem 0.5rem;
@@ -4819,6 +4823,8 @@ fieldset:disabled .btn {
 .modal-title {
   margin-bottom: 0;
   line-height: 1.5;
+  width: 100%;
+  font-size:30px;
 }
 
 .modal-body {
@@ -10171,7 +10177,7 @@ blockquote::before {
 }
 
 .form-control:not(textarea) {
-  height: 55px;
+  height: 60px;
 }
 select.form-control {
   height: auto;
@@ -10192,7 +10198,7 @@ textarea.form-control {
 .form-group {
   position: relative;
 
-  padding-bottom: 8px;
+  padding-bottom: 15px;
 }
 .form-group label {
   position: absolute;
@@ -10627,6 +10633,9 @@ footer h4 {
 .error-message {
   color: red;
   font-size: 14px;
+}
+#home ._action-buttons_131vj_291 {
+  display: none;
 }
 .css-10o2lyd-MuiStack-root > .MuiTextField-root,
 .css-10o2lyd-MuiStack-root > .MuiPickersTextField-root {

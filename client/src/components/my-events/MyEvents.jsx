@@ -2,6 +2,8 @@ import { useEffect, useState, useTransition } from "react";
 import { useSearchParams, Link, useNavigate } from "react-router";
 import "../../App";
 
+import { useMyEvents, useDeleteEvent } from "../../api/eventApi";
+
 import EventsListItem from "../events-list/events-list-item/EventsListItem";
 import Pagination from "../pagination/Pagination";
 import DeleteEvent from "../event-delete/EventDelete";
@@ -21,20 +23,13 @@ export default function EventList() {
   const firstPostIndex = lastPostIndex - eventsPerPage;
   const [eventitems, setEventItems] = useState([]);
   const [displayProducts, setDisplayProducts] = useState([]);
-  const [noData, setNoData] = useState(false);
   const navigate = useNavigate();
-  const [pending, startTransition] = useTransition();
+  const { myEvents, pending } = useMyEvents();
+  const { deleteEvent } = useDeleteEvent();
 
   useEffect(() => {
-    startTransition(() => {
-      eventService.getAll().then((result) => {
-        setEventItems(
-          result.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-        );
-        setDisplayProducts(result);
-      });
-    });
-  }, []);
+    setDisplayProducts(myEvents);
+  }, [myEvents]);
 
   useEffect(() => {
     if (!isGrid) {
@@ -42,13 +37,6 @@ export default function EventList() {
     } else {
       setView("grid-view");
     }
-    setTimeout(() => {
-      setNoData(false);
-      if (!pending && !displayProducts.length) {
-        setNoData(true);
-      } else {
-      }
-    }, 500);
   }, [isGrid, displayProducts]);
 
   const currentEvents = displayProducts.slice(firstPostIndex, lastPostIndex);
@@ -61,17 +49,17 @@ export default function EventList() {
     setCurrentPage(page);
     // setSearchParams(`?page=${page}`);
   };
+  const showDeleteModalHandler = (id) => {
+    setShowDeleteModal((showDeleteModal) => !showDeleteModal);
+    setEventId(id);
+  };
+
   const deleteEventHandler = async () => {
-    await eventService.delete(eventId);
+    await deleteEvent(eventId);
     setDisplayProducts((oldstate) =>
       oldstate.filter((event) => event._id !== eventId)
     );
     setShowDeleteModal(false);
-  };
-
-  const showDeleteModalHandler = (id) => {
-    setShowDeleteModal((showDeleteModal) => !showDeleteModal);
-    setEventId(id);
   };
 
   const filterHandler = (e) => {
@@ -272,7 +260,7 @@ export default function EventList() {
                 />
               ))}
             </>
-            {noData && (
+            {!currentEvents.length && (
               <div>
                 <h3 className="text-primary">
                   <i class="fa-solid fa-circle-info"></i> No data found!

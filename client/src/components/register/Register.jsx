@@ -1,4 +1,4 @@
-import { useActionState, useContext } from "react";
+import { useActionState, useContext, useState } from "react";
 import { useNavigate } from "react-router";
 import { UserContext } from "../../contexts/UserContext";
 import { useRegister } from "./../../api/authApi";
@@ -7,6 +7,7 @@ export default function Register({ showLoginModal, showRegisterModal }) {
   const { userLoginHandler } = useContext(UserContext);
   const { register } = useRegister();
   const navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const registerHandler = async (_, formData) => {
     console.log(Object.fromEntries(formData));
@@ -14,11 +15,14 @@ export default function Register({ showLoginModal, showRegisterModal }) {
       Object.fromEntries(formData);
 
     if (password !== passwordConfirm) {
-      console.log("Password missmatch");
-
+      setError("Password missmatch");
       return;
     }
     const authData = await register(username, email, password);
+    if (authData.code == "403" || authData.code == "409") {
+      setError(authData.message);
+      return;
+    }
     userLoginHandler(authData);
     showRegisterModal(false);
     navigate("/events");
@@ -103,6 +107,7 @@ export default function Register({ showLoginModal, showRegisterModal }) {
                     />
                   </div>
                 </div>
+                {error && <span className="error-message">{error}</span>}
                 <div className="col-lg-12 mt-4">
                   <button type="submit" className="btn btn-primary w-100">
                     Register

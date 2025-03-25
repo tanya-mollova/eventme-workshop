@@ -1,8 +1,9 @@
 import { useEffect, useState, useTransition, useContext } from "react";
 import { useNavigate } from "react-router";
-import { useEvents } from "../../api/eventApi";
+import { useEvents, useDeleteEvent } from "../../api/eventApi";
 import { fromIsoDate } from "../../utils/dateTime";
 // import eventService from "../../services/eventService";
+import DeleteEvent from "../event-delete/EventDelete";
 import EventsListItem from "../events-list/events-list-item/EventsListItem";
 import Pagination from "../pagination/Pagination";
 import { LikeContext } from "./../../contexts/LikeContext";
@@ -14,20 +15,20 @@ export default function EventList() {
   const [currentPage, setCurrentPage] = useState(1);
   const [eventsPerPage, setEventsPerPage] = useState(8);
   // const [searchParams, setSearchParams] = useSearchParams();
-  // const [eventId, setEventId] = useState(null);
+  const [eventId, setEventId] = useState(null);
   const [searchCategory, setSearchCategory] = useState("All");
   const [searchCity, setSearchCity] = useState("All");
   const lastPostIndex = currentPage * eventsPerPage;
   const firstPostIndex = lastPostIndex - eventsPerPage;
-  const [eventitems, setEventItems] = useState([]);
-  const [noData, setNoData] = useState(false);
-
+  // const [eventitems, setEventItems] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { events, pending } = useEvents();
   const navigate = useNavigate();
   const [displayProducts, setDisplayProducts] = useState([]);
-  // const [pending, startTransition] = useTransition();
+
   // const { likeStatusHandler } = useContext(LikeContext);
   // const [likeStatus, setLikeStatus] = useState({ child1: "", child2: "" });
+  const { deleteEvent } = useDeleteEvent();
 
   useEffect(() => {
     // startTransition(() => {
@@ -44,24 +45,35 @@ export default function EventList() {
     //     setDisplayProducts(sortedItems);
     //   });
     // });
-
     setDisplayProducts(events);
-  }, []);
+  }, [events]);
 
-  useEffect(() => {
-    if (!isGrid) {
-      setView("list-view");
-    } else {
-      setView("grid-view");
-    }
-    // setTimeout(() => {
-    //   setNoData(false);
-    //   if (!pending && !displayProducts.length) {
-    //     setNoData(true);
-    //   } else {
-    //   }
-    // }, 500);
-  }, [isGrid, displayProducts]);
+  const showDeleteModalHandler = (id) => {
+    setShowDeleteModal((showDeleteModal) => !showDeleteModal);
+    setEventId(id);
+  };
+
+  const deleteEventHandler = async () => {
+    await deleteEvent(eventId);
+    setDisplayProducts((oldstate) =>
+      oldstate.filter((event) => event._id !== eventId)
+    );
+    setShowDeleteModal(false);
+  };
+  // useEffect(() => {
+  //   if (!isGrid) {
+  //     setView("list-view");
+  //   } else {
+  //     setView("grid-view");
+  //   }
+  //   setTimeout(() => {
+  //     setNoData(false);
+  //     if (!pending && !displayProducts.length) {
+  //       setNoData(true);
+  //     } else {
+  //     }
+  //   }, 500);
+  // }, [isGrid, displayProducts]);
 
   // const currentEvents = displayProducts.slice(firstPostIndex, lastPostIndex);
   const changeViewHandler = (event) => {
@@ -253,11 +265,12 @@ export default function EventList() {
                 <div></div>
               </div>
               <br />
-              {/* {pending && (
+
+              {pending && (
                 <div id="loader">
                   <img src="/images/loader.svg" />
                 </div>
-              )} */}
+              )}
             </div>
             <>
               {displayProducts.map((eventitem) => (
@@ -265,16 +278,23 @@ export default function EventList() {
                   view={view}
                   key={eventitem._id}
                   {...eventitem}
+                  showDeleteModal={showDeleteModalHandler}
                   // onLike={likeClickHandler}
                 />
               ))}
             </>
-            {noData && (
+            {!displayProducts.length && (
               <div>
                 <h3 className="text-primary">
                   <i class="fa-solid fa-circle-info"></i> No data found!
                 </h3>
               </div>
+            )}
+            {showDeleteModal && (
+              <DeleteEvent
+                onDelete={deleteEventHandler}
+                showDeleteModal={showDeleteModalHandler}
+              ></DeleteEvent>
             )}
             {/* <Pagination
               totalEvents={displayProducts.length}

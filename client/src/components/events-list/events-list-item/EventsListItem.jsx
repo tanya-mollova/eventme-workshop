@@ -14,10 +14,12 @@ export default function EventsListItem({
   imageUrl,
   view,
   status,
+  _ownerId,
   showDeleteModal,
 }) {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, email, userId } = useAuth();
 
+  const isOwner = userId === _ownerId;
   return (
     <div
       className={`${styles["event-item"]} ${
@@ -85,7 +87,7 @@ export default function EventsListItem({
           </div> */}
           {/* <br /> */}
           {/* TO DO hide when */}
-          {isAuthenticated && (
+          {isAuthenticated && isOwner && (
             <div className={styles["action-buttons"]}>
               <Link to={`/my-events/${_id}/details`}>
                 <i className="fa-solid fa-eye"></i>

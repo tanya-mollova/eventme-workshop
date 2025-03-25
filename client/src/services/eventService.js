@@ -1,6 +1,6 @@
 import request from "../utils/request";
 
-const baseUrl = "http://localhost:3030/jsonstore/events";
+const baseUrl = "http://localhost:3030/data/events";
 
 export default {
   async getAll() {

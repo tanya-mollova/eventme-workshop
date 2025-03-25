@@ -10,51 +10,68 @@ export const useEvents = () => {
   useEffect(() => {
     const searchParams = new URLSearchParams({
       sortBy: "_createdOn desc",
-      // select: "_id,imageUrl,title,description,address,price",
+      where: "status=true",
     });
     startTransition(() => {
       request.get(`${baseUrl}?${searchParams.toString()}`).then(setEvents);
     });
   }, []);
 
-  return { events };
+  return { events, pending };
 };
 
-export const useEvent = (gameId) => {
-  const [event, setEvent] = useState({});
+export const useEvent = (eventId) => {
+  const [eventData, setEventData] = useState({});
 
   useEffect(() => {
-    request.get(`${baseUrl}/${eventId}`).then(setEvent);
+    request.get(`${baseUrl}/${eventId}`).then(setEventData);
   }, [eventId]);
 
   return {
-    event,
+    eventData,
   };
 };
 
-export const useLatestEvents = () => {
-  const [latestEvents, setLatestEvents] = useState([]);
+export const useHomeEvents = () => {
+  const [homeEvents, setHomeEvents] = useState([]);
   const [pending, startTransition] = useTransition();
   useEffect(() => {
-    const searchParams = new URLSearchParams({
-      sortBy: "_createdOn desc",
-      pageSize: 4,
-      // select: "_id,imageUrl,title,description,address,price",
-    });
     startTransition(() => {
-      request
-        .get(`${baseUrl}?${searchParams.toString()}`)
-        .then(setLatestEvents);
+      const searchParams = new URLSearchParams({
+        sortBy: "_createdOn desc",
+        pageSize: 4,
+        where: "status=true",
+      });
+
+      request.get(`${baseUrl}?${searchParams.toString()}`).then(setHomeEvents);
     });
   }, []);
 
-  return { latestEvents };
+  return { homeEvents, pending };
+};
+export const useMyEvents = () => {
+  const userId = useAuth();
+  const [myEvents, setMyEvents] = useState([]);
+  const [pending, startTransition] = useTransition();
+  useEffect(() => {
+    startTransition(() => {
+      const searchParams = new URLSearchParams({
+        sortBy: "_createdOn desc",
+        where: `_ownerId LIKE "${userId.userId}"`,
+      });
+
+      request.get(`${baseUrl}?${searchParams.toString()}`).then(setMyEvents);
+    });
+  }, []);
+
+  return { myEvents, pending };
 };
 
 export const useCreateEvent = () => {
   const { request } = useAuth();
 
-  const create = (eventData) => request.post(baseUrl, eventData);
+  const create = (eventData) =>
+    request.post(baseUrl, transformEventData(eventData));
 
   return {
     create,
@@ -64,20 +81,28 @@ export const useCreateEvent = () => {
 export const useEditEvent = () => {
   const { request } = useAuth();
 
-  const edit = (eventId, eventData) =>
-    request.put(`${baseUrl}/${eventId}`, { ...eventData, _id: eventId });
+  const edit = (eventId, eventData) => {
+    const postData = transformEventData(eventData);
+    request.put(`${baseUrl}/${eventId}`, { ...postData, _id: eventId });
+  };
 
   return {
     edit,
   };
 };
-
 export const useDeleteEvent = () => {
   const { request } = useAuth();
 
-  const deleteEvent = (eventId) => request.delete(`${baseUrl}/${eventd}`);
+  const deleteEvent = (eventId) => request.delete(`${baseUrl}/${eventId}`);
 
   return {
     deleteEvent,
   };
 };
+function transformEventData(eventData) {
+  const { city, street, streetNumber, category, ...transformedData } =
+    eventData;
+  transformedData.address = { city, street, streetNumber };
+  transformedData.category = category;
+  return transformedData;
+}

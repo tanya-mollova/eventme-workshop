@@ -8,12 +8,14 @@ const baseUrl = "http://localhost:3030/users";
 export const useLogin = () => {
   // const abortRef = useRef(new AbortController());
 
-  const login = async (email, password) =>
-    request.post(
+  const login = async (email, password) => {
+    const response = await request.post(
       `${baseUrl}/login`,
       { email, password }
       // { signal: abortRef.current.signal }
     );
+    return response;
+  };
 
   // useEffect(() => {
   //     const abortController = abortRef.current;
@@ -28,12 +30,14 @@ export const useLogin = () => {
 export const useRegister = () => {
   // const abortRef = useRef(new AbortController());
 
-  const register = async (username, email, password) =>
-    request.post(
+  const register = async (username, email, password) => {
+    const response = await request.post(
       `${baseUrl}/register`,
       { username, email, password }
       // { signal: abortRef.current.signal }
     );
+    return response;
+  };
 
   // useEffect(() => {
   //     const abortController = abortRef.current;

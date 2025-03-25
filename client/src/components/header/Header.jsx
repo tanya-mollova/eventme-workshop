@@ -1,8 +1,7 @@
-import { useState, useContext } from "react";
-import { Link, NavLink, Navigate, useNavigate } from "react-router";
+import { useState } from "react";
+import { Link, NavLink } from "react-router";
 
 import useAuth from "../../hooks/useAuth";
-import { useLogout } from "../../api/authApi";
 
 import Login from "../login/Login";
 import Register from "../register/Register";
@@ -98,7 +97,7 @@ export default function Header() {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <i class="fa-solid fa-circle-user"></i> {username}
+                    <i className="fa-solid fa-circle-user"></i> {username}
                   </NavLink>
                   <ul
                     className="dropdown-menu"
@@ -144,7 +143,6 @@ export default function Header() {
                 showLogin={showLoginForm}
               ></Register>
             )}
-            {/* account btn */}{" "}
           </div>
         </div>
       </nav>

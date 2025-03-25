@@ -18,7 +18,7 @@ import utc from "dayjs/plugin/utc";
 import Stack from "@mui/material/Stack";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import Switch from "@mui/material/Switch";
-
+import { useCreateEvent } from "../../api/eventApi";
 dayjs.extend(utc);
 
 const ITEM_HEIGHT = 48;
@@ -58,7 +58,7 @@ export default function EventCreate() {
     streetNumber: "",
     category: [],
   });
-
+  const { create } = useCreateEvent();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -135,18 +135,16 @@ export default function EventCreate() {
     setErrors(newErrors);
     if (Object.keys(newErrors).length === 0) {
       startTransition(async () => {
-        await eventService.create(formData);
-        startTransition(() => {
-          // <DataGrid {...data} loading />;
-          navigate("/my-events");
-        });
+        await create(formData);
+
+        // <DataGrid {...data} loading />;
+        navigate("/my-events");
       });
     } else {
     }
   };
 
   useEffect(() => {
-    console.log(errors);
     if (Object.keys(errors).length == 0) {
       setErrors({});
     } else {

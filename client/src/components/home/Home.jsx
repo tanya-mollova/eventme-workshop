@@ -1,11 +1,25 @@
 import { Link } from "react-router";
-import { useLatestEvents } from "../../api/eventApi";
+import { useHomeEvents } from "../../api/eventApi";
 
 import Banner from "./banner/Banner";
 import EventsListItem from "../events-list/events-list-item/EventsListItem";
 
 export default function Home() {
-  const { latestEvents, pending } = useLatestEvents();
+  const { homeEvents, pending } = useHomeEvents();
+  // useEffect(() => {
+  //   if (!isGrid) {
+  //     setView("list-view");
+  //   } else {
+  //     setView("grid-view");
+  //   }
+  //   setTimeout(() => {
+  //     setNoData(false);
+  //     if (!pending && !displayProducts.length) {
+  //       setNoData(true);
+  //     } else {
+  //     }
+  //   }, 500);
+  // }, [isGrid, displayProducts]);
   return (
     <>
       <Banner></Banner>
@@ -18,23 +32,24 @@ export default function Home() {
                   events
                 </p>
                 <h1 data-aos="fade-up" data-aos-duration="1000">
-                  Discover upcoming events
+                  Discover upcoming events {pending}
                 </h1>
                 <span> Explore and attend our upcoming events!</span>
               </div>
             </div>
+          </div>
+
+          <div className="row">
+            {homeEvents.map((eventitem) => (
+              <EventsListItem key={eventitem._id} {...eventitem} />
+            ))}
           </div>
           {pending && (
             <div id="loader">
               <img src="/images/loader.svg" />
             </div>
           )}
-          <div className="row">
-            {latestEvents.map((eventitem) => (
-              <EventsListItem key={eventitem._id} {...eventitem} />
-            ))}
-          </div>
-          {!latestEvents.length && (
+          {!homeEvents.length && (
             <div>
               <h3 className="text-primary">
                 <i className="fa-solid fa-circle-info"></i> No data found!

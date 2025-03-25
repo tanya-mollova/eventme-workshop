@@ -14,6 +14,15 @@ export const fromIsoTime = (isoTime) => {
 
   return formattedTime[0];
 };
+export const fromIsoTimeTwo = (isoTime) => {
+  const time = new Date(isoTime).toLocaleTimeString("en", {
+    timeStyle: "short",
+    hour12: false,
+    timeZone: "UTC",
+  });
+
+  return time;
+};
 export const fromIsoDate = (isoDate) => {
   const date = new Date(isoDate);
 
