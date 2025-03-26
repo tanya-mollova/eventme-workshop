@@ -43,7 +43,7 @@ export default function EventsListItem({
                 <span className={styles["event-time"]}>
                   {toShortDate(date)}
                 </span>{" "}
-                <i className="fa-solid fa-clock"></i>
+                -
                 <span className={styles["event-time"]}>
                   {fromIsoTime(time)} h.
                 </span>

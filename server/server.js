@@ -1439,6 +1439,12 @@
         hashedPassword:
           "fac7060c3e17e6f151f247eacb2cd5ae80b8c36aedb8764e18a41bbdc16aa302",
       },
+      "a8e95a15-1a45-4fc8-b93c-727ea6cdc191": {
+        username: "Tanya",
+        email: "tanya@abv.bg",
+        hashedPassword:
+          "fac7060c3e17e6f151f247eacb2cd5ae80b8c36aedb8764e18a41bbdc16aa302",
+      },
     },
     sessions: {},
   };
@@ -1741,7 +1747,7 @@
     },
     events: [
       {
-        _ownerId: "560f6ed0-86c3-4470-90a7-87bc9a80fe94",
+        _ownerId: "a8e95a15-1a45-4fc8-b93c-727ea6cdc191",
         title: "Cookbook Collage Workshop",
         imageUrl:
           "https://events.amny.com/wp-content/uploads/2025/02/File-1298_medium-e1739917123993.png",
@@ -1762,7 +1768,7 @@
         _id: "5fb2bc08-35fb-416d-aa78-8ef81854d968",
       },
       {
-        _ownerId: "560f6ed0-86c3-4470-90a7-87bc9a80fe98",
+        _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
         title: "Aviv Purim Afterparty",
         imageUrl:
           "https://bj.org/wp-content/uploads/2025/02/Aviv-Purim-Happy-Hour.png",
@@ -1783,7 +1789,7 @@
         _id: "a23600f0-7e9e-4453-b5f0-e513cb472734",
       },
       {
-        _ownerId: "560f6ed0-86c3-4470-90a7-87bc9a80fe94",
+        _ownerId: "a8e95a15-1a45-4fc8-b93c-727ea6cdc191",
         title: "AI Image Generators",
         imageUrl:
           "https://149472331.v2.pressablecdn.com/wp-content/uploads/2024/01/ai-image-generators-Adobe-Stock.jpeg",
@@ -1804,7 +1810,7 @@
         _id: "3fc7370d-c075-4271-8aea-6541f735558b",
       },
       {
-        _ownerId: "560f6ed0-86c3-4470-90a7-87bc9a80fe98",
+        _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
         title: "Drop-in Crafternoon",
         imageUrl:
           "https://events.amny.com/wp-content/uploads/2022/11/ny-parenting-liberty-logo-family-brandcolors-placeholder-1.jpg?w=1200&p=q",
@@ -1825,7 +1831,7 @@
         _id: "0cf6a3db-0b18-4c10-83e7-879ca83c958f",
       },
       {
-        _ownerId: "560f6ed0-86c3-4470-90a7-87bc9a80fe98",
+        _ownerId: "a8e95a15-1a45-4fc8-b93c-727ea6cdc191",
         title: "Meditation with Ms. Jean",
         imageUrl:
           "https://149472331.v2.pressablecdn.com/wp-content/uploads/2020/03/meditation.jpg",
@@ -1846,7 +1852,7 @@
         _id: "87d643ec-9bd3-4b5a-8fe4-83d403eeed46",
       },
       {
-        _ownerId: "560f6ed0-86c3-4470-90a7-87bc9a80fe98",
+        _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
         title: "Big East Basketball Tournament - All Session Pass",
         imageUrl: "https://img.vggcdn.net/img/cat/10461/2/1.jpg",
         description: "Ticket listings for Big East Basketball Tournament ",
@@ -1865,7 +1871,7 @@
         _id: "c5ea4a50-c6c8-4fcd-ae49-539cfbe19884",
       },
       {
-        _ownerId: "560f6ed0-86c3-4470-90a7-87bc9a80fe98",
+        _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
         title: "Staying Safe Online",
         imageUrl:
           "https://149472331.v2.pressablecdn.com/wp-content/uploads/2022/10/online-privacy-cybersecurity.jpeg",
@@ -1886,7 +1892,7 @@
         _id: "05aaef7b-b1dd-40bd-9798-ef0b231ab454",
       },
       {
-        _ownerId: "560f6ed0-86c3-4470-90a7-87bc9a80fe98",
+        _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
         title: "Wild & Scenic Film Festival",
         imageUrl:
           "https://images.mapsofworld.com/around-the-world/film-festivals1.jpg",

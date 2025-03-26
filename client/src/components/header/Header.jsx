@@ -97,7 +97,8 @@ export default function Header() {
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
                   >
-                    <i className="fa-solid fa-circle-user"></i> {username}
+                    <i className="fa-solid fa-circle-user text-primary"></i>{" "}
+                    {username}
                   </NavLink>
                   <ul
                     className="dropdown-menu"

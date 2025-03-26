@@ -383,7 +383,14 @@ export default function EventCreate() {
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-4"></div>
+            <div className="col-lg-4">
+              {" "}
+              {pending && (
+                <div id="loader">
+                  <img src="/images/loader.svg" />
+                </div>
+              )}
+            </div>
             <div className="col-lg-4 mb-12 pb-2">
               <input
                 disabled={pending}
@@ -392,6 +399,7 @@ export default function EventCreate() {
                 className="btn btn-primary w-100"
               />
             </div>
+
             <div className="col-lg-4"></div>
           </div>
         </form>

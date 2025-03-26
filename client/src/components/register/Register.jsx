@@ -40,7 +40,7 @@ export default function Register({ showLoginModal, showRegisterModal }) {
         <div className="modal-content">
           <div className="modal-header border-bottom-0">
             <h4 className="modal-title" id="exampleModalLabel">
-              Register
+              <i class="fa-solid fa-id-card text-primary"></i> Register
             </h4>
             <button
               type="button"
@@ -109,9 +109,18 @@ export default function Register({ showLoginModal, showRegisterModal }) {
                 </div>
                 {error && <span className="error-message">{error}</span>}
                 <div className="col-lg-12 mt-4">
-                  <button type="submit" className="btn btn-primary w-100">
+                  <button
+                    type="submit"
+                    className="btn btn-primary w-100"
+                    disabled={isPending ? "disabled" : ""}
+                  >
                     Register
                   </button>
+                  {isPending && (
+                    <div id="loader">
+                      <img src="/images/loader.svg" />
+                    </div>
+                  )}
                   <p className="mt-3">
                     You don't have an account?{" "}
                     <a className="primary-text" onClick={showLoginModal}>

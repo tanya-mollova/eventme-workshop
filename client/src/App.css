@@ -2930,8 +2930,9 @@ fieldset:disabled .btn {
 .btn-primary:disabled,
 .btn-primary.disabled {
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  opacity: 0.5;
+  pointer-events: all;
+  cursor: not-allowed !important;
 }
 
 .btn-secondary {
@@ -9883,6 +9884,9 @@ blockquote::before {
 .homepage_tab {
   z-index: 5;
 }
+.category-devider:last-of-type {
+  display: none;
+}
 @media (max-width: 767px) {
   .homepage_tab {
     overflow: hidden;
@@ -10593,7 +10597,7 @@ nav.shrink .navbar-toggle {
 }
 .section-events {
   background-color: #f7f5f2;
-  padding-bottom:50px;
+  padding-bottom: 50px;
 }
 .social-icons-item {
   transition: all ease-in 0.2s;
@@ -10608,6 +10612,12 @@ nav.shrink .navbar-toggle {
 #section-create,
 #section-details {
   background: #f7f5f2;
+}
+#section-details img {
+  max-height: 400px;
+  width: auto;
+  width: 100%;
+  object-fit: cover;
 }
 #section-details .container {
   padding: 100px 50px;
