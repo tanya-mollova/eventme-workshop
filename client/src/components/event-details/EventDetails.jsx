@@ -124,7 +124,9 @@ export default function EventDetails() {
               <br />
               <hr />
               For more information about this event, contact to{" "}
-              <a href={`mailto:${email}`}>{email}</a>
+              <a href={`mailto:${eventData._ownerEmail}`}>
+                {eventData._ownerEmail}
+              </a>
             </div>
           </div>
         </div>

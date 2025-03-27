@@ -1748,6 +1748,7 @@
     events: [
       {
         _ownerId: "a8e95a15-1a45-4fc8-b93c-727ea6cdc191",
+        _ownerEmail: "tanya@abv.bg",
         title: "Cookbook Collage Workshop",
         imageUrl:
           "https://events.amny.com/wp-content/uploads/2025/02/File-1298_medium-e1739917123993.png",
@@ -1769,6 +1770,7 @@
       },
       {
         _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+        _ownerEmail: "admin@abv.bg",
         title: "Aviv Purim Afterparty",
         imageUrl:
           "https://bj.org/wp-content/uploads/2025/02/Aviv-Purim-Happy-Hour.png",
@@ -1790,6 +1792,7 @@
       },
       {
         _ownerId: "a8e95a15-1a45-4fc8-b93c-727ea6cdc191",
+        _ownerEmail: "tanya@abv.bg",
         title: "AI Image Generators",
         imageUrl:
           "https://149472331.v2.pressablecdn.com/wp-content/uploads/2024/01/ai-image-generators-Adobe-Stock.jpeg",
@@ -1811,6 +1814,7 @@
       },
       {
         _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+        _ownerEmail: "admin@abv.bg",
         title: "Drop-in Crafternoon",
         imageUrl:
           "https://events.amny.com/wp-content/uploads/2022/11/ny-parenting-liberty-logo-family-brandcolors-placeholder-1.jpg?w=1200&p=q",
@@ -1832,6 +1836,7 @@
       },
       {
         _ownerId: "a8e95a15-1a45-4fc8-b93c-727ea6cdc191",
+        _ownerEmail: "tanya@abv.bg",
         title: "Meditation with Ms. Jean",
         imageUrl:
           "https://149472331.v2.pressablecdn.com/wp-content/uploads/2020/03/meditation.jpg",
@@ -1853,6 +1858,7 @@
       },
       {
         _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+        _ownerEmail: "admin@abv.bg",
         title: "Big East Basketball Tournament - All Session Pass",
         imageUrl: "https://img.vggcdn.net/img/cat/10461/2/1.jpg",
         description: "Ticket listings for Big East Basketball Tournament ",
@@ -1872,6 +1878,7 @@
       },
       {
         _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+        _ownerEmail: "admin@abv.bg",
         title: "Staying Safe Online",
         imageUrl:
           "https://149472331.v2.pressablecdn.com/wp-content/uploads/2022/10/online-privacy-cybersecurity.jpeg",
@@ -1893,6 +1900,7 @@
       },
       {
         _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+        _ownerEmail: "admin@abv.bg",
         title: "Wild & Scenic Film Festival",
         imageUrl:
           "https://images.mapsofworld.com/around-the-world/film-festivals1.jpg",

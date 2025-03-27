@@ -49,6 +49,7 @@ export const useHomeEvents = () => {
 
   return { homeEvents, pending };
 };
+
 export const useMyEvents = () => {
   const userId = useAuth();
   const [myEvents, setMyEvents] = useState([]);
@@ -69,7 +70,6 @@ export const useMyEvents = () => {
 
 export const useCreateEvent = () => {
   const { request } = useAuth();
-
   const create = (eventData) =>
     request.post(baseUrl, transformEventData(eventData));
 
@@ -80,7 +80,6 @@ export const useCreateEvent = () => {
 
 export const useEditEvent = () => {
   const { request } = useAuth();
-
   const edit = (eventId, eventData) => {
     const postData = transformEventData(eventData);
     request.put(`${baseUrl}/${eventId}`, { ...postData, _id: eventId });
@@ -90,15 +89,16 @@ export const useEditEvent = () => {
     edit,
   };
 };
+
 export const useDeleteEvent = () => {
   const { request } = useAuth();
-
   const deleteEvent = (eventId) => request.delete(`${baseUrl}/${eventId}`);
 
   return {
     deleteEvent,
   };
 };
+
 function transformEventData(eventData) {
   const { city, street, streetNumber, category, ...transformedData } =
     eventData;

@@ -1,6 +1,7 @@
 import { useState, useEffect, useTransition } from "react";
 import { useNavigate } from "react-router";
 
+import useAuth from "../../hooks/useAuth";
 import { fromIsoDate } from "../../utils/dateTime";
 import { useCreateEvent } from "../../api/eventApi";
 
@@ -46,8 +47,10 @@ export default function EventCreate() {
   const [pending, startTransition] = useTransition();
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
+  const { email } = useAuth();
 
   const [formData, setFormData] = useState({
+    _ownerEmail: email,
     title: "",
     imageUrl: "",
     description: "",

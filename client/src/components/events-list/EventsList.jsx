@@ -1,11 +1,10 @@
 import { useEffect, useState, useTransition, useContext } from "react";
 import { useNavigate } from "react-router";
+
 import { useEvents, useDeleteEvent } from "../../api/eventApi";
-import { fromIsoDate } from "../../utils/dateTime";
 import DeleteEvent from "../event-delete/EventDelete";
 import EventsListItem from "../events-list/events-list-item/EventsListItem";
 import Pagination from "../pagination/Pagination";
-import { LikeContext } from "./../../contexts/LikeContext";
 import "../../App";
 
 export default function EventList() {
@@ -13,24 +12,20 @@ export default function EventList() {
   const [view, setView] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [eventsPerPage, setEventsPerPage] = useState(8);
-  // const [searchParams, setSearchParams] = useSearchParams();
   const [eventId, setEventId] = useState(null);
   const [searchCategory, setSearchCategory] = useState("All");
   const [searchCity, setSearchCity] = useState("All");
   const lastPostIndex = currentPage * eventsPerPage;
   const firstPostIndex = lastPostIndex - eventsPerPage;
-  // const [events, setevents] = useState([]);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { events, pending } = useEvents();
   const navigate = useNavigate();
-  const [displayProducts, setDisplayProducts] = useState([]);
+  const [displayEvents, setDisplayEvents] = useState([]);
   const [IsPending, startTransition] = useTransition();
-  // const { likeStatusHandler } = useContext(LikeContext);
-  // const [likeStatus, setLikeStatus] = useState({ child1: "", child2: "" });
   const { deleteEvent } = useDeleteEvent();
 
   useEffect(() => {
-    setDisplayProducts(events);
+    setDisplayEvents(events);
   }, [events]);
 
   const showDeleteModalHandler = (id) => {
@@ -40,7 +35,7 @@ export default function EventList() {
 
   const deleteEventHandler = async () => {
     await deleteEvent(eventId);
-    setDisplayProducts((oldstate) =>
+    setDisplayEvents((oldstate) =>
       oldstate.filter((event) => event._id !== eventId)
     );
     setShowDeleteModal(false);
@@ -53,7 +48,7 @@ export default function EventList() {
     }
   }, [isGrid]);
 
-  const currentEvents = displayProducts.slice(firstPostIndex, lastPostIndex);
+  const currentEvents = displayEvents.slice(firstPostIndex, lastPostIndex);
   const changeViewHandler = (event) => {
     event.preventDefault();
     setIsGrid((isGrid) => !isGrid);
@@ -70,13 +65,13 @@ export default function EventList() {
       setSearchCategory(filterItemValue);
       navigate(`?category=${filterItemValue}&city=${searchCity}`);
       if (searchCity == null || searchCity == "All") {
-        setDisplayProducts(
+        setDisplayEvents(
           [...events].filter((item) => item.category.includes(filterItemValue))
         );
       } else if (filterItemValue === "All") {
-        setDisplayProducts(...events);
+        setDisplayEvents(...events);
       } else {
-        setDisplayProducts(
+        setDisplayEvents(
           [...events].filter(
             (item) =>
               item.category.includes(filterItemValue) &&
@@ -85,24 +80,24 @@ export default function EventList() {
         );
       }
       if (filterItemValue === "All") {
-        setDisplayProducts(
+        setDisplayEvents(
           [...events].filter((item) => item.address.city.includes(searchCity))
         );
       }
       if (filterItemValue === "All" && searchCity == "All") {
-        setDisplayProducts([...events]);
+        setDisplayEvents([...events]);
       }
     } else if (filterBy == "city") {
       setSearchCity(filterItemValue);
       navigate(`?category=${searchCategory}&city=${filterItemValue}`);
       if (searchCategory == null || searchCategory == "All") {
-        setDisplayProducts(
+        setDisplayEvents(
           [...events].filter((item) =>
             item.address.city.includes(filterItemValue)
           )
         );
       } else {
-        setDisplayProducts(
+        setDisplayEvents(
           [...events].filter(
             (item) =>
               item.address.city.includes(filterItemValue) &&
@@ -111,32 +106,32 @@ export default function EventList() {
         );
       }
       if (filterItemValue === "All") {
-        setDisplayProducts(
+        setDisplayEvents(
           [...events].filter((item) => item.category.includes(searchCategory))
         );
       }
       if (filterItemValue === "All" && searchCategory == "All") {
-        setDisplayProducts([...events]);
+        setDisplayEvents([...events]);
       }
     } else if (filterBy == "date") {
       if (filterItemValue.includes("asc")) {
         const sortedItems = () =>
-          [...displayProducts].sort(
+          [...displayEvents].sort(
             (a, b) => new Date(a.date) - new Date(b.date)
           );
-        setDisplayProducts(sortedItems);
+        setDisplayEvents(sortedItems);
       } else if (filterItemValue.includes("desc")) {
         const sortedItems = () =>
-          [...displayProducts].sort(
+          [...displayEvents].sort(
             (a, b) => new Date(b.date) - new Date(a.date)
           );
-        setDisplayProducts(sortedItems);
+        setDisplayEvents(sortedItems);
       } else {
         const sortedItems = () =>
-          [...displayProducts].sort(
+          [...displayEvents].sort(
             (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
           );
-        setDisplayProducts(sortedItems);
+        setDisplayEvents(sortedItems);
       }
     }
   };
@@ -268,7 +263,7 @@ export default function EventList() {
               ></DeleteEvent>
             )}
             <Pagination
-              totalEvents={displayProducts.length}
+              totalEvents={displayEvents.length}
               eventsPerPage={eventsPerPage}
               showCurrentPage={currentPageClickHandler}
               currentPage={currentPage}

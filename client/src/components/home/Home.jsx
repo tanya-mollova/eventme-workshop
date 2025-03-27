@@ -47,7 +47,6 @@ export default function Home() {
                   <div className="col-md-6 homepage-events" key={eventitem._id}>
                     <Link to={`/events/${eventitem._id}/details`}>
                       <div>
-                        {/* <div className="icon rounded-number">01</div> */}
                         <div className="img-box">
                           <img
                             src={eventitem.imageUrl}

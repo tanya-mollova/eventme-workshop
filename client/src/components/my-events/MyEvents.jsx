@@ -1,5 +1,5 @@
-import { useEffect, useState, useTransition } from "react";
-import { useSearchParams, Link, useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router";
 
 import { useMyEvents, useDeleteEvent } from "../../api/eventApi";
 
@@ -13,23 +13,22 @@ export default function EventList() {
   const [view, setView] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [eventsPerPage, setEventsPerPage] = useState(8);
-  const [searchParams, setSearchParams] = useSearchParams();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [eventId, setEventId] = useState(null);
   const [searchCategory, setSearchCategory] = useState("All");
   const [searchCity, setSearchCity] = useState("All");
   const lastPostIndex = currentPage * eventsPerPage;
   const firstPostIndex = lastPostIndex - eventsPerPage;
-  const [eventitems, setEventItems] = useState([]);
-  const [displayProducts, setDisplayProducts] = useState([]);
+  const [displayEvents, setDisplayEvents] = useState([]);
   const navigate = useNavigate();
   const { myEvents, pending } = useMyEvents();
   const { deleteEvent } = useDeleteEvent();
 
   useEffect(() => {
-    setDisplayProducts(myEvents);
+    setDisplayEvents(myEvents);
   }, [myEvents]);
 
+  // console.log(oldEvent);
   useEffect(() => {
     if (!isGrid) {
       setView("list-view");
@@ -38,7 +37,7 @@ export default function EventList() {
     }
   }, [isGrid]);
 
-  const currentEvents = displayProducts.slice(firstPostIndex, lastPostIndex);
+  const currentEvents = displayEvents.slice(firstPostIndex, lastPostIndex);
   const changeViewHandler = (event) => {
     event.preventDefault();
     setIsGrid((isGrid) => !isGrid);
@@ -54,7 +53,7 @@ export default function EventList() {
 
   const deleteEventHandler = async () => {
     await deleteEvent(eventId);
-    setDisplayProducts((oldstate) =>
+    setDisplayEvents((oldstate) =>
       oldstate.filter((event) => event._id !== eventId)
     );
     setShowDeleteModal(false);
@@ -67,15 +66,15 @@ export default function EventList() {
       setSearchCategory(filterItemValue);
       navigate(`?category=${filterItemValue}&city=${searchCity}`);
       if (searchCity == null || searchCity == "All") {
-        setDisplayProducts(
+        setDisplayEvents(
           [...myEvents].filter((item) =>
             item.category.includes(filterItemValue)
           )
         );
       } else if (filterItemValue === "All") {
-        setDisplayProducts(...myEvents);
+        setDisplayEvents(...myEvents);
       } else {
-        setDisplayProducts(
+        setDisplayEvents(
           [...myEvents].filter(
             (item) =>
               item.category.includes(filterItemValue) &&
@@ -84,24 +83,24 @@ export default function EventList() {
         );
       }
       if (filterItemValue === "All") {
-        setDisplayProducts(
+        setDisplayEvents(
           [...myEvents].filter((item) => item.address.city.includes(searchCity))
         );
       }
       if (filterItemValue === "All" && searchCity == "All") {
-        setDisplayProducts([...myEvents]);
+        setDisplayEvents([...myEvents]);
       }
     } else if (filterBy == "city") {
       setSearchCity(filterItemValue);
       navigate(`?category=${searchCategory}&city=${filterItemValue}`);
       if (searchCategory == null || searchCategory == "All") {
-        setDisplayProducts(
+        setDisplayEvents(
           [...myEvents].filter((item) =>
             item.address.city.includes(filterItemValue)
           )
         );
       } else {
-        setDisplayProducts(
+        setDisplayEvents(
           [...myEvents].filter(
             (item) =>
               item.address.city.includes(filterItemValue) &&
@@ -110,32 +109,32 @@ export default function EventList() {
         );
       }
       if (filterItemValue === "All") {
-        setDisplayProducts(
+        setDisplayEvents(
           [...myEvents].filter((item) => item.category.includes(searchCategory))
         );
       }
       if (filterItemValue === "All" && searchCategory == "All") {
-        setDisplayProducts([...myEvents]);
+        setDisplayEvents([...myEvents]);
       }
     } else if (filterBy == "date") {
       if (filterItemValue.includes("asc")) {
         const sortedItems = () =>
-          [...displayProducts].sort(
+          [...displayEvents].sort(
             (a, b) => new Date(a.date) - new Date(b.date)
           );
-        setDisplayProducts(sortedItems);
+        setDisplayEvents(sortedItems);
       } else if (filterItemValue.includes("desc")) {
         const sortedItems = () =>
-          [...displayProducts].sort(
+          [...displayEvents].sort(
             (a, b) => new Date(b.date) - new Date(a.date)
           );
-        setDisplayProducts(sortedItems);
+        setDisplayEvents(sortedItems);
       } else {
         const sortedItems = () =>
-          [...displayProducts].sort(
+          [...displayEvents].sort(
             (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
           );
-        setDisplayProducts(sortedItems);
+        setDisplayEvents(sortedItems);
       }
     }
   };
@@ -271,7 +270,7 @@ export default function EventList() {
               </div>
             )}
             <Pagination
-              totalEvents={displayProducts.length}
+              totalEvents={displayEvents.length}
               eventsPerPage={eventsPerPage}
               showCurrentPage={currentPageClickHandler}
               currentPage={currentPage}
