@@ -250,14 +250,13 @@ export default function EventList() {
                   key={eventitem._id}
                   {...eventitem}
                   showDeleteModal={showDeleteModalHandler}
-                  // onLike={likeClickHandler}
                 />
               ))}
             </>
             {!currentEvents.length && (
               <div>
                 <h3 className="text-primary">
-                  <i class="fa-solid fa-circle-info"></i> No data found!
+                  <i className="fa-solid fa-circle-info"></i> No data found!
                 </h3>
               </div>
             )}

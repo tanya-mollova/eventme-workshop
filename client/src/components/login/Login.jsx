@@ -32,11 +32,11 @@ export default function Login({ showLoginModal, showRegisterModal }) {
         <div className="modal-content">
           <div className="modal-header border-bottom-0">
             <h4 className="modal-title" id="exampleModalLabel">
-              <i class="fa-solid fa-door-open text-primary"></i> Login
+              <i className="fa-solid fa-door-open text-primary"></i> Login
             </h4>
             <button
               type="button"
-              class="btn-close"
+              className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
               onClick={showLoginModal}

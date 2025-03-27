@@ -40,11 +40,11 @@ export default function Register({ showLoginModal, showRegisterModal }) {
         <div className="modal-content">
           <div className="modal-header border-bottom-0">
             <h4 className="modal-title" id="exampleModalLabel">
-              <i class="fa-solid fa-id-card text-primary"></i> Register
+              <i className="fa-solid fa-id-card text-primary"></i> Register
             </h4>
             <button
               type="button"
-              class="btn-close"
+              className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
               onClick={showRegisterModal}

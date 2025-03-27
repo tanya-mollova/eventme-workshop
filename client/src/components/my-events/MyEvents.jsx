@@ -258,7 +258,6 @@ export default function EventList() {
                   view={view}
                   key={eventitem._id}
                   {...eventitem}
-                  // changeStatus={changeStatus}
                   deleteEvent={deleteEventHandler}
                   showDeleteModal={showDeleteModalHandler}
                 />
@@ -267,7 +266,7 @@ export default function EventList() {
             {!currentEvents.length && (
               <div>
                 <h3 className="text-primary">
-                  <i class="fa-solid fa-circle-info"></i> No data found!
+                  <i className="fa-solid fa-circle-info"></i> No data found!
                 </h3>
               </div>
             )}

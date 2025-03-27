@@ -1,18 +1,28 @@
-import { useState } from "react";
+import { useState, useOptimistic } from "react";
 import { useParams, Link, useNavigate } from "react-router";
 
 import { toShortDate, fromIsoTimeTwo } from "../../utils/dateTime";
 import { useEvent, useDeleteEvent } from "../../api/eventApi";
 import DeleteEvent from "../event-delete/EventDelete";
 import CommentCreate from "../comment-create/CommentCreate";
+import CommentsShow from "../comments-show/CommentsShow";
 import useAuth from "../../hooks/useAuth";
+import { useCreateComment, useComments } from "../../api/commentApi";
+import { v4 as uuid } from "uuid";
 
-export default function SingleEvent() {
-  const { email, userId } = useAuth();
+export default function EventDetails() {
+  const { email, userId, username, isAuthenticated } = useAuth();
   const { eventId } = useParams();
   const { eventData } = useEvent(eventId);
   const { deleteEvent } = useDeleteEvent();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const { comments, addComment } = useComments(eventId);
+  const { create } = useCreateComment();
+  const [optComments, setOptComments] = useOptimistic(
+    comments,
+    (state, newComment) => [...state, newComment]
+  );
+  const [error, setError] = useState();
   const isOwner = userId === eventData._ownerId;
   const navigate = useNavigate();
 
@@ -25,13 +35,36 @@ export default function SingleEvent() {
     setShowDeleteModal(false);
     navigate("/my-events");
   };
+  const createCommentHandler = async (formData) => {
+    const comment = formData.get("comment");
+    if (!comment.trim()) {
+      setError(true);
+      return;
+    }
+    setError(false);
+
+    const newComment = {
+      _id: uuid(),
+      _ownerId: userId,
+      eventId,
+      comment,
+      pending: true,
+      author: {
+        username,
+      },
+    };
+
+    setOptComments(newComment);
+    const result = await create(eventId, comment);
+    addComment({ ...result, author: { username } });
+  };
+
   return (
     <section className="section-sm" id="section-details">
       <div className="container bg-white shadow">
         <div className="row g-5">
           <div className="col-lg-12">
             <div className="content">
-              {[eventData.category]}
               <h1 className="text-primary">{eventData.title}</h1>
               <div>
                 <img src={eventData.imageUrl} alt={eventData.title}></img>
@@ -40,24 +73,55 @@ export default function SingleEvent() {
                 <span className="text-primary display-5">
                   {toShortDate(eventData.date)}{" "}
                 </span>
-                <br></br>
-                <br></br>
-                <i class="fa-solid fa-clock"></i>{" "}
+                <div className="empty-space"></div>
+                <i className="fa-solid fa-clock"></i>{" "}
                 {fromIsoTimeTwo(eventData.time)} h.
               </h3>
               <span>
                 <b>Category:</b>{" "}
               </span>
-              {[eventData.category].map((item) => (
-                <span className="text-primary" key={item}>
+              {/* {[eventData.category].map((item) => (
+                <span className="text-primary" key={item.}>
                   {item}
                   <span className="category-devider"> , </span>
                 </span>
-              ))}
-              <br />
-              <br />
+              ))} */}
+              <div className="empty-space"></div>
               <p>{eventData.description}</p>
-              <CommentCreate></CommentCreate>
+              <div className="empty-space"></div>
+              <div className="row align-items-center">
+                <div className="col-md-6">
+                  {" "}
+                  <CommentsShow comments={comments}></CommentsShow>
+                </div>
+
+                <div className="col-md-6">
+                  {isAuthenticated && (
+                    <CommentCreate
+                      username={username}
+                      eventId={eventId}
+                      createComment={createCommentHandler}
+                      pending={comments.pending}
+                    ></CommentCreate>
+                  )}
+                  {!isAuthenticated && (
+                    <img width={160} src="/images/comment.png" alt="EventMe" />
+                  )}
+                  {error && (
+                    <span className="error-message">
+                      You need to write a comment first!
+                    </span>
+                  )}
+                </div>
+
+                {!isAuthenticated && (
+                  <p className="m-4">
+                    You want to add a comment? You need to Log In first!
+                  </p>
+                )}
+              </div>
+              <br />
+              <br />
               <hr />
               For more information about this event, contact to{" "}
               <a href={`mailto:${email}`}>{email}</a>
@@ -73,7 +137,7 @@ export default function SingleEvent() {
             >
               <span>Edit </span>
               <span>
-                <i class="fa-solid fa-pen-to-square"></i>
+                <i className="fa-solid fa-pen-to-square"></i>
               </span>
             </Link>
             <Link
@@ -83,7 +147,7 @@ export default function SingleEvent() {
             >
               <span>Delete </span>
               <span>
-                <i class="fa-solid fa-trash"></i>
+                <i className="fa-solid fa-trash"></i>
               </span>
             </Link>
           </div>

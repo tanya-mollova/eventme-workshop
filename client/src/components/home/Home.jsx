@@ -1,8 +1,8 @@
 import { Link } from "react-router";
+
 import { useHomeEvents } from "../../api/eventApi";
 import { toShortDate, fromIsoTime } from "../../utils/dateTime";
 import Banner from "./banner/Banner";
-import EventsListItem from "../events-list/events-list-item/EventsListItem";
 
 export default function Home() {
   const { homeEvents, pending } = useHomeEvents();
@@ -43,13 +43,8 @@ export default function Home() {
                     </h3>
                   </div>
                 )}
-                {/* <div className="row">
-                  {homeEvents.map((eventitem) => (
-                    <EventsListItem key={eventitem._id} {...eventitem} />
-                  ))}
-                </div> */}
                 {homeEvents.map((eventitem) => (
-                  <div className="col-md-6 homepage-events">
+                  <div className="col-md-6 homepage-events" key={eventitem._id}>
                     <Link to={`/events/${eventitem._id}/details`}>
                       <div>
                         {/* <div className="icon rounded-number">01</div> */}
