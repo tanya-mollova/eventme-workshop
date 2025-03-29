@@ -1,8 +1,8 @@
-import { useState, useOptimistic } from "react";
+import { useState, useOptimistic, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router";
 
 import { toShortDate, fromIsoTimeTwo } from "../../utils/dateTime";
-import { useEvent, useDeleteEvent } from "../../api/eventApi";
+import { useEvent, useDeleteEvent, useEditEvent } from "../../api/eventApi";
 import DeleteEvent from "../event-delete/EventDelete";
 import CommentCreate from "../comment-create/CommentCreate";
 import CommentsShow from "../comments-show/CommentsShow";
@@ -15,6 +15,7 @@ export default function EventDetails() {
   const { eventId } = useParams();
   const { eventData } = useEvent(eventId);
   const { deleteEvent } = useDeleteEvent();
+  const { edit } = useEditEvent();
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const { comments, addComment } = useComments(eventId);
   const { create } = useCreateComment();
@@ -25,11 +26,13 @@ export default function EventDetails() {
   const [error, setError] = useState();
   const isOwner = userId === eventData._ownerId;
   const navigate = useNavigate();
-
+  const [displayEvent, setDisplayEvent] = useState({});
   const showDeleteModalHandler = () => {
     setShowDeleteModal((showDeleteModal) => !showDeleteModal);
   };
-
+  useEffect(() => {
+    setDisplayEvent(eventData);
+  }, [eventData]);
   const deleteEventHandler = async () => {
     await deleteEvent(eventId);
     setShowDeleteModal(false);
@@ -65,17 +68,17 @@ export default function EventDetails() {
         <div className="row g-5">
           <div className="col-lg-12">
             <div className="content">
-              <h1 className="text-primary">{eventData.title}</h1>
+              <h1 className="text-primary">{displayEvent.title}</h1>
               <div>
-                <img src={eventData.imageUrl} alt={eventData.title}></img>
+                <img src={displayEvent.imageUrl} alt={displayEvent.title}></img>
               </div>
               <h3 id="">
                 <span className="text-primary display-5">
-                  {toShortDate(eventData.date)}{" "}
+                  {toShortDate(displayEvent.date)}{" "}
                 </span>
                 <div className="empty-space"></div>
                 <i className="fa-solid fa-clock"></i>{" "}
-                {fromIsoTimeTwo(eventData.time)} h.
+                {fromIsoTimeTwo(displayEvent.time)} h.
               </h3>
               <span>
                 <b>Category:</b>{" "}
@@ -87,7 +90,7 @@ export default function EventDetails() {
                 </span>
               ))} */}
               <div className="empty-space"></div>
-              <p>{eventData.description}</p>
+              <p>{displayEvent.description}</p>
               <div className="empty-space"></div>
               <div className="row align-items-center">
                 <div className="col-md-6">
@@ -116,7 +119,7 @@ export default function EventDetails() {
 
                 {!isAuthenticated && (
                   <p className="m-4">
-                    You want to add a comment? You need to Log In first!
+                    Want to add a comment? You need to Log In first!
                   </p>
                 )}
               </div>
@@ -124,8 +127,8 @@ export default function EventDetails() {
               <br />
               <hr />
               For more information about this event, contact to{" "}
-              <a href={`mailto:${eventData._ownerEmail}`}>
-                {eventData._ownerEmail}
+              <a href={`mailto:${displayEvent._ownerEmail}`}>
+                {displayEvent._ownerEmail}
               </a>
             </div>
           </div>
