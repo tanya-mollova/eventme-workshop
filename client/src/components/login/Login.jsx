@@ -12,14 +12,14 @@ export default function Login({ showLoginModal, showRegisterModal }) {
 
   const loginHandler = async (_, formData) => {
     const values = Object.fromEntries(formData);
-    const authData = await login(values.email, values.password);
-    if (authData.code == "403") {
-      setError(authData.message);
-      return;
+    try {
+      const authData = await login(values.email, values.password);
+      userLoginHandler(authData);
+      navigate("/my-events");
+      showLoginModal(false);
+    } catch (err) {
+      setError(err.message);
     }
-    userLoginHandler(authData);
-    navigate("/my-events");
-    showLoginModal(false);
   };
 
   const [_, loginAction, isPending] = useActionState(loginHandler, {

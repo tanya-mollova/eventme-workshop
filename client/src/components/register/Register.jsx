@@ -19,14 +19,15 @@ export default function Register({ showLoginModal, showRegisterModal }) {
       setError("Password missmatch");
       return;
     }
-    const authData = await register(username, email, password);
-    if (authData.code == "403" || authData.code == "409") {
-      setError(authData.message);
-      return;
+
+    try {
+      const authData = await register(username, email, password);
+      userLoginHandler(authData);
+      showRegisterModal(false);
+      navigate("/events");
+    } catch (err) {
+      setError(err.message);
     }
-    userLoginHandler(authData);
-    showRegisterModal(false);
-    navigate("/events");
   };
 
   const [_, registerAction, isPending] = useActionState(registerHandler, {

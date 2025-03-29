@@ -12,6 +12,7 @@ export const useLogin = () => {
     });
     return response;
   };
+
   return {
     login,
   };
@@ -19,11 +20,11 @@ export const useLogin = () => {
 
 export const useRegister = () => {
   const register = async (username, email, password) => {
-    const response = await request.post(
-      `${baseUrl}/register`,
-      { username, email, password }
-      // { signal: abortRef.current.signal }
-    );
+    const response = await request.post(`${baseUrl}/register`, {
+      username,
+      email,
+      password,
+    });
     return response;
   };
 
@@ -31,6 +32,7 @@ export const useRegister = () => {
     register,
   };
 };
+
 export const useLogout = () => {
   const { accessToken, userLogoutHandler } = useContext(UserContext);
 
@@ -38,14 +40,12 @@ export const useLogout = () => {
     if (!accessToken) {
       return;
     }
-
     const options = {
       headers: {
         "X-Authorization": accessToken,
       },
     };
-
-    request.get(`${baseUrl}/logout`, null, options).then(userLogoutHandler);
+    request.get(`${baseUrl}/logout`, null, options).finally(userLogoutHandler);
   }, [accessToken, userLogoutHandler]);
 
   return {
