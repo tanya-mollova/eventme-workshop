@@ -35,7 +35,7 @@ export default function EventsListItem({
           </Link>
           <div className={styles["event-info"]}>
             <div className={styles["event-meta"]}>
-              <Link className="text-black" to={`/events/${_id}/details`}>
+              <Link className="text-black" to={`/all-events/${_id}/details`}>
                 <h3 className={`${styles["event-title"]}`}>{title}</h3>
               </Link>
               <div className={styles["event-date-time"]}>

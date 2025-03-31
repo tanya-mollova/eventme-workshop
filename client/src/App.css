@@ -4749,27 +4749,6 @@ fieldset:disabled .btn {
   transition: transform 0.3s ease-out;
   transform: translate(0, -50px);
 }
-.comments-wrapper {
-  scrollbar-width: none;
-  overflow: hidden;
-}
-.comments-box {
-  height: 400px;
-  max-height: 400px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  padding: 20px;
-}
-.comment-item {
-  padding: 5px 10px;
-  text-align: left;
-  background-color: #f5f3f0;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
-.comment-item p {
-  margin-bottom: 0 !important;
-}
 
 @media (prefers-reduced-motion: reduce) {
   .modal.fade .modal-dialog {
@@ -10655,7 +10634,10 @@ nav.shrink .navbar-toggle {
 #section-details .container {
   padding: 100px 50px;
 }
-#home ._action-buttons_1ik26_281 {
+#section-details div[class^="_comment-item"] input[type="button"] {
+  display: none;
+}
+#home div[class^="_action-buttons"] {
   display: none;
 }
 .add-comment-top {

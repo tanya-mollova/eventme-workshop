@@ -1,0 +1,38 @@
+.comments-wrapper {
+  scrollbar-width: none;
+  overflow: hidden;
+}
+.comments-box {
+  height: 400px;
+  max-height: 400px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px;
+}
+.comment-item {
+  padding: 5px 10px;
+  text-align: left;
+  background-color: #f5f3f0;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  position: relative;
+}
+.comment-item p {
+  margin-bottom: 0 !important;
+}
+.comment-item input[type="button"] {
+  position: absolute;
+  top: 0px;
+  right: 5px;
+  background: none;
+  border: none;
+  padding: 10px;
+  font-weight: 900;
+}
+.comment-item input[type="button"]:hover {
+  border: none;
+  outline: none;
+  color: #f05537;
+  border: none;
+}
+

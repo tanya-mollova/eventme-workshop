@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
 
+import styles from "./assets/ComentsShow.module.css";
 import { useDeleteComment } from "../../api/commentApi";
 import useAuth from "../../hooks/useAuth";
 import CommentDelete from "../comment-delete/CommentDelete";
@@ -36,21 +37,25 @@ export default function CommentShow({ comments }) {
   };
 
   return (
-    <div className="comments-wrapper">
+    <div className={styles["comments-wrapper"]}>
       <h4>Comments:</h4>
-      <div className="comments-box">
+      <div className={styles["comments-box"]}>
         {displayComments?.length > 0 ? (
           displayComments.map(({ _id, comment, pending, author }) => (
             <div
               key={_id}
-              className="comment-item"
+              className={styles["comment-item"]}
               style={{ backgroundColor: pending ? "#dedede" : "" }}
             >
               <p data-testid="test-comment">
                 <i className="fa-solid fa-quote-left text-primary"></i>{" "}
                 {author.username}: {comment}
               </p>{" "}
-              <button onClick={() => showDeleteCommentHandler(_id)}>X</button>
+              <input
+                type="button"
+                onClick={() => showDeleteCommentHandler(_id)}
+                value="X"
+              />
             </div>
           ))
         ) : (
