@@ -25,6 +25,19 @@ export const useComments = (eventId) => {
   };
 };
 
+export const useDeleteComment = () => {
+  const { request } = useAuth();
+  const deleteComment = (commentId) =>
+    request.delete(`${baseUrl}/${commentId}`, null, {
+      headers: {
+        "X-admin": "x-admin",
+      },
+    });
+
+  return {
+    deleteComment,
+  };
+};
 export const useCreateComment = () => {
   const { request } = useAuth();
 

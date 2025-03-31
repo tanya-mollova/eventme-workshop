@@ -33,6 +33,7 @@ export default function EventDetails() {
   useEffect(() => {
     setDisplayEvent(eventData);
   }, [eventData]);
+
   const deleteEventHandler = async () => {
     await deleteEvent(eventId);
     setShowDeleteModal(false);

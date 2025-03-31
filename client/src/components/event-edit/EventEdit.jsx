@@ -21,6 +21,8 @@ import timezone from "dayjs/plugin/timezone";
 import Stack from "@mui/material/Stack";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import Switch from "@mui/material/Switch";
+import { useComments } from "../../api/commentApi";
+import CommentsShow from "../comments-show/CommentsShow";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -52,6 +54,8 @@ export default function EventCreate() {
   const navigate = useNavigate();
   const { eventId } = useParams();
   const { edit } = useEditEvent();
+  const { comments, addComment } = useComments(eventId);
+  const [displayComents, setDisplayComents] = useState();
 
   const [eventData, setEventData] = useState({
     title: "",
@@ -189,7 +193,7 @@ export default function EventCreate() {
   return (
     <section className="section" id="section-edit">
       <div className="section-title">
-        <h2 className="h1 mb-4 mt-4">Edit Event</h2>
+        <h2 className="h1 mb-4 mt-4">Edit Event {eventData.title}</h2>
       </div>
       <div className="container shadow rounded p-5 bg-white">
         <form action={submitAction} id="create">
@@ -416,6 +420,8 @@ export default function EventCreate() {
             <div className="col-lg-4"></div>
           </div>
         </form>
+        <br /> <br /> <br />
+        <CommentsShow comments={comments}></CommentsShow>
       </div>
     </section>
   );
