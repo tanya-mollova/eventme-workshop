@@ -10,7 +10,7 @@ export default function CommentShow({ comments }) {
               className="comment-item"
               style={{ backgroundColor: pending ? "#dedede" : "" }}
             >
-              <p>
+              <p data-testid="test-comment">
                 <i className="fa-solid fa-quote-left text-primary"></i>{" "}
                 {author.username}: {comment}
               </p>
