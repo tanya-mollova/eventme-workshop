@@ -17,7 +17,9 @@ export default function CommentShow({ comments }) {
             </div>
           ))
         ) : (
-          <p className="text-primary">No comments.</p>
+          <p className="text-primary">
+            <i className="fa-solid fa-circle-info"></i> No comments!
+          </p>
         )}
       </div>
     </div>

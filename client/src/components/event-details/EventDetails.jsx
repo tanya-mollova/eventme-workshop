@@ -36,7 +36,7 @@ export default function EventDetails() {
   const deleteEventHandler = async () => {
     await deleteEvent(eventId);
     setShowDeleteModal(false);
-    navigate("/my-events");
+    navigate(-1);
   };
   const createCommentHandler = async (formData) => {
     const comment = formData.get("comment");
@@ -80,24 +80,18 @@ export default function EventDetails() {
                 <i className="fa-solid fa-clock"></i>{" "}
                 {fromIsoTimeTwo(displayEvent.time)} h.
               </h3>
-              <span>
+              <p className="d-inline">
                 <b>Category:</b>{" "}
-              </span>
-              {/* {[eventData.category].map((item) => (
-                <span className="text-primary" key={item.}>
-                  {item}
-                  <span className="category-devider"> , </span>
+              </p>
+              {eventData.category?.map((item) => (
+                <span key={item} className="colored-box">
+                  {item}{" "}
                 </span>
-              ))} */}
+              ))}
               <div className="empty-space"></div>
-              <p>{displayEvent.description}</p>
+              <p className="text-justify">{displayEvent.description}</p>
               <div className="empty-space"></div>
-              <div className="row align-items-center">
-                <div className="col-md-6">
-                  {" "}
-                  <CommentsShow comments={comments}></CommentsShow>
-                </div>
-
+              <div className="row">
                 <div className="col-md-6">
                   {isAuthenticated && (
                     <CommentCreate
@@ -105,16 +99,26 @@ export default function EventDetails() {
                       eventId={eventId}
                       createComment={createCommentHandler}
                       pending={comments.pending}
+                      comments={comments}
                     ></CommentCreate>
                   )}
                   {!isAuthenticated && (
-                    <img width={160} src="/images/comment.png" alt="EventMe" />
+                    <img
+                      width={160}
+                      src="/images/comment.png"
+                      alt="EventMe"
+                      id="comment-img"
+                    />
                   )}
                   {error && (
                     <span className="error-message">
                       You need to write a comment first!
                     </span>
                   )}
+                </div>
+
+                <div className="col-md-6">
+                  <CommentsShow comments={comments}></CommentsShow>
                 </div>
 
                 {!isAuthenticated && (

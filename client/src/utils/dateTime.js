@@ -1,30 +1,27 @@
 export const fromIsoTime = (isoTime) => {
   const formattedTime = isoTime.match(/\d\d:\d\d/);
-
   return formattedTime[0];
 };
+
 export const fromIsoTimeTwo = (isoTime) => {
   const time = new Date(isoTime).toLocaleTimeString("en", {
     timeStyle: "short",
     hour12: false,
     timeZone: "UTC",
   });
-
   return time;
 };
 export const fromIsoDate = (isoDate) => {
   const date = new Date(isoDate);
-
   const formattedDate = date.toISOString().substring(0, 10);
-
   return formattedDate;
 };
+
 export const toShortDate = (date) => {
   const formattedDate = new Date(date).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
     year: "2-digit",
   });
-
   return formattedDate;
 };

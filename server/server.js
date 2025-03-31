@@ -1490,15 +1490,37 @@
         _createdOn: 1613551388703,
       },
     },
-    comments: {
-      "0a272c58-b7ea-4e09-a000-7ec988248f66": {
-        _ownerId: "35c62d76-8152-4626-8712-eeb96381bea8",
-        content: "Great recipe!",
-        recipeId: "8f414b4f-ab39-4d36-bedb-2ad69da9c830",
-        _createdOn: 1614260681375,
-        _id: "0a272c58-b7ea-4e09-a000-7ec988248f66",
+    comments: [
+      {
+        _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+        eventId: "0",
+        comment: "This might be a good experience!",
+        _createdOn: 1743403775611,
+        _id: "e7c647bd-dfb0-415f-a01f-a9cf3cbaa742",
       },
-    },
+      {
+        _ownerId: "60f0cf0b-34b0-4abd-9769-8c42f830dffc",
+        eventId: "7",
+        comment: "That sounds nice!",
+        _createdOn: 1743403812489,
+        _id: "7a2af913-dbd3-44d8-a339-46f1add73a0d",
+      },
+      {
+        _ownerId: "a8e95a15-1a45-4fc8-b93c-727ea6cdc191",
+        eventId: "1",
+        comment: "I will join for sure!",
+        _createdOn: 1743404000752,
+        _id: "6407a3c5-7372-4768-bb14-5be003425ffa",
+      },
+      {
+        _ownerId: "a8e95a15-1a45-4fc8-b93c-727ea6cdc191",
+        eventId: "2",
+        comment:
+          "I am very interested in Artificial Intelligence! That would be great lecture!",
+        _createdOn: 1743404146271,
+        _id: "92b445a1-225f-48e5-bfd1-8af51ad948cd",
+      },
+    ],
     records: {
       i01: {
         name: "John1",
@@ -1757,14 +1779,13 @@
         time: "2025-03-16T22:38:25.534Z",
         date: "2025-03-28T02:00:00Z",
         price: "30",
-        status: false,
+        status: true,
         address: {
           city: "Plovdiv",
           street: "Vasil Levski",
           streetNumber: "52",
         },
         category: ["Culture", "Lifestyle"],
-        likes: 40,
         _createdOn: 1742238372475,
         _id: "5fb2bc08-35fb-416d-aa78-8ef81854d968",
       },
@@ -1775,7 +1796,7 @@
         imageUrl:
           "https://bj.org/wp-content/uploads/2025/02/Aviv-Purim-Happy-Hour.png",
         description:
-          "Join other 20s & 30s for drinks, hamantaschen, and great company after the Megillah reading. Come in costume, grab a cocktail, and let’s toast to a night of joy, laughter, and a little bit of chaos—just as Purim should be! ?? Register",
+          "Join other 20s & 30s for drinks, hamantaschen, and great company after the Megillah reading. Come in costume, grab a cocktail, and let’s toast to a night of joy, laughter, and a little bit of chaos—just as Purim should be!",
         time: "2025-03-16T20:40:25.534Z",
         date: "2025-06-26",
         price: "40",
@@ -1785,7 +1806,6 @@
           street: "Ivan Vazov",
           streetNumber: "56",
         },
-        likes: 100,
         category: ["Music", "Lifestyle"],
         _createdOn: 1742238372475,
         _id: "a23600f0-7e9e-4453-b5f0-e513cb472734",
@@ -1797,7 +1817,7 @@
         imageUrl:
           "https://149472331.v2.pressablecdn.com/wp-content/uploads/2024/01/ai-image-generators-Adobe-Stock.jpeg",
         description:
-          "Do you envision something in your mind’s eye but struggle to bring it to life? There’s an AI tool for that! This lecture will explain how artificial intelligence can turn your words into stunning realistic and imaginative images in seconds. We’ll demonstrate an AI image generator and the wide range of visual and artistic styles it can produce. You’ll also learn tips for getting the most out of this new and exciting technology so you can get started! NYC Program Registration - Q1 2025",
+          "Do you envision something in your mind’s eye but struggle to bring it to life? There’s an AI tool for that! This lecture will explain how artificial intelligence can turn your words into stunning realistic and imaginative images in seconds. We’ll demonstrate an AI image generator and the wide range of visual and artistic styles it can produce. You’ll also learn tips for getting the most out of this new and exciting technology so you can get started!",
         time: "2025-03-16T17:30:25.534Z",
         date: "2025-08-28",
         price: "10",
@@ -1807,7 +1827,6 @@
           street: "Opalchenska",
           streetNumber: "13",
         },
-        likes: 56,
         category: ["Online", "Business"],
         _createdOn: 1742238372475,
         _id: "3fc7370d-c075-4271-8aea-6541f735558b",
@@ -1819,17 +1838,16 @@
         imageUrl:
           "https://events.amny.com/wp-content/uploads/2022/11/ny-parenting-liberty-logo-family-brandcolors-placeholder-1.jpg?w=1200&p=q",
         description:
-          "This event will take place in person at Mulberry Street Branch. Drop in from 3:30 - 5 PM to make a fun craft in the Community Room on LL2; all supplies will be provided. For ages 4+. No registration is required. ",
+          "This event will take place in person at Mulberry Street Branch. Drop in from 9:40 AM to make a fun craft in the Community Room on LL2; all supplies will be provided. For ages 4+. No registration is required. ",
         time: "2025-03-16T09:40:25.534Z",
         date: "2025-07-18",
         price: "30",
         status: true,
         address: {
-          city: "Varna",
+          city: "Burgas",
           street: "G. Sava Rakovski",
           streetNumber: "100",
         },
-        likes: 125,
         category: ["Culture", "Lifestyle"],
         _createdOn: 1742238372475,
         _id: "0cf6a3db-0b18-4c10-83e7-879ca83c958f",
@@ -1841,7 +1859,7 @@
         imageUrl:
           "https://149472331.v2.pressablecdn.com/wp-content/uploads/2020/03/meditation.jpg",
         description:
-          "Join us for this participant-led meditation session. Ms. Jean will lead us in a simple form of meditation focusing on the inner light and sound within you. The goal of this session is to bring clarity and peace to the mind and body. Registration NYC Program Registration - Q1 2025",
+          "Join us for this participant-led meditation session. Ms. Jean will lead us in a simple form of meditation focusing on the inner light and sound within you. The goal of this session is to bring clarity and peace to the mind and body.",
         time: "2025-03-16T08:00:25.534Z",
         date: "2025-06-27",
         price: "50",
@@ -1851,7 +1869,6 @@
           street: "Кракра 2",
           streetNumber: "26",
         },
-        likes: 89,
         category: ["Music"],
         _createdOn: 1742238372475,
         _id: "87d643ec-9bd3-4b5a-8fe4-83d403eeed46",
@@ -1871,7 +1888,6 @@
           street: "Ivan Vazov",
           streetNumber: "26",
         },
-        likes: 187,
         category: ["Sport"],
         _createdOn: 1742238372475,
         _id: "c5ea4a50-c6c8-4fcd-ae49-539cfbe19884",
@@ -1883,17 +1899,16 @@
         imageUrl:
           "https://149472331.v2.pressablecdn.com/wp-content/uploads/2022/10/online-privacy-cybersecurity.jpeg",
         description:
-          "This hands-on workshop reviews important tips for keeping your personal information safe while enjoying the benefits of the internet. Learn how to recognize suspicious emails, tips for safe browsing and best practices for shopping online. NYC Program Registration - Q1 2025",
+          "This hands-on workshop reviews important tips for keeping your personal information safe while enjoying the benefits of the internet. Learn how to recognize suspicious emails, tips for safe browsing and best practices for shopping online.",
         time: "2025-03-16T14:20:25.534Z",
         date: "2025-07-20",
         price: "20",
-        status: false,
+        status: true,
         address: {
           city: "Varna",
           street: "",
           streetNumber: "",
         },
-        likes: 203,
         category: ["Online", "Business"],
         _createdOn: 1742238372475,
         _id: "05aaef7b-b1dd-40bd-9798-ef0b231ab454",
@@ -1915,7 +1930,6 @@
           street: "Vasil Levski",
           streetNumber: "24",
         },
-        likes: 143,
         category: ["Music", "Business", "Culture"],
         _createdOn: 1742818298091,
         _id: "21bb332a-cc09-40b9-9320-af492eab6353",

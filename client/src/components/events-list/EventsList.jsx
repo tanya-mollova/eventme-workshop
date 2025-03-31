@@ -231,7 +231,6 @@ export default function EventList() {
                 <div></div>
               </div>
               <br />
-
               {pending && (
                 <div id="loader">
                   <img src="/images/loader.svg" />

@@ -57,7 +57,7 @@ export default function Header() {
                   className={({ isActive }) =>
                     isActive ? "nav-link active" : "nav-link"
                   }
-                  to="/events"
+                  to="/all-events"
                 >
                   All Events
                 </NavLink>

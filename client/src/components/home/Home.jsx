@@ -45,7 +45,7 @@ export default function Home() {
                 )}
                 {homeEvents.map((eventitem) => (
                   <div className="col-md-6 homepage-events" key={eventitem._id}>
-                    <Link to={`/events/${eventitem._id}/details`}>
+                    <Link to={`/all-events/${eventitem._id}/details`}>
                       <div>
                         <div className="img-box">
                           <img
@@ -243,7 +243,7 @@ export default function Home() {
                 <Link
                   type="button"
                   className="btn btn-primary  mt-4 mb-4"
-                  to="/events"
+                  to="/all-events"
                 >
                   See all Events
                   <span

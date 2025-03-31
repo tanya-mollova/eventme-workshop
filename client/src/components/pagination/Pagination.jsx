@@ -1,5 +1,5 @@
-import React from "react";
 import { useEffect } from "react";
+
 import { Link, useSearchParams } from "react-router";
 import styles from "./assets/Pagination.module.css";
 

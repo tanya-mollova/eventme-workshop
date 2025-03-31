@@ -141,8 +141,6 @@ export default function EventCreate() {
     if (Object.keys(newErrors).length === 0) {
       startTransition(async () => {
         await create(formData);
-
-        // <DataGrid {...data} loading />;
         navigate("/my-events");
       });
     } else {

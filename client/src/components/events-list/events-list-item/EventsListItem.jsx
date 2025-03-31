@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+
 import useAuth from "./../../../hooks/useAuth";
 import { toShortDate, fromIsoTime } from "../../../utils/dateTime";
 import styles from "./assets/EventsListItem.module.css";
@@ -26,10 +27,9 @@ export default function EventsListItem({
         styles[`${view}`]
       } col-lg-3 col-md-6 col-sm-6 col-xs-12`}
     >
-      {/* TODO when logged in make Link to my-events/id/details */}
       <div className="text-black">
         <div className={styles["block"]}>
-          <Link className="text-black" to={`/events/${_id}/details`}>
+          <Link className="text-black" to={`/all-events/${_id}/details`}>
             {" "}
             <img src={imageUrl} className={styles["event-image"]} alt={title} />
           </Link>
@@ -70,23 +70,6 @@ export default function EventsListItem({
               ))}
             </div>
           </div>
-          {/* <div className={styles["likes"]}>
-            <span className="primary-text likes">
-              {likeStatus && (
-                <button type="submit" value={likesValue} onClick={onLike}>
-                  <i class="fa-solid fa-thumbs-up"></i>
-                </button>
-              )}
-              {!likeStatus && (
-                <button type="submit" value={likesValue} onClick={onLike}>
-                  <i class="fa-solid fa-thumbs-down"></i>
-                </button>
-              )}
-            </span>
-            {likesValue} Likes
-          </div> */}
-          {/* <br /> */}
-          {/* TO DO hide when */}
           {isAuthenticated && isOwner && (
             <div className={styles["action-buttons"]}>
               <Link to={`/my-events/${_id}/details`}>

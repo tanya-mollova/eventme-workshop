@@ -4770,6 +4770,7 @@ fieldset:disabled .btn {
 .comment-item p {
   margin-bottom: 0 !important;
 }
+
 @media (prefers-reduced-motion: reduce) {
   .modal.fade .modal-dialog {
     transition: none;
@@ -4848,7 +4849,7 @@ fieldset:disabled .btn {
   margin-bottom: 0;
   line-height: 1.5;
   width: 100%;
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .modal-body {
@@ -9905,8 +9906,16 @@ blockquote::before {
 .homepage_tab {
   z-index: 5;
 }
-.category-devider:last-of-type {
-  display: none;
+.colored-box {
+  display: inline-block;
+  border-radius: 10px;
+  background-color: rgb(240, 186, 175);
+  padding: 5px;
+  font-size: 12px;
+  width: auto;
+  margin-right: 5px;
+  margin: 1px;
+  color: #040404 !important;
 }
 @media (max-width: 767px) {
   .homepage_tab {
@@ -10548,7 +10557,7 @@ footer p {
 }
 
 .applyLoanModal .modal-content {
-  padding: 10px;
+  padding: 30px 10px;
 }
 /*# sourceMappingURL=style.css.map */
 #create-modal .modal-dialog {
@@ -10637,7 +10646,7 @@ nav.shrink .navbar-toggle {
 #section-details {
   background: #f7f5f2;
 }
-#section-details img {
+#section-details .comment-img {
   max-height: 400px;
   width: auto;
   width: 100%;
@@ -10648,6 +10657,13 @@ nav.shrink .navbar-toggle {
 }
 #home ._action-buttons_1ik26_281 {
   display: none;
+}
+.add-comment-top {
+  height: 40px;
+  width: 100%;
+  background-image: url(/images/comment-add.png);
+  background-repeat: repeat;
+  background-size: contain;
 }
 footer {
   padding-top: 100px;

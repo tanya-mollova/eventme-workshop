@@ -26,16 +26,12 @@ export default function EventList() {
 
   useEffect(() => {
     setDisplayEvents(myEvents);
-  }, [myEvents]);
-
-  // console.log(oldEvent);
-  useEffect(() => {
     if (!isGrid) {
       setView("list-view");
     } else {
       setView("grid-view");
     }
-  }, [isGrid]);
+  }, [myEvents, isGrid]);
 
   const currentEvents = displayEvents.slice(firstPostIndex, lastPostIndex);
   const changeViewHandler = (event) => {

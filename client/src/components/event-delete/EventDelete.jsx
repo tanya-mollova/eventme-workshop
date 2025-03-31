@@ -1,6 +1,6 @@
 export default function Login({ showDeleteModal, onDelete }) {
   return (
-    <div className="modal applyLoanModal fade" id="login">
+    <div className="modal applyLoanModal fade" id="delete">
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
           <div className="modal-header border-bottom-0">
@@ -15,7 +15,7 @@ export default function Login({ showDeleteModal, onDelete }) {
               onClick={showDeleteModal}
             ></button>
           </div>
-          <div className="row">
+          <div className="row align-items-center justify-content-center">
             <div className="col-md-4 mt-4">
               <button onClick={onDelete} className="btn btn-primary w-100">
                 Yes

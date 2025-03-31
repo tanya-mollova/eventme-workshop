@@ -24,7 +24,7 @@ export default function Register({ showLoginModal, showRegisterModal }) {
       const authData = await register(username, email, password);
       userLoginHandler(authData);
       showRegisterModal(false);
-      navigate("/events");
+      navigate("/all-events");
     } catch (err) {
       setError(err.message);
     }

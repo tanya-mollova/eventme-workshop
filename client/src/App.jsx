@@ -24,11 +24,10 @@ function App() {
   return (
     <UserProvider>
       <Header />
-
       <Routes>
         <Route index element={<Home />} />
-        <Route path="/events" element={<EventsList />} />
-        <Route path="/events/:eventId/details" element={<EventDetails />} />
+        <Route path="/all-events" element={<EventsList />} />
+        <Route path="/all-events/:eventId/details" element={<EventDetails />} />
         <Route element={<AuthGuard />}>
           <Route element={<AuthorGuard />}>
             <Route path="/my-events/:eventId/edit" element={<EventEdit />} />
