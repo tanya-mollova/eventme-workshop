@@ -1,4 +1,4 @@
-import { Outlet, useParams, useNavigate } from "react-router";
+import { Outlet, useParams, useNavigate, Navigate } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import { useEvent } from "../../api/eventApi";
 
@@ -11,7 +11,7 @@ export default function AutorGuard() {
   const isOwner = userId === eventData._ownerId;
 
   if (!isOwner) {
-    return navigate("/");
+    return <Navigate to="/" />;
   }
   return <Outlet />;
 }
