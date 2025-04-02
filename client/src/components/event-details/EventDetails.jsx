@@ -82,6 +82,14 @@ export default function EventDetails() {
                 {fromIsoTimeTwo(displayEvent.time)} h.
               </h3>
               <p className="d-inline">
+                <b>
+                  <i class="fa-solid fa-location-dot"></i>{" "}
+                </b>
+                {eventData.address?.city}, {eventData.address?.street}{" "}
+                {eventData.address?.streetNumber}
+              </p>
+              <br></br> <br></br>
+              <p className="d-inline">
                 <b>Category:</b>{" "}
               </p>
               {eventData.category?.map((item) => (
