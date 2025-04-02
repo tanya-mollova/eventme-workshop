@@ -28,7 +28,7 @@ export default function CommentCreate({ createComment }) {
           width={100}
           src="/images/comment-add.png"
           alt="EventMe"
-          id="comment-img"
+          id="comment-add-img"
         />
         <textarea
           className="form-control shadow-none"

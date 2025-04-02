@@ -193,7 +193,7 @@ export default function EventCreate() {
   return (
     <section className="section" id="section-edit">
       <div className="section-title">
-        <h2 className="h1 mb-4 mt-4">Edit Event {eventData.title}</h2>
+        <h2 className="h1 mb-4 mt-4">Edit: {eventData.title}</h2>
       </div>
       <div className="container shadow rounded p-5 bg-white">
         <form action={submitAction} id="create">

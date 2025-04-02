@@ -4037,6 +4037,7 @@ fieldset:disabled .btn {
   flex-basis: 100%;
   flex-grow: 1;
   align-items: center;
+  padding: 30px 10px;
 }
 
 .navbar-toggler {
@@ -9334,11 +9335,19 @@ a:hover {
   word-break: break-word;
   overflow-wrap: break-word;
 }
-.content img {
+.content #comment-add-img {
+  width: 100px;
   max-width: 100%;
   margin-top: 10px;
   margin-bottom: 35px;
 }
+.content #comment-img {
+  width: 100%;
+  max-width: 100%;
+  margin-top: 10px;
+  margin-bottom: 35px;
+}
+
 .content h1,
 .content .h1,
 .content h2,
@@ -10735,6 +10744,16 @@ input:-internal-autofill-selected {
   align-items: center;
   justify-content: center;
 }
+@media (max-width: 1200px) {
+  .nav-item .dropdown-menu {
+    display: inline-block;
+  }
+  .navigation .dropdown-menu {
+    text-align: center;
+    border: 1px solid rgba(81, 181, 109, 0.2);
+  }
+}
+
 @media (max-width: 900px) {
   .view-button {
     display: none !important;
@@ -10760,5 +10779,13 @@ input:-internal-autofill-selected {
   }
   .nav-item .dropdown-menu {
     display: inline-block;
+  }
+  footer .row {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center !important;
+  }
+  .MuiFormControl-root {
+    width: 100% !important;
   }
 }
